@@ -1,0 +1,108 @@
+# if the convi graph has the same edge of base graph
+convi_p = [0.1,0.3,0.5,0.7,0.9]
+We are loading data from: data/ee.edges
+Finish loading data
+We are working on edge: 1
+number of info network edges: 2466
+number of evaluation edges: 598
+convi_MNE score: 0.6850649354274962
+convi_MNE score: 0.6955719817309787
+convi_MNE score: 0.6919664974883819
+convi_MNE score: 0.6728986530877363
+convi_MNE score: 0.6452437079264399
+convi_MNE performance: 0.6781491551322066
+We are working on edge: 1
+number of info network edges: 2465
+number of evaluation edges: 595
+convi_MNE score: 0.6461702727332999
+convi_MNE score: 0.6672314607329914
+convi_MNE score: 0.675842882700006
+convi_MNE score: 0.657662056229575
+convi_MNE score: 0.6182246494501789
+convi_MNE performance: 0.6530262643692103
+We are working on edge: 1
+number of info network edges: 2466
+number of evaluation edges: 590
+convi_MNE score: 0.701911629229675
+convi_MNE score: 0.723156470943111
+convi_MNE score: 0.715911495911496
+convi_MNE score: 0.6896415659227224
+convi_MNE score: 0.6623249971106403
+convi_MNE performance: 0.6985892318235289
+We are working on edge: 1
+number of info network edges: 2465
+number of evaluation edges: 603
+convi_MNE score: 0.6834074459285785
+convi_MNE score: 0.6906380963473149
+convi_MNE score: 0.694290106210891
+convi_MNE score: 0.6839995855867557
+convi_MNE score: 0.6537361894954357
+convi_MNE performance: 0.6812142847137952
+We are working on edge: 1
+number of info network edges: 2466
+number of evaluation edges: 608
+convi_MNE score: 0.6830240968678162
+convi_MNE score: 0.6889561718536399
+convi_MNE score: 0.6840945585769306
+convi_MNE score: 0.6914048026612031
+convi_MNE score: 0.6429530388099585
+convi_MNE performance: 0.6780865337539096
+Overall convi_MNE AUC: [0.67814916 0.65302626 0.69858923 0.68121428 0.67808653]
+Overall convi_MNE_AUC: 0.6778130939585302
+Overall convi_MNE_AUC std: 0.014545037852568615
+
+
+
+convi_G edge + CN
+We are loading data from: data/ee.edges
+Finish loading data
+We are working on edge: 1
+number of info network edges: 2466
+number of evaluation edges: 606
+convi_MNE score: 0.6798648741517427
+convi_MNE score: 0.6724471148146083
+convi_MNE score: 0.6942370751028515
+convi_MNE score: 0.681789441423138
+convi_MNE score: 0.6480167736057979
+convi_MNE performance: 0.6752710558196277
+We are working on edge: 1
+number of info network edges: 2465
+number of evaluation edges: 601
+convi_MNE score: 0.669795067935397
+convi_MNE score: 0.6863995946855075
+convi_MNE score: 0.6895587406088761
+convi_MNE score: 0.6810649379892819
+convi_MNE score: 0.6273751549229746
+convi_MNE performance: 0.6708386992284074
+We are working on edge: 1
+number of info network edges: 2466
+number of evaluation edges: 596
+convi_MNE score: 0.7166818479203647
+convi_MNE score: 0.724587379333425
+convi_MNE score: 0.7185218852374298
+convi_MNE score: 0.6965210612330807
+convi_MNE score: 0.665929504991682
+convi_MNE performance: 0.7044483357431963
+We are working on edge: 1
+number of info network edges: 2465
+number of evaluation edges: 605
+convi_MNE score: 0.6869063658215153
+convi_MNE score: 0.6907267520974882
+convi_MNE score: 0.6874581905915723
+convi_MNE score: 0.6867148246940615
+convi_MNE score: 0.6439637520733099
+convi_MNE performance: 0.6791539770555894
+We are working on edge: 1
+number of info network edges: 2466
+number of evaluation edges: 590
+convi_MNE score: 0.6885898106256494
+convi_MNE score: 0.676903407705933
+convi_MNE score: 0.7047864699286608
+convi_MNE score: 0.681660493113182
+convi_MNE score: 0.6486259151596027
+convi_MNE performance: 0.6801132193066055
+Overall convi_MNE AUC: [0.67527106 0.6708387  0.70444834 0.67915398 0.68011322]
+Overall convi_MNE_AUC: 0.6819650574306853
+Overall convi_MNE_AUC std: 0.011708413943870543
+
+

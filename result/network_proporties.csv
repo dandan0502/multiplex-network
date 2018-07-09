@@ -1,0 +1,5 @@
+,,common dev,edge(not include aaaa),large scc(最大连通分量的节点数), transitivity,common dev of degree centrality/closeness centrality/betweenness @ top100,oij(overlap of edges),weighted edge overlap
+eclipse,history,608,4041,207,0.1313298,46/36/50,344,1065/5473
+,email,,2322,470,0.159197664,,,
+gnome,history,892,1069,7,0.03386254,35/18/27,296,4156/83719
+,email,,18184,819,0.2553,,,

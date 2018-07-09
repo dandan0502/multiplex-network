@@ -1,0 +1,5 @@
+,,common dev,edge,large scc(最大连通分量的节点数), transitivity,common dev of degree centrality/closeness centrality/betweenness @ top50,,,common dev of degree centrality/closeness centrality/betweenness @ top100,,,common dev of degree centrality/closeness centrality/betweenness @ top300,,,common dev of degree centrality/closeness centrality/betweenness @ top500,,
+eclipse,history,716,4041,207,0.1313298399,18,17,22,44,33,46,174,156,167,381,363,410
+,email,,2913,552,0.1496952966,,,,,,,,,,,,
+gnome,history,916,1280,7,0.0338625402,12,6,12,32,18,27,150,127,126,307,296,287
+,email,,19030,837,0.2532829747,,,,,,,,,,,,

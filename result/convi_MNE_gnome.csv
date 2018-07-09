@@ -1,0 +1,60 @@
+# if the convi graph has the same edge of base graph, the convi_p = 0.9
+convi_MNE performance: 0.5955611300871104
+Overall convi_MNE AUC: [0.66421338 0.65702895 0.65775927 0.65187281 0.59556113]
+Overall convi_MNE_AUC: 0.645287107724858
+Overall convi_MNE_AUC std: 0.025170116233921135
+
+
+
+We are loading data from: data/ge.edges
+Finish loading data
+We are working on edge: 1
+number of info network edges: 15917
+number of evaluation edges: 3969
+convi_MNE score: 0.6713800530750836
+convi_MNE score: 0.6700964443980855
+convi_MNE score: 0.6677327718088442
+convi_MNE score: 0.6602290529184285
+convi_MNE score: 0.6448977683453624
+convi_MNE performance: 0.6628672181091607
+We are working on edge: 1
+number of info network edges: 15917
+number of evaluation edges: 3969
+convi_MNE score: 0.6799207053318468
+convi_MNE score: 0.6716484550363686
+convi_MNE score: 0.6679168882355118
+convi_MNE score: 0.6648650429720918
+convi_MNE score: 0.6538074189198901
+convi_MNE performance: 0.6676317020991418
+We are working on edge: 1
+number of info network edges: 15916
+number of evaluation edges: 3970
+convi_MNE score: 0.6731195450332638
+convi_MNE score: 0.6720404947841414
+convi_MNE score: 0.6726081625885396
+convi_MNE score: 0.6613628178896085
+convi_MNE score: 0.6525974230103495
+convi_MNE performance: 0.6663456886611805
+We are working on edge: 1
+number of info network edges: 15917
+number of evaluation edges: 3969
+convi_MNE score: 0.6635402265267515
+convi_MNE score: 0.6648762543230251
+convi_MNE score: 0.6573034715404215
+convi_MNE score: 0.6551933557646591
+convi_MNE score: 0.6344601349746211
+convi_MNE performance: 0.6550746886258957
+We are working on edge: 1
+number of info network edges: 15917
+number of evaluation edges: 3977
+convi_MNE score: 0.6680525454235686
+convi_MNE score: 0.6651981255083059
+convi_MNE score: 0.6619590672644424
+convi_MNE score: 0.6599444312889485
+convi_MNE score: 0.6489604128607809
+convi_MNE performance: 0.6608229164692092
+Overall convi_MNE AUC: [0.66286722 0.6676317  0.66634569 0.65507469 0.66082292]
+Overall convi_MNE_AUC: 0.6625484427929175
+Overall convi_MNE_AUC std: 0.004454091635866699
+
+0.67
