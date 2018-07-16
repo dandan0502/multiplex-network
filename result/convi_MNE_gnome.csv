@@ -57,4 +57,7 @@ Overall convi_MNE AUC: [0.66286722 0.6676317  0.66634569 0.65507469 0.66082292]
 Overall convi_MNE_AUC: 0.6625484427929175
 Overall convi_MNE_AUC std: 0.004454091635866699
 
-0.67
+weight:[0.  0.  0.9 0. ]
+convi_MNE score: 0.7235667459379455
+weight:[0.  0.  0.6 0. ]
+convi_MNE score: 0.7244822829793571
