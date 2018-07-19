@@ -10,6 +10,7 @@ import argparse
 import pandas as pd
 import os
 import Convince_Graph
+import Convince_Multi_Graph
 from MNE import *
 import random
 
@@ -64,8 +65,7 @@ def parse_args():
 def divide_data(input_list, group_number):
     local_division = len(input_list) / float(group_number)
     random.shuffle(input_list)
-    return [input_list[int(round(local_division * i)): int(round(local_division * (i + 1)))] for i in
-            range(group_number)]
+    return [input_list[int(round(local_division * i)): int(round(local_division * (i + 1)))] for i in range(group_number)]
 
 
 def train_deepwalk_embedding(walks, iteration=None):
@@ -179,8 +179,14 @@ args = parse_args()
 file_name = args.input
 # test_file_name = 'data/Vickers-Chan-7thGraders_multiplex.edges'
 edge_data_by_type, all_edges, all_nodes = load_network_data(file_name)
+edge_data_by_type['1'] = pd.DataFrame(edge_data_by_type['1'], columns=['From', 'To', 'Weight'])
+edge_data_by_type['1']['Weight'].apply(int)
+edge_data_by_type['1'] = edge_data_by_type['1'].values.tolist()
 edge_data = {'1':edge_data_by_type['1']}
+
 convi_data = edge_data_by_type['2']
+convi_data = pd.DataFrame(convi_data, columns=['From', 'To', 'Weight'])
+convi_data['Weight'].apply(int)
 
 # In our experiment, we use 5-fold cross-validation, but you can change that
 number_of_groups = 5
@@ -190,88 +196,125 @@ for edge_type in edge_data:
     separated_data = divide_data(all_data, number_of_groups)
     edge_data_by_type_by_group[edge_type] = separated_data
 
+for cp in [0.9, 0.7, 0.5, 0.3, 0.1]:
+    for i in range(number_of_groups):
+        training_data_by_type = dict()
+        evaluation_data_by_type = dict()
+        for edge_type in edge_data_by_type_by_group:
+            training_data_by_type[edge_type] = list()
+            evaluation_data_by_type[edge_type] = list()
+            for j in range(number_of_groups):
+                if j == i:
+                    for tmp_edge in edge_data_by_type_by_group[edge_type][j]:
+                        evaluation_data_by_type[edge_type].append((tmp_edge[0], tmp_edge[1], tmp_edge[2]))
+                else:
+                    for tmp_edge in edge_data_by_type_by_group[edge_type][j]:
+                        training_data_by_type[edge_type].append((tmp_edge[0], tmp_edge[1], tmp_edge[2]))
+        base_edges = list()
+        training_nodes = list()
+        for edge_type in training_data_by_type:
+            for edge in training_data_by_type[edge_type]:
+                base_edges.append(edge)
+                training_nodes.append(edge[0])
+                training_nodes.append(edge[1])
+        edge_data['Base'] = base_edges
+        training_nodes = list(set(training_nodes))
 
-overall_convi_MNE_performance = list()
+        tmp_convi_MNE_performance = 0
+        merged_networks = dict()
+        merged_networks['training'] = dict()
+        merged_networks['test_true'] = dict()
+        merged_networks['test_false'] = dict()
+        number_of_edges = 0
+        for edge_type in training_data_by_type:
+            if edge_type == 'Base':
+                continue
+            print('We are working on edge:', edge_type)
+            selected_true_edges = list()
+            tmp_training_nodes = list()
+            for edge in training_data_by_type[edge_type]:
+                tmp_training_nodes.append(edge[0])
+                tmp_training_nodes.append(edge[1])
+            tmp_training_nodes = set(tmp_training_nodes)
+            for edge in evaluation_data_by_type[edge_type]:
+                if edge[0] in tmp_training_nodes and edge[1] in tmp_training_nodes:
+                    if edge[0] == edge[1]:
+                        continue
+                    selected_true_edges.append(edge)
+            if len(selected_true_edges) == 0:
+                continue
+            selected_false_edges = randomly_choose_false_edges(training_nodes, len(selected_true_edges)/2,
+                                                                edge_data[edge_type])
+            # print('number of info network edges:', len(training_data_by_type[edge_type]))
+            # print('number of evaluation edges:', len(selected_true_edges))
+            merged_networks['training'][edge_type] = set(training_data_by_type[edge_type])
+            merged_networks['test_true'][edge_type] = selected_true_edges
+            merged_networks['test_false'][edge_type] = selected_false_edges
+            local_model = dict()
 
-for i in range(number_of_groups):
-    training_data_by_type = dict()
-    evaluation_data_by_type = dict()
-    for edge_type in edge_data_by_type_by_group:
-        training_data_by_type[edge_type] = list()
-        evaluation_data_by_type[edge_type] = list()
-        for j in range(number_of_groups):
-            if j == i:
-                for tmp_edge in edge_data_by_type_by_group[edge_type][j]:
-                    evaluation_data_by_type[edge_type].append((tmp_edge[0], tmp_edge[1], tmp_edge[2]))
-            else:
-                for tmp_edge in edge_data_by_type_by_group[edge_type][j]:
-                    training_data_by_type[edge_type].append((tmp_edge[0], tmp_edge[1], tmp_edge[2]))
-    base_edges = list()
-    training_nodes = list()
-    for edge_type in training_data_by_type:
-        for edge in training_data_by_type[edge_type]:
-            base_edges.append(edge)
-            training_nodes.append(edge[0])
-            training_nodes.append(edge[1])
-    edge_data['Base'] = base_edges
-    training_nodes = list(set(training_nodes))
+            for weight1 in np.arange(0, 1, .1):
+                for weight2 in np.arange(0, 1-weight1, .1):
+                    for weight3 in np.arange(0, 1-weight1-weight2, .1):
+                        weight = np.array([weight1, weight2, weight3, 1-weight1-weight2-weight3])
+                        # weight = np.array([0.9, 0, 0, 0.1])
+                        overall_convi_MNE_performance = list()
+                        convi_struct_G = Convince_Graph.ConvGraph(get_G_from_edges(training_data_by_type[edge_type]),\
+                                                                get_G_from_edges(convi_data),\
+                                                                args.directed, cp, weight)
+                        convi_struct_G.preprocess_transition_probs(weight)
+                        convi_MNE_walks = convi_struct_G.simulate_walks(10, 10)
+                        convi_MNE_model = train_deepwalk_embedding(convi_MNE_walks)
+                        tmp_convi_MNE_score = get_AUC(convi_MNE_model, selected_true_edges, selected_false_edges)
+                        print('weight:{}'.format(weight))
 
-    tmp_convi_MNE_performance = 0
-    merged_networks = dict()
-    merged_networks['training'] = dict()
-    merged_networks['test_true'] = dict()
-    merged_networks['test_false'] = dict()
-    number_of_edges = 0
-    for edge_type in training_data_by_type:
-        if edge_type == 'Base':
-            continue
-        print('We are working on edge:', edge_type)
-        selected_true_edges = list()
-        tmp_training_nodes = list()
-        for edge in training_data_by_type[edge_type]:
-            tmp_training_nodes.append(edge[0])
-            tmp_training_nodes.append(edge[1])
-        tmp_training_nodes = set(tmp_training_nodes)
-        for edge in evaluation_data_by_type[edge_type]:
-            if edge[0] in tmp_training_nodes and edge[1] in tmp_training_nodes:
-                if edge[0] == edge[1]:
-                    continue
-                selected_true_edges.append(edge)
-        if len(selected_true_edges) == 0:
-            continue
-        selected_false_edges = randomly_choose_false_edges(training_nodes, len(selected_true_edges)/2,
-                                                            edge_data[edge_type])
-        # print('number of info network edges:', len(training_data_by_type[edge_type]))
-        # print('number of evaluation edges:', len(selected_true_edges))
-        merged_networks['training'][edge_type] = set(training_data_by_type[edge_type])
-        merged_networks['test_true'][edge_type] = selected_true_edges
-        merged_networks['test_false'][edge_type] = selected_false_edges
-        local_model = dict()
-        for cp in [0.1,0.3,0.5,0.7,0.9]:
-            for i in range(100):
-                weight_weight = random.randint(0, 10) * 0.1
-                weight = np.array([weight_weight, 1 - weight_weight, 0, 0])
-                convi_MNE_G = Convince_Graph.ConvGraph(get_G_from_edges(training_data_by_type[edge_type]),\
-                                                        get_G_from_edges(convi_data),\
-                                                        args.directed, cp, weight)
-                convi_MNE_G.preprocess_transition_probs(weight)
-                convi_MNE_walks = convi_MNE_G.simulate_walks(10, 10)
-                convi_MNE_model = train_deepwalk_embedding(convi_MNE_walks)
-                tmp_convi_MNE_score = get_AUC(convi_MNE_model, selected_true_edges, selected_false_edges)
-                if tmp_convi_MNE_score > 0.60:
-                    print('weight:{}'.format(weight))
-                    print('convi_MNE score:', tmp_convi_MNE_score)
+                        tmp_convi_MNE_performance += tmp_convi_MNE_score * 1
+                        number_of_edges += 1
 
+                        print('cp:{}'.format(cp), 'weight:{}'.format(weight))
+                        print('convi_MNE performance:', tmp_convi_MNE_performance / number_of_edges)
+                        overall_convi_MNE_performance.append(tmp_convi_MNE_performance / number_of_edges)
+ 
+                    overall_convi_MNE_performance = np.asarray(overall_convi_MNE_performance)
+                    print('Overall convi_MNE AUC:', overall_convi_MNE_performance)
+                    print('Overall convi_MNE_AUC:', np.mean(overall_convi_MNE_performance))
+                    print('Overall convi_MNE_AUC std:', np.std(overall_convi_MNE_performance))
+    
+                        # if tmp_convi_MNE_score > 0.70:
+                        #     print('weight:{}'.format(weight))
+                        #     print('convi_MNE score:', tmp_convi_MNE_score)
+# ======================================property============================================================
+            # for weight1 in np.arange(0, 1, .1):
+            #     for weight2 in np.arange(0,  1-weight1, .1):
+            #         for weight3 in np.arange(0, 1-weight1-weight2, .1):
+            #             for weight4 in np.arange(0, 1-weight1-weight2-weight3, .1):
+            #                 for t in range(10):
+            #                     weight_property = np.array([weight1, weight2, weight3, weight4, 1-weight1-weight2-weight3-weight4])
+            #                     # weight_property = np.array([random.randint(0, 10) * 0.1 for n in range(5)])
+            #                     convi_proper_G = Convince_Multi_Graph.ConvMultiGraph(get_G_from_edges(training_data_by_type[edge_type]),\
+            #                                                                 get_G_from_edges(convi_data),\
+            #                                                                 training_data_by_type[edge_type],\
+            #                                                                 convi_data, args.directed, cp, weight_property)
+            #                     print("preprocess_transition_probs...")
+            #                     convi_proper_G.preprocess_transition_probs(weight_property)
+            #                     convi_MNE_walks = convi_proper_G.simulate_walks(10, 10)
+            #                     convi_MNE_model = train_deepwalk_embedding(convi_MNE_walks)
+            #                     tmp_convi_MNE_score = get_AUC(convi_MNE_model, selected_true_edges, selected_false_edges)
+            #                     # if tmp_convi_MNE_score > 0.67:
+            #                     #     print('weight:{}'.format(weight))
+            #                     #     print('convi_MNE score:', tmp_convi_MNE_score)
 
-                # tmp_convi_MNE_performance += tmp_convi_MNE_score * 1
-                # number_of_edges += 1
+            #                     # print('weight:{}'.format(weight_property))
+            #                     # print('convi_MNE score:', tmp_convi_MNE_score)
 
-            # print('cp:{}'.format(cp), 'weight:{}'.format(weight))
-            # print('convi_MNE performance:', tmp_convi_MNE_performance / number_of_edges)
-            # overall_convi_MNE_performance.append(tmp_convi_MNE_performance / number_of_edges)
+            #                     tmp_convi_MNE_performance += tmp_convi_MNE_score * 1
+            #                     number_of_edges += 1
 
-    # overall_convi_MNE_performance = np.asarray(overall_convi_MNE_performance)
-    # print('Overall convi_MNE AUC:', overall_convi_MNE_performance)
-    # print('Overall convi_MNE_AUC:', np.mean(overall_convi_MNE_performance))
-    # print('Overall convi_MNE_AUC std:', np.std(overall_convi_MNE_performance))
+            #                     print('cp:{}'.format(cp), 'weight:{}'.format(weight_property))
+            #                     print('convi_MNE performance:', tmp_convi_MNE_performance / number_of_edges)
+            #                     overall_convi_MNE_performance.append(tmp_convi_MNE_performance / number_of_edges)
+ 
+            #                 overall_convi_MNE_performance = np.asarray(overall_convi_MNE_performance)
+            #                 print('Overall convi_MNE AUC:', overall_convi_MNE_performance)
+            #                 print('Overall convi_MNE_AUC:', np.mean(overall_convi_MNE_performance))
+            #                 print('Overall convi_MNE_AUC std:', np.std(overall_convi_MNE_performance))
     print('end')

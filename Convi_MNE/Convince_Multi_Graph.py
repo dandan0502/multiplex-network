@@ -4,11 +4,14 @@ import networkx as nx
 import random
 import math
 from get_score import *
+import scipy
 
-class ConvGraph():
-    def __init__(self, nx_G, Conv_G, is_directed, conv_p, weight):
+class ConvMultiGraph():
+    def __init__(self, nx_G, Conv_G, df, Conv_df, is_directed, conv_p, weight):
         self.G = nx_G
         self.Conv_G = Conv_G
+        self.df = df
+        self.Conv_df = Conv_df
         self.is_directed = is_directed
         self.p = conv_p
         self.weight = weight
@@ -44,24 +47,55 @@ class ConvGraph():
         return walks
 
 
+    def convi_score(self):
+        G = self.G
+        Conv_G = self.Conv_G
+        df = self.df
+        df = pd.DataFrame(df, columns=['From', 'To', 'Weight'])
+        df['Weight'] = np.array(df['Weight']).astype(int)
+        Conv_df = self.Conv_df
+        overlap_weight = get_o_ij_w(df, Conv_df)
+        zscore_norm_overlap_weight = scipy.stats.zscore(np.array(overlap_weight['Weight']).astype(int))
+        return zscore_norm_overlap_weight
+
+
     def preprocess_transition_probs(self, weight):
         # Preprocessing of transition probabilities for guiding the random walks.
         G = self.G
         Conv_G = self.Conv_G
+        df = self.df
+        df = pd.DataFrame(df, columns=['From', 'To', 'Weight'])
+        df['Weight'] = np.array(df['Weight']).astype(int)
+        Conv_df = self.Conv_df
+        Conv_df = pd.DataFrame(Conv_df, columns=['From', 'To', 'Weight'])
+        Conv_df['Weight'] = np.array(Conv_df['Weight']).astype(int)
         Conv_p = self.p
         Inconv_p = 1 - Conv_p
         is_directed = self.is_directed
+
+        zscore_norm_overlap_weight = self.convi_score()
+        overlap_degree, strength_df, entropy_degree, Ci1, lambdai = get_property_score(G, Conv_G, df, Conv_df, weight)
 
         alias_nodes = {}
         for node in G.nodes():
             unnormalized_prob = []
             for nbr in sorted(G.neighbors(node)):
-                Connected, CN, JA, AA = get_structure_score(G, Conv_G, node, nbr)
-                unnormalized_prob.append((nbr, count_structure_score(Connected, CN, JA, AA, weight)))
-            # print(unnormalized_prob)
-            unnormalized_probs = [weight * Conv_p \
+                try:
+                    strength = round(float(strength_df[strength_df['From'] == nbr].iloc[0, 1]), 4)
+                except :
+                    strength = 0
+                if Ci1.get(nbr, 0) == nbr:
+                    first_coef = Ci1[nbr]
+                else:
+                    first_coef = 0
+                if lambdai.get(nbr, 0) == nbr:
+                    inter_dependence = lambdai[nbr]
+                else:
+                    inter_dependence = 0
+                unnormalized_prob.append((nbr, count_property_score(overlap_degree[nbr], strength, entropy_degree[nbr], first_coef, inter_dependence, weight)))
+            unnormalized_probs = [convi_weight * Conv_p \
                                     if nbr in Conv_G.neighbors(node) \
-                                    else weight * Inconv_p for nbr, weight in unnormalized_prob]
+                                    else convi_weight * Inconv_p for nbr, convi_weight in unnormalized_prob]
             norm_const = sum(unnormalized_probs)
             normalized_probs = [float(u_prob) / norm_const if norm_const != 0 else 0 for u_prob in unnormalized_probs]
             alias_nodes[node] = alias_setup(normalized_probs)
@@ -69,33 +103,6 @@ class ConvGraph():
         self.alias_nodes = alias_nodes
 
         return
-
-
-    # def preprocess_transition_probs(self, weight):
-    #     # Preprocessing of transition probabilities for guiding the random walks.
-    #     G = self.G
-    #     Conv_G = self.Conv_G
-    #     Conv_p = self.p
-    #     Inconv_p = 1 - Conv_p
-    #     is_directed = self.is_directed
-
-    #     alias_nodes = {}
-    #     for node in G.nodes():
-    #         unnormalized_prob = []
-    #         for nbr in sorted(G.neighbors(node)):
-    #             degree = get_property_score(G, node, nbr)
-    #             unnormalized_prob.append((nbr, count_property_score(degree, weight)))
-    #         # print(unnormalized_prob)
-    #         unnormalized_probs = [weight * Conv_p \
-    #                                 if nbr in Conv_G.neighbors(node) \
-    #                                 else weight * Inconv_p for nbr, weight in unnormalized_prob]
-    #         norm_const = sum(unnormalized_probs)
-    #         normalized_probs = [float(u_prob) / norm_const if norm_const != 0 else 0 for u_prob in unnormalized_probs]
-    #         alias_nodes[node] = alias_setup(normalized_probs)
-
-    #     self.alias_nodes = alias_nodes
-
-    #     return
 
 
 def alias_setup(probs):
