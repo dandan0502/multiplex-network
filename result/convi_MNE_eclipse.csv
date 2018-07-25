@@ -105,4 +105,151 @@ Overall convi_MNE AUC: [0.67527106 0.6708387  0.70444834 0.67915398 0.68011322]
 Overall convi_MNE_AUC: 0.6819650574306853
 Overall convi_MNE_AUC std: 0.011708413943870543
 
+sum_structure_weight = 1
+We are loading data from: data/ee.edges
+Finish loading data
+We are working on edge: 1
+weight:[0.9 0.  0.  0.1]
+convi_MNE score: 0.7014938067920807
+weight:[0.9 0.  0.  0.1]
+convi_MNE score: 0.7012775113630846
+weight:[0.9 0.  0.  0.1]
+convi_MNE score: 0.7014322155120578
+weight:[0.9 0.  0.  0.1]
+convi_MNE score: 0.7019928581565846
+weight:[0.9 0.  0.  0.1]
+convi_MNE score: 0.7032910835732933
+weight:[0.9 0.  0.  0.1]
+convi_MNE score: 0.7016668767483465
+weight:[0.9 0.  0.  0.1]
+convi_MNE score: 0.7101365017385427
+weight:[0.9 0.  0.  0.1]
+convi_MNE score: 0.7045388286965972
+weight:[0.9 0.  0.  0.1]
+convi_MNE score: 0.7029499669471491
+weight:[0.9 0.  0.  0.1]
+convi_MNE score: 0.7072847176315485
+weight:[0.9 0.  0.  0.1]
+convi_MNE score: 0.7079153128069527
+end
+We are working on edge: 1
+end
+We are working on edge: 1
+weight:[0.9 0.  0.  0.1]
+convi_MNE score: 0.7038649483106323
+weight:[0.9 0.  0.  0.1]
+convi_MNE score: 0.71066206728467
+weight:[0.9 0.  0.  0.1]
+convi_MNE score: 0.7028095747706976
+weight:[0.9 0.  0.  0.1]
+convi_MNE score: 0.7036581595499581
+weight:[0.9 0.  0.  0.1]
+convi_MNE score: 0.7013669717461735
+weight:[0.9 0.  0.  0.1]
+convi_MNE score: 0.707385715847258
+weight:[0.9 0.  0.  0.1]
+convi_MNE score: 0.7018782313934895
+weight:[0.9 0.  0.  0.1]
+convi_MNE score: 0.702144011651931
+weight:[0.9 0.  0.  0.1]
+convi_MNE score: 0.7134784592878474
+weight:[0.9 0.  0.  0.1]
+convi_MNE score: 0.7051202343591589
+weight:[0.9 0.  0.  0.1]
+convi_MNE score: 0.7088445352101391
+weight:[0.9 0.  0.  0.1]
+convi_MNE score: 0.7035677096673246
+weight:[0.9 0.  0.  0.1]
+convi_MNE score: 0.7030806386887769
+weight:[0.9 0.  0.  0.1]
+convi_MNE score: 0.7032726303920075
+weight:[0.9 0.  0.  0.1]
+convi_MNE score: 0.7049293902593073
+weight:[0.9 0.  0.  0.1]
+convi_MNE score: 0.7084657558336944
+weight:[0.9 0.  0.  0.1]
+convi_MNE score: 0.7117832804698814
+weight:[0.9 0.  0.  0.1]
+convi_MNE score: 0.7059926565000312
+weight:[0.9 0.  0.  0.1]
+convi_MNE score: 0.7019760961991788
+weight:[0.9 0.  0.  0.1]
+convi_MNE score: 0.7018941760543121
+end
+We are working on edge: 1
+end
+We are working on edge: 1
+weight:[0.9 0.  0.  0.1]
+convi_MNE score: 0.7111170419709233
+weight:[0.9 0.  0.  0.1]
+convi_MNE score: 0.7012090526120583
+weight:[0.9 0.  0.  0.1]
+convi_MNE score: 0.7044193545920245
+weight:[0.9 0.  0.  0.1]
+convi_MNE score: 0.7035045008789547
+weight:[0.9 0.  0.  0.1]
+convi_MNE score: 0.703230485915217
+
+
+We are loading data from: data/ee_tw.edges
+Finish loading data
+We are working on edge: 1
+weight:[0.9 0.  0.  0.1]
+convi_MNE score: 0.735428112963018
+weight:[0.9 0.  0.  0.1]
+convi_MNE score: 0.7407159393968188
+weight:[0.9 0.  0.  0.1]
+convi_MNE score: 0.732720495917069
+weight:[0.9 0.  0.  0.1]
+convi_MNE score: 0.7388534965463847
+weight:[0.9 0.  0.  0.1]
+convi_MNE score: 0.7420315118485632
+end
+weight:[0.9 0.  0.  0.1]
+convi_MNE score: 0.7305954005514814
+end
+weight:[0.9 0.  0.  0.1]
+convi_MNE score: 0.7305751779472568
+convi_MNE score: 0.7348667790795067
+weight:[0.9 0.  0.  0.1]
+convi_MNE score: 0.738557520106855
+weight:[0.9 0.  0.  0.1]
+convi_MNE score: 0.7391747638159846
+weight:[0.9 0.  0.  0.1]
+convi_MNE score: 0.7317512705512175
+convi_MNE score: 0.7337861476138536
+weight:[0.9 0.  0.  0.1]
+convi_MNE score: 0.7301482197759893
+convi_MNE score: 0.7384740170126479
+end
+end
+We are working on edge: 1
+weight:[0.9 0.  0.  0.1]
+convi_MNE score: 0.7339709623806306
+weight:[0.9 0.  0.  0.1]
+convi_MNE score: 0.737430104615087
+weight:[0.9 0.  0.  0.1]
+convi_MNE score: 0.741009560713415
+weight:[0.9 0.  0.  0.1]
+convi_MNE score: 0.7233247580973863
+weight:[0.9 0.  0.  0.1]
+convi_MNE score: 0.7254001094354583
+weight:[0.9 0.  0.  0.1]
+convi_MNE score: 0.7374771078888448
+weight:[0.9 0.  0.  0.1]
+convi_MNE score: 0.7440380753504076
+weight:[0.9 0.  0.  0.1]
+convi_MNE score: 0.7321757974550672
+
+
+data:ee_tw.edges
+cp:0.7 weight:[0.2 0.1 0.6 0.1]
+Overall convi_MNE AUC: [0.68772992 0.70270693 0.71822138 0.68527644 0.68452668]
+Overall convi_MNE_AUC: 0.6956922700610578
+Overall convi_MNE_AUC std: 0.013063882954149182
+cp:0.7 weight:[0.2 0.  0.7 0.1]
+Overall convi_MNE AUC: [0.69186905 0.71967488 0.69622329 0.68626147 0.68341988]
+Overall convi_MNE_AUC: 0.6954897153837989
+Overall convi_MNE_AUC std: 0.012879526526357777
+
 
