@@ -1,0 +1,24 @@
+cp:0.9 weight:[0.  0.  0.1 0.  0.9]
+Overall convi_MNE AUC: [0.6480619  0.66005807 0.64497528 0.64721732 0.64619931]
+Overall convi_MNE_AUC: 0.6493023758077963
+Overall convi_MNE_AUC std: 0.005475836586325043
+cp:0.9 weight:[0.  0.  0.1 0.  0.9]
+Overall convi_MNE AUC: [0.6480619  0.66005807 0.64497528 0.64721732 0.64619931]
+Overall convi_MNE_AUC: 0.6493023758077963
+Overall convi_MNE_AUC std: 0.005475836586325043
+We are working on edge: 1
+cross validation :{} 0
+We are working on edge: 1
+cross validation :{} 1
+We are working on edge: 1
+cross validation :{} 2
+We are working on edge: 1
+cross validation :{} 3
+We are working on edge: 1
+cross validation :{} 4
+cp:0.9 weight:[0.  0.  0.1 0.1 0.8]
+Overall convi_MNE AUC: [0.64712115 0.65791919 0.64204818 0.65803749 0.64386593]
+Overall convi_MNE_AUC: 0.6497983895927841
+Overall convi_MNE_AUC std: 0.006873973782575232
+
+

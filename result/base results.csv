@@ -1,0 +1,36 @@
+datasets,base results,target results,before results,,
+ee_structure,0.705,0.705,0.71,,"cp:0.7 weight:[0.6 0.  0.1 0.3]
+Overall convi_MNE AUC: [0.71097842 0.70354354 0.71041518 0.69286354 0.70364312]
+Overall convi_MNE_AUC: 0.7042887596515723
+Overall convi_MNE_AUC std: 0.006538998003973816
+"
+ee_property,0.733,0.705,na,,"cp:0.9 weight:[0.  0.  0.3 0.4 0.3]
+Overall convi_MNE AUC: [0.73424274 0.72849505 0.72771617 0.73608    0.73709404]
+Overall convi_MNE_AUC: 0.732725600038016
+Overall convi_MNE_AUC std: 0.003889189145461483
+"
+ee_tw_structure,0.695,0.7,0.744,,"cp:0.7 weight:[0.2 0.  0.7 0.1]
+Overall convi_MNE AUC: [0.69186905 0.71967488 0.69622329 0.68626147 0.68341988]
+Overall convi_MNE_AUC: 0.6954897153837989
+Overall convi_MNE_AUC std: 0.012879526526357777"
+ee_tw_property,0.729,0.7,na,,"cp:0.9 weight:[0.  0.  0.2 0.  0.8]
+Overall convi_MNE AUC: [0.72201014 0.71802429 0.73166058 0.72389711 0.74398809]
+Overall convi_MNE_AUC: 0.7279160406562734
+Overall convi_MNE_AUC std: 0.009178348672784222
+"
+ge_struture,0.6,0.749,0.724,,
+ge_property,0.65,0.749,na,,"cp:0.9 weight:[0.  0.  0.1 0.1 0.8]
+Overall convi_MNE AUC: [0.64712115 0.65791919 0.64204818 0.65803749 0.64386593]
+Overall convi_MNE_AUC: 0.6497983895927841
+Overall convi_MNE_AUC std: 0.006873973782575232
+"
+ge_tw_structure,0.61,0.641,0.724,,"cp:0.9 weight:[0.  0.  0.9 0.1]
+Overall convi_MNE AUC: [0.61218573 0.61640341 0.61694045 0.62066756 0.60257969]
+Overall convi_MNE_AUC: 0.6137553674447817
+Overall convi_MNE_AUC std: 0.006201530386935485
+"
+ge_tw_property,0.651,0.641,na,,"cp:0.9 weight:[0.  0.  0.1 0.  0.9]
+Overall convi_MNE AUC: [0.64789507 0.6535253  0.65789152 0.65499632 0.64328657]
+Overall convi_MNE_AUC: 0.6515189554052687
+Overall convi_MNE_AUC std: 0.0052465572713939765
+"

@@ -241,6 +241,45 @@ convi_MNE score: 0.7440380753504076
 weight:[0.9 0.  0.  0.1]
 convi_MNE score: 0.7321757974550672
 
+data:ee.edges
+cp:0.7 weight:[0.3 0.  0.3 0.4]
+Overall convi_MNE AUC: [0.68896134 0.68473088 0.69693778 0.69806491 0.70042661]
+Overall convi_MNE_AUC: 0.6938243052093523
+Overall convi_MNE_AUC std: 0.005959960683097447
+We are working on edge: 1
+cross validation :{} 0
+We are working on edge: 1
+cross validation :{} 1
+We are working on edge: 1
+cross validation :{} 2
+We are working on edge: 1
+cross validation :{} 3
+We are working on edge: 1
+cross validation :{} 4
+cp:0.7 weight:[0.3 0.  0.4 0.3]
+Overall convi_MNE AUC: [0.70498595 0.6959361  0.69860287 0.70016968 0.70799389]
+Overall convi_MNE_AUC: 0.7015376997797927
+Overall convi_MNE_AUC std: 0.004368877906257982
+cp:0.7 weight:[0.4 0.  0.1 0.5]
+Overall convi_MNE AUC: [0.70295312 0.70155146 0.70518487 0.69962778 0.70331145]
+Overall convi_MNE_AUC: 0.7025257372760121
+Overall convi_MNE_AUC std: 0.0018557119980583455
+We are working on edge: 1
+cross validation :{} 0
+We are working on edge: 1
+cross validation :{} 1
+We are working on edge: 1
+cross validation :{} 2
+We are working on edge: 1
+cross validation :{} 3
+We are working on edge: 1
+cross validation :{} 4
+cp:0.7 weight:[0.4 0.  0.2 0.4]
+Overall convi_MNE AUC: [0.6986032  0.70499897 0.697873   0.7001043  0.70590682]
+Overall convi_MNE_AUC: 0.7014972579567217
+Overall convi_MNE_AUC std: 0.003321366534853262
+
+
 
 data:ee_tw.edges
 cp:0.7 weight:[0.2 0.1 0.6 0.1]
@@ -251,5 +290,9 @@ cp:0.7 weight:[0.2 0.  0.7 0.1]
 Overall convi_MNE AUC: [0.69186905 0.71967488 0.69622329 0.68626147 0.68341988]
 Overall convi_MNE_AUC: 0.6954897153837989
 Overall convi_MNE_AUC std: 0.012879526526357777
+cp:0.7 weight:[0.3 0.  0.5 0.2]
+Overall convi_MNE AUC: [0.6887475  0.70066065 0.69128375 0.6922492  0.67768045]
+Overall convi_MNE_AUC: 0.6901243100436644
+Overall convi_MNE_AUC std: 0.007397554697623775
 
 

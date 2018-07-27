@@ -61,3 +61,8 @@ weight:[0.  0.  0.9 0. ]
 convi_MNE score: 0.7235667459379455
 weight:[0.  0.  0.6 0. ]
 convi_MNE score: 0.7244822829793571
+cp:0.9 weight:[0.  0.2 0.7 0.1]
+Overall convi_MNE AUC: [0.60423761 0.60111491 0.59812345 0.59907031 0.61286725]
+Overall convi_MNE_AUC: 0.6030827057559439
+Overall convi_MNE_AUC std: 0.005322345916909
+
