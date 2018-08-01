@@ -180,8 +180,14 @@ args = parse_args()
 file_name = args.input
 # test_file_name = 'data/Vickers-Chan-7thGraders_multiplex.edges'
 edge_data_by_type, all_edges, all_nodes = load_network_data(file_name)
+edge_data_by_type['1'] = pd.DataFrame(edge_data_by_type['1'], columns=['From', 'To', 'Weight'])
+edge_data_by_type['1']['Weight'].apply(int)
+edge_data_by_type['1'] = edge_data_by_type['1'].values.tolist()
 edge_data = {'1':edge_data_by_type['1']}
+
 convi_data = edge_data_by_type['2']
+convi_data = pd.DataFrame(convi_data, columns=['From', 'To', 'Weight'])
+convi_data['Weight'].apply(int)
 
 # In our experiment, we use 5-fold cross-validation, but you can change that
 number_of_groups = 5
@@ -252,9 +258,7 @@ for i in range(number_of_groups):
             for i in range(100):
                 # weight_weight = random.randint(0, 10) * 0.1
                 # weight = np.array([weight_weight, 1 - weight_weight, 0, 0])
-                # weight = np.array([random.randint(0, 10) * 0.1 for n in range(4)])
-                weight = np.array([0, random.randint(0, 10) * 0.1, random.randint(0, 10) * 0.1, random.randint(0, 10) * 0.1])
-                # weight = 1  # only for single layer degree
+                # weight = np.array([random.randint(0, 10) * 0.1, random.randint(0, 10) * 0.1, 0.9, random.randint(0, 10) * 0.1])
                 # convi_struct_G = Convince_Graph.ConvGraph(get_G_from_edges(training_data_by_type[edge_type]),\
                 #                                         get_G_from_edges(convi_data),\
                 #                                         args.directed, cp, weight)
@@ -262,18 +266,28 @@ for i in range(number_of_groups):
                 # convi_MNE_walks = convi_struct_G.simulate_walks(10, 10)
                 # convi_MNE_model = train_deepwalk_embedding(convi_MNE_walks)
                 # tmp_convi_MNE_score = get_AUC(convi_MNE_model, selected_true_edges, selected_false_edges)
+                # if tmp_convi_MNE_score > 0.7:
+                #     print('weight:{}'.format(weight))
+                #     print('convi_MNE score:', tmp_convi_MNE_score)
+# ======================================property=============================
+                weight_property = np.array([random.randint(0, 10) * 0.1 for n in range(5)])
+                convi_proper_G = Convince_Multi_Graph.ConvMultiGraph(get_G_from_edges(training_data_by_type[edge_type]),\
+                                                            get_G_from_edges(convi_data),\
+                                                            training_data_by_type[edge_type],\
+                                                            convi_data, args.directed, cp, weight_property)
+                print("preprocess_transition_probs...")
+                convi_proper_G.preprocess_transition_probs(weight_property)
+                # print("walk")
+                convi_MNE_walks = convi_proper_G.simulate_walks(10, 10)
+                # print("embedding")
+                convi_MNE_model = train_deepwalk_embedding(convi_MNE_walks)
+                tmp_convi_MNE_score = get_AUC(convi_MNE_model, selected_true_edges, selected_false_edges)
                 # if tmp_convi_MNE_score > 0.67:
                 #     print('weight:{}'.format(weight))
                 #     print('convi_MNE score:', tmp_convi_MNE_score)
 
-                convi_proper_G = Convince_Multi_Graph.ConvMultiGraph(get_G_from_edges(training_data_by_type[edge_type]),\
-                                                            get_G_from_edges(convi_data),\
-                                                            training_data_by_type[edge_type],\
-                                                            convi_data, args.directed, cp, weight)
-                convi_proper_G.preprocess_transition_probs(weight)
-
-                # print('weight:{}'.format(weight))
-                # print('convi_MNE score:', tmp_convi_MNE_score)
+                print('weight:{}'.format(weight_property))
+                print('convi_MNE score:', tmp_convi_MNE_score)
 
 
                 # tmp_convi_MNE_performance += tmp_convi_MNE_score * 1

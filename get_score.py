@@ -112,16 +112,17 @@ def get_oi(email, hist):
 
 
 def get_si(email, nbr):
-    email = pd.DataFrame(email, columns=['From', 'To', 'Weight'])
     strength_df = email.groupby(['From'])[['Weight']].sum().reset_index()
-    strength = strength_df[strength_df['From'] == nbr]
+    strength_df['Weight'] = scipy.stats.zscore(np.array(strength_df['Weight']))
+    strength = round(float(strength_df[strength_df['From'] == nbr].iloc[0,1]), 4)
     return strength
 
 
 def get_o_ij_w(email, hist):
-    email = pd.DataFrame(email, columns=['From', 'To', 'Weight'])
-    hist  = pd.DataFrame(hist,  columns=['From', 'To', 'Weight'])
+    # email = pd.DataFrame(email, columns=['From', 'To', 'Weight'])
+    # hist  = pd.DataFrame(hist,  columns=['From', 'To', 'Weight'])
     df = pd.concat([email, hist])
+    df['Weight'] = df['Weight'].apply(int)
     weight_sum = df.groupby(['From', 'To'])[['Weight']].sum().reset_index()
     return weight_sum
 
@@ -154,10 +155,10 @@ def get_cross_entropy(email, hist, oi, nbr):
 
 
 def get_Ci1(email_layer, hist_layer, email_graph, hist_graph, nbr):
-    email = pd.DataFrame(email_layer, columns=['From', 'To', 'Weight'])
-    hist  = pd.DataFrame(hist_layer,  columns=['From', 'To', 'Weight'])
-    email_layer = email[['From','To']]
-    hist_layer = hist[['From','To']]
+    # email = pd.DataFrame(email_layer, columns=['From', 'To', 'Weight'])
+    # hist  = pd.DataFrame(hist_layer,  columns=['From', 'To', 'Weight'])
+    email_layer = email_layer[['From', 'To']]
+    hist_layer = hist_layer[['From', 'To']]
     # ki
     email_oi = email_graph.degree
     email_oi_d = {}
@@ -169,25 +170,25 @@ def get_Ci1(email_layer, hist_layer, email_graph, hist_graph, nbr):
         hist_oi_d[k] = v
     # email layer
     # init
-    triangle_2_email = dict.fromkeys(list(set(email_layer['From']) | set(email_layer['To'])),0)
+    triangle_2_email = dict.fromkeys(list(set(email_layer['From']) | set(email_layer['To'])), 0)
     # del triangle_2_email['aaaa']
-    triad_1_email = dict.fromkeys(list(set(email_layer['From']) | set(email_layer['To'])),0)
+    triad_1_email = dict.fromkeys(list(set(email_layer['From']) | set(email_layer['To'])), 0)
     # del triad_1_email['aaaa']
     # triangle_2
     for key,value in email_oi_d.items():
-        key_row = email_layer[email_layer['From']==key]
+        key_row = email_layer[email_layer['From'] == key]
         for row in key_row.values.tolist():
-            a = hist_layer[(hist_layer['From']==row[1]) & (hist_layer['From']!=hist_layer['To'])]
+            a = hist_layer[(hist_layer['From'] == row[1]) & (hist_layer['From']!=hist_layer['To'])]
             if not a.empty:
                 for hist_row in a.values.tolist():
-                    b = email_layer[(email_layer['From']==hist_row[1]) & \
-                                    (email_layer['From']!=email_layer['To']) & \
-                                    (email_layer['To']==row[0])]
+                    b = email_layer[(email_layer['From'] == hist_row[1]) & \
+                                    (email_layer['From'] != email_layer['To']) & \
+                                    (email_layer['To'] == row[0])]
                     if not b.empty:
                         triangle_2_email[key] += len(b)
         # triad_1
         for row in key_row.values.tolist():
-            triad_1_email[key] = triad_1_email[key]+len(email_layer[(email_layer['To']==row[0]) & \
+            triad_1_email[key] = triad_1_email[key] + len(email_layer[(email_layer['To']==row[0]) & \
                                                     (email_layer['From']!=row[1])])
     # hist layer
     triangle_2_hist = dict.fromkeys(list(set(hist_layer['From']) | set(hist_layer['To'])),0)
@@ -195,32 +196,36 @@ def get_Ci1(email_layer, hist_layer, email_graph, hist_graph, nbr):
     triad_1_hist = dict.fromkeys(list(set(hist_layer['From']) | set(hist_layer['To'])),0)
     # del triad_1_hist['aaaa']
     for key,value in hist_oi_d.items():
-        key_row = hist_layer[hist_layer['From']==key]
+        key_row = hist_layer[hist_layer['From'] == key]
         for row in key_row.values.tolist():
-            a = email_layer[(email_layer['From']==row[1]) & (email_layer['From']!=email_layer['To'])]
+            a = email_layer[(email_layer['From'] == row[1]) & (email_layer['From'] != email_layer['To'])]
             if not a.empty:
                 for email_row in a.values.tolist():
-                    b = hist_layer[(hist_layer['From']==email_row[1]) & \
-                                    (hist_layer['From']!=hist_layer['To']) & \
-                                    (hist_layer['To']==row[0])]
+                    b = hist_layer[(hist_layer['From'] == email_row[1]) & \
+                                    (hist_layer['From'] != hist_layer['To']) & \
+                                    (hist_layer['To'] == row[0])]
                     if not b.empty:
                         triangle_2_hist[key] += len(b)
         for row in key_row.values.tolist():
-            triad_1_hist[key] = triad_1_hist[key]+len(hist_layer[(hist_layer['To']==row[0]) & \
-                                                    (hist_layer['From']!=row[1])])
-    triangle_2 = dict(Counter(triangle_2_email)+Counter(triangle_2_hist))
-    triad_1 = dict(Counter(triad_1_email)+Counter(triad_1_hist))
+            triad_1_hist[key] = triad_1_hist[key] + len(hist_layer[(hist_layer['To'] == row[0]) & \
+                                                    (hist_layer['From'] != row[1])])
+    triangle_2 = dict(Counter(triangle_2_email) + Counter(triangle_2_hist))
+    triad_1 = dict(Counter(triad_1_email) + Counter(triad_1_hist))
     Ci1 = {}
     for i in triangle_2.keys():
-        Ci1[i] = round(triangle_2[i]/float(triad_1[i]),2)
-    return Ci1[nbr]
+        Ci1[i] = round(triangle_2[i] / float(triad_1[i]), 2)
+    if Ci1.get(nbr, 0) == nbr:
+        return Ci1[nbr]
+    else:
+        return 0
 
 
 def aggregated_network(email, hist):
-    email = pd.DataFrame(email, columns=['From', 'To', 'Weight'])
-    hist  = pd.DataFrame(hist,  columns=['From', 'To', 'Weight'])
+    # email = pd.DataFrame(email, columns=['From', 'To', 'Weight'])
+    # hist  = pd.DataFrame(hist,  columns=['From', 'To', 'Weight'])
     agg_network = pd.concat([email,hist])
-    agg_network = agg_network.sort_values(['Weight'], ascending=True).drop_duplicates(['From','To'],keep='first')
+    agg_network['Weight'] = agg_network['Weight'].apply(int)
+    agg_network = agg_network.sort_values(['Weight'], ascending=True).drop_duplicates(['From','To'], keep='first')
     agg_network = agg_network[~(agg_network['From'] == agg_network['To'])]
     return agg_network
 
@@ -250,8 +255,8 @@ def get_lambdai(email_layer, hist_layer, email_graph, hist_graph, nbr):
         for i in path:
             agg_edge_path_dict['++'.join(path[i])] = 1
     # count the shortest path of node i in agg_network
-    bottom_df = pd.DataFrame(agg_edge_path_dict.items(),columns=['edge','count'])
-    bottom_df['From'] = bottom_df['edge'].map(lambda x:x.split('++')[0])
+    bottom_df = pd.DataFrame(list(agg_edge_path_dict.items()), columns=['edge', 'count'])
+    bottom_df['From'] = bottom_df['edge'].map(lambda x : x.split('++')[0])
     bottom_count = Counter(bottom_df['From'])
     for edge in email_edge_path_dict:
         if agg_edge_path_dict.get(edge, 'aaaa') != 'aaaa':
@@ -261,29 +266,32 @@ def get_lambdai(email_layer, hist_layer, email_graph, hist_graph, nbr):
         if agg_edge_path_dict.get(edge, 'aaaa') != 'aaaa':
             agg_edge_path_dict.pop(edge)
     # count the shortest path of node i  between two layers
-    top_df = pd.DataFrame(agg_edge_path_dict.items(),columns=['edge','count'])
-    top_df['From'] = top_df['edge'].map(lambda x:x.split('++')[0])
+    top_df = pd.DataFrame(list(agg_edge_path_dict.items()), columns=['edge', 'count'])
+    top_df['From'] = top_df['edge'].map(lambda x : x.split('++')[0])
     top_count = Counter(top_df['From'])
     # calculate the lambda i
     lambdai = {}
     for k in bottom_count:
         if top_count.get(k,'aaaa') != 'aaaa':
-            lambdai[k] = round(top_count[k]/float(bottom_count[k]),2)
-    return lambdai[nbr]
+            lambdai[k] = round(top_count[k] / float(bottom_count[k]),2)
+    if lambdai.get(nbr, 0) == nbr:
+        return lambdai[nbr]
+    else:
+        return 0
 
 
 def get_property_score(G, Conv_G, df, Conv_df, node, nbr):
     overlap_degree = get_oi(G, Conv_G)
     zscore_norm_overlap_degree = dict(zip(overlap_degree.keys(), scipy.stats.zscore(list(overlap_degree.values()))))
-    nbr_strength = get_si(df, nbr) # need to be normed
+    nbr_strength = get_si(df, nbr)
     entropy_degree = get_cross_entropy(G, Conv_G, overlap_degree, nbr)
     first_coef = get_Ci1(df, Conv_df, G, Conv_G, nbr)
     inter_dependence = get_lambdai(df, Conv_df, G, Conv_G, nbr)
-    print(inter_dependence)
-    return
-    # return zscore_norm_overlap_degree[nbr], strength, entropy_degree, first_coef, inter_dependence
+    # print(nbr_strength, entropy_degree, first_coef, inter_dependence)
+    # print("property score finished")
+    return zscore_norm_overlap_degree[nbr], nbr_strength, entropy_degree, first_coef, inter_dependence
 
 
-def count_property_score(overlap_degree, strength, partici_coef, cluster, first_coef, inter_dependence):
-    
+def count_property_score(overlap_degree, strength, entropy_degree, first_coef, inter_dependence, weight):
+    score = np.array([float(overlap_degree), float(strength), float(entropy_degree), float(first_coef), float(inter_dependence)])
     return sum(score * weight)
