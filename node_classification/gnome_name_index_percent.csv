@@ -1,0 +1,894 @@
+name,index,begin,end,middle,tosser,fix_percent
+linux codehelp co uk,511,5.0,4.0,2.0,0.0,0.364
+trowbrds gmail com,843,9.0,0.0,2.0,0.0,0.0
+nicolas ndufresne ca,628,13.0,1.0,0.0,0.0,0.071
+chrisime gnome org,146,0.0,3.0,2.0,0.0,0.6
+peter hutterer who-t net,675,0.0,1.0,4.0,0.0,0.2
+tthurman gnome org,845,20.0,8.0,1.0,0.0,0.276
+marinaz redhat com,545,12.0,4.0,3.0,0.0,0.211
+mkestner ximian com,600,0.0,108.0,20.0,0.0,0.844
+adamh densi com,19,0.0,2.0,0.0,0.0,1.0
+michael terry canonical com,577,1.0,0.0,2.0,0.0,0.0
+gianmt gnome org,292,20.0,20.0,0.0,0.0,0.5
+baptistem gnome org,85,7.0,0.0,0.0,1.0,0.0
+senger rehfisch de,770,0.0,0.0,1.0,0.0,0.0
+linas linas org,508,9.0,11.0,1.0,0.0,0.524
+paolo bacch tin it,657,0.0,3.0,0.0,0.0,1.0
+rganesan novell com,721,0.0,1.0,1.0,0.0,0.5
+alex ximian com,40,8.0,24.0,7.0,0.0,0.615
+phhigino gmail com,679,4.0,4.0,0.0,0.0,0.5
+tml iki fi,832,23.0,16.0,16.0,0.0,0.291
+rob robster org uk,730,4.0,0.0,0.0,1.0,0.0
+liberforce freeside fr,506,2.0,2.0,0.0,0.0,0.5
+brunobol gnome org,110,11.0,2.0,1.0,0.0,0.143
+daniel veillard com,172,1.0,2.0,0.0,0.0,0.667
+carol spears gmail com,128,2.0,0.0,0.0,1.0,0.0
+lathiat bur st,496,1.0,0.0,0.0,1.0,0.0
+pablog gnome org,651,1.0,0.0,0.0,1.0,0.0
+anna ximian com,68,45.0,87.0,35.0,0.0,0.521
+roman bromeco de,741,1.0,24.0,12.0,0.0,0.649
+sopwith redhat com,788,2.0,0.0,0.0,1.0,0.0
+shprasad novell com,776,0.0,12.0,8.0,0.0,0.6
+horkana maths tcd ie,339,4.0,0.0,0.0,1.0,0.0
+djihed gmail com,203,3.0,3.0,0.0,0.0,0.5
+palfrey tevp net,654,5.0,0.0,0.0,1.0,0.0
+hggdh2 gmail com,331,0.0,3.0,0.0,0.0,1.0
+jordi sindominio net,423,3.0,1.0,0.0,0.0,0.25
+aguelzow taliesin ca,25,0.0,44.0,4.0,0.0,0.917
+ajgenius ajgenius us,30,2.0,0.0,0.0,1.0,0.0
+ppawel fastmail fm,692,8.0,2.0,2.0,0.0,0.167
+darin bentspoon com,181,178.0,32.0,16.0,0.0,0.142
+palo simo gmail com,655,0.0,21.0,1.0,0.0,0.955
+ogmaciel gnome org,639,1.0,1.0,0.0,0.0,0.5
+tpopela redhat com,838,1.0,4.0,13.0,0.0,0.222
+tuharsky misbb sk,846,0.0,1.0,5.0,0.0,0.167
+nalimilan club fr,620,7.0,6.0,0.0,0.0,0.462
+ofourdan redhat com,638,0.0,3.0,4.0,0.0,0.429
+oleavr gmail com,641,1.0,0.0,0.0,1.0,0.0
+mdke ubuntu com,568,1.0,0.0,0.0,1.0,0.0
+kyoushuu yahoo com,492,7.0,1.0,0.0,0.0,0.125
+sadam gnome org,750,9.0,0.0,0.0,1.0,0.0
+eemynotna gmail com,230,1.0,1.0,0.0,0.0,0.5
+t i m zen co uk,811,195.0,103.0,67.0,0.0,0.282
+paolo gnome org,660,30.0,3.0,3.0,0.0,0.083
+tal ecs soton ac uk,812,1.0,0.0,0.0,1.0,0.0
+lmedinas gnome org,515,2.0,0.0,0.0,1.0,0.0
+william jon mccann gmail com,867,8.0,0.0,1.0,0.0,0.0
+wfdavis seas upenn edu,866,1.0,1.0,0.0,0.0,0.5
+jesse icecrew nl,390,0.0,3.0,0.0,0.0,1.0
+piotrdrag gmail com,684,1.0,0.0,0.0,1.0,0.0
+do baum ro,206,61.0,49.0,27.0,0.0,0.358
+algol firenze linux it,48,0.0,6.0,0.0,0.0,1.0
+hema seetharamaiah wipro com,327,6.0,3.0,5.0,0.0,0.214
+harshy dersoldat org,323,16.0,8.0,0.0,0.0,0.333
+yagood o2 pl,879,0.0,0.0,2.0,0.0,0.0
+dcbw redhat com,191,13.0,12.0,4.0,0.0,0.414
+hpj ximian com,346,0.0,91.0,27.0,0.0,0.771
+hp redhat com,343,0.0,31.0,80.0,0.0,0.279
+mark skynet ie,546,248.0,16.0,64.0,0.0,0.049
+arxcruz gnome org,78,1.0,0.0,0.0,1.0,0.0
+bill haneman sun com,95,143.0,146.0,32.0,0.0,0.455
+mjs noisehavoc org,595,26.0,7.0,1.0,0.0,0.206
+iain ximian com,350,16.0,148.0,63.0,0.0,0.652
+remenic gmail com,720,0.0,5.0,0.0,0.0,1.0
+erickpc gnome org,245,1.0,0.0,0.0,1.0,0.0
+redfox redfoxcenter org,717,1.0,1.0,9.0,0.0,0.091
+louie ximian com,519,0.0,8.0,7.0,0.0,0.533
+sontek gmail com,787,0.0,0.0,3.0,0.0,0.0
+nielsen memberwebs com,629,0.0,10.0,0.0,0.0,1.0
+gustavo sagui org,315,0.0,0.0,2.0,0.0,0.0
+ltilve igalia com,522,0.0,2.0,1.0,0.0,0.667
+loban earthling net,516,1.0,1.0,0.0,0.0,0.5
+sebol ikhlas com,767,,,,,
+shurik179 gmail com,777,5.0,0.0,0.0,1.0,0.0
+wim taymans gmail com,871,49.0,25.0,4.0,0.0,0.321
+micke imendio com,581,0.0,39.0,3.0,0.0,0.929
+dreamil gmail com,217,,,,,
+LDinesh novell com,4,5.0,3.0,3.0,0.0,0.273
+david fubar dk,189,0.0,10.0,0.0,0.0,1.0
+daniel mustieles gmail com,170,1.0,1.0,0.0,0.0,0.5
+marcel telka sk,541,39.0,2.0,10.0,0.0,0.039
+dennis_cranston yahoo com,195,5.0,0.0,0.0,1.0,0.0
+andi5 py gmx net,58,6.0,6.0,0.0,0.0,0.5
+abharath gnome org,14,19.0,0.0,1.0,0.0,0.0
+thaytan noraisin net,820,27.0,2.0,2.0,0.0,0.065
+mjs eazel com,594,,,,,
+knocte gmail com,486,2.0,1.0,0.0,0.0,0.333
+hub figuiere net,347,6.0,3.0,0.0,0.0,0.333
+timj gtk org,830,14.0,16.0,2.0,0.0,0.5
+john johnmccutchan com,414,1.0,0.0,0.0,1.0,0.0
+jaap haitsma org,362,3.0,0.0,1.0,0.0,0.0
+ptitjes free fr,701,3.0,1.0,0.0,0.0,0.25
+nano-master gmx de,622,0.0,1.0,1.0,0.0,0.5
+nils redhat com,630,2.0,1.0,0.0,0.0,0.333
+wbrack mmm com hk,863,2.0,2.0,0.0,0.0,0.5
+jwendell gnome org,450,38.0,0.0,4.0,0.0,0.0
+pvillavi gnome org,703,10.0,4.0,0.0,0.0,0.286
+rajkumar siva wipro com,709,1.0,0.0,1.0,0.0,0.0
+arunp novell com,76,0.0,19.0,8.0,0.0,0.704
+csaavedra igalia com,161,17.0,2.0,2.0,0.0,0.095
+demurgets free fr,194,,,,,
+patrick ohly gmx de,666,7.0,3.0,7.0,0.0,0.176
+PeterBloomfield BellSouth net,5,4.0,4.0,0.0,0.0,0.5
+lauris ximian com,498,0.0,11.0,1.0,0.0,0.917
+jpavel helixcode com,429,2.0,1.0,3.0,0.0,0.167
+seb sfo free fr,765,28.0,27.0,4.0,0.0,0.458
+frb ximian com,276,0.0,0.0,3.0,0.0,0.0
+ettore ximian com,251,275.0,374.0,307.0,0.0,0.391
+thaller redhat com,818,8.0,9.0,1.0,0.0,0.5
+lewing ximian com,504,32.0,63.0,34.0,0.0,0.488
+gnomeuser gmail com,303,3.0,0.0,0.0,1.0,0.0
+mclasen redhat com,565,37.0,3.0,8.0,0.0,0.063
+r_kinder yahoo com,708,1.0,0.0,0.0,1.0,0.0
+danw helixcode com,178,0.0,12.0,8.0,0.0,0.6
+dneary gnome org,205,72.0,0.0,3.0,0.0,0.0
+dave cirt net,182,3.0,3.0,0.0,0.0,0.5
+raywang gnome org,712,2.0,2.0,0.0,0.0,0.5
+tigert ximian com,826,0.0,11.0,6.0,0.0,0.647
+kai cmail ru,458,6.0,3.0,0.0,0.0,0.333
+in7y118 public uni-hamburg de,351,0.0,1.0,2.0,0.0,0.333
+vuntz gnome org,857,93.0,2.0,8.0,0.0,0.019
+mpeseng tin it,605,0.0,59.0,11.0,0.0,0.843
+carol gimp org,127,,,,,
+jvivek novell com,449,10.0,16.0,12.0,0.0,0.421
+john carr unrouted co uk,413,4.0,5.0,0.0,0.0,0.556
+fherrera onirica com,269,8.0,1.0,0.0,0.0,0.111
+alexander winston comcast net,42,1.0,1.0,0.0,0.0,0.5
+wwalker gnome org,873,403.0,1.0,78.0,0.0,0.002
+bratsche gnome org,106,16.0,17.0,2.0,0.0,0.486
+rodo ximian com,737,0.0,100.0,15.0,0.0,0.87
+excentric gmail com,254,1.0,1.0,0.0,0.0,0.5
+sebp k-d-w org,768,22.0,0.0,0.0,1.0,0.0
+rodrigo gnome-db org,738,127.0,18.0,59.0,0.0,0.088
+awalton gnome org,82,9.0,4.0,0.0,0.0,0.308
+jap gnome org,371,14.0,0.0,0.0,1.0,0.0
+ebassi gmail com,227,6.0,1.0,2.0,0.0,0.111
+iulian radu67 gmail com,357,4.0,5.0,0.0,0.0,0.556
+mduponchelle1 gmail com,569,1.0,0.0,0.0,1.0,0.0
+kmaraas gnome org,485,205.0,4.0,26.0,0.0,0.017
+rishi is lostca se,725,2.0,0.0,7.0,0.0,0.0
+parent f gmail com,662,1.0,1.0,0.0,0.0,0.5
+brunoboaventura gmail com,109,0.0,5.0,1.0,0.0,0.833
+federico gnome org,261,122.0,2.0,38.0,0.0,0.012
+mitch imendio com,591,1.0,0.0,0.0,1.0,0.0
+patriciasantanacruz gmail com,665,2.0,2.0,0.0,0.0,0.5
+svu gnome org,809,21.0,25.0,1.0,0.0,0.532
+adrighem gnome org,21,2.0,0.0,3.0,0.0,0.0
+clarkbw gnome org,154,5.0,0.0,0.0,1.0,0.0
+msmith xiph org,609,4.0,4.0,0.0,0.0,0.5
+lark linux net cn,494,0.0,0.0,1.0,0.0,0.0
+chbm gnome org,137,2.0,1.0,0.0,0.0,0.333
+david davemalcolm demon co uk,188,8.0,0.0,0.0,1.0,0.0
+rodrigo novell com,739,0.0,49.0,15.0,0.0,0.766
+prlw1 cam ac uk,695,3.0,3.0,18.0,0.0,0.125
+gilbert fang sun com,294,3.0,3.0,1.0,0.0,0.429
+aaaa,10,,,,,
+jojeda gnome org,418,3.0,0.0,0.0,1.0,0.0
+seif lotfy com,769,1.0,1.0,2.0,0.0,0.25
+jap1 users sourceforge net,372,3.0,3.0,0.0,0.0,0.5
+marko anastasov gmail com,548,1.0,1.0,0.0,0.0,0.5
+pknbe volny cz,686,13.0,14.0,0.0,0.0,0.519
+philipl mail utexas edu,681,0.0,57.0,3.0,0.0,0.95
+friedel translate org za,279,,,,,
+xan gnome org,875,2.0,4.0,1.0,0.0,0.571
+aruiz gnome org,75,1.0,1.0,0.0,0.0,0.5
+itp ximian com,356,0.0,20.0,5.0,0.0,0.8
+robin nibor org,734,3.0,2.0,0.0,0.0,0.4
+andrew new-destiny co uk,63,,,,,
+cerdiogenes gmail com,130,8.0,0.0,1.0,0.0,0.0
+julien moutte net,444,3.0,10.0,0.0,0.0,0.769
+sameerds gmail com,753,2.0,3.0,1.0,0.0,0.5
+teuf gnome org,816,,,,,
+mpgritti gmail com,606,192.0,2.0,10.0,0.0,0.01
+xordoquy wanadoo fr,878,3.0,3.0,2.0,0.0,0.375
+mdevine cs stanford edu,567,2.0,2.0,0.0,0.0,0.5
+stephane delcroix org,798,8.0,6.0,0.0,0.0,0.429
+jdennis redhat com,379,1.0,1.0,0.0,0.0,0.5
+Johann Glaser gmx at,3,0.0,0.0,1.0,0.0,0.0
+mikkel kamstrup gmail com,588,6.0,5.0,0.0,0.0,0.455
+kiko async com br,480,34.0,0.0,7.0,0.0,0.0
+alvaropg gmail com,53,4.0,4.0,0.0,0.0,0.5
+andrearo pvv ntnu no,60,22.0,0.0,0.0,1.0,0.0
+ds schleef org,220,23.0,19.0,1.0,0.0,0.442
+kabalak kabalak net,456,9.0,0.0,0.0,1.0,0.0
+Uraeus linuxrising org,9,38.0,3.0,10.0,0.0,0.059
+epiotr use pl,243,7.0,7.0,0.0,0.0,0.5
+michael ximian com,578,0.0,66.0,11.0,0.0,0.857
+glynn foster sun com,299,0.0,5.0,2.0,0.0,0.714
+zcerza redhat com,890,6.0,5.0,0.0,0.0,0.455
+hendi gnome-de org,328,2.0,15.0,2.0,0.0,0.789
+snallagatla novell com,785,17.0,25.0,13.0,0.0,0.455
+gilles dartiguelongue esiee org,295,1.0,0.0,0.0,1.0,0.0
+gwidion gmail com,316,1.0,0.0,1.0,0.0,0.0
+dick ximian com,200,0.0,0.0,1.0,0.0,0.0
+hans breuer org,320,20.0,9.0,0.0,0.0,0.31
+ps baum ro,696,6.0,19.0,1.0,0.0,0.731
+drago01 gmail com,216,1.0,1.0,0.0,0.0,0.5
+erwann chenede sun com,248,3.0,6.0,2.0,0.0,0.545
+nacho resa gmail com,618,11.0,9.0,3.0,0.0,0.391
+toshok ximian com,837,28.0,110.0,42.0,0.0,0.611
+aquarichy gmail com,71,,,,,
+phomes gmail com,682,6.0,8.0,0.0,0.0,0.571
+dan_erat pobox com,168,0.0,46.0,3.0,0.0,0.939
+bolian yin sun com,100,2.0,0.0,0.0,1.0,0.0
+jfriedl suse cz,393,3.0,5.0,0.0,0.0,0.625
+jens triq net,386,3.0,0.0,2.0,0.0,0.0
+john stowers gmail com,415,1.0,0.0,0.0,1.0,0.0
+pierre-luc pierlux com,683,20.0,12.0,0.0,0.0,0.375
+mike vee net,587,6.0,6.0,0.0,0.0,0.5
+abelcheung gmail com,13,6.0,0.0,1.0,0.0,0.0
+wingo pobox com,872,24.0,9.0,4.0,0.0,0.243
+chahibi gmail com,133,1.0,0.0,0.0,1.0,0.0
+christer edwards gmail com,147,1.0,1.0,0.0,0.0,0.5
+sampie ariana-dsl utu fi,754,0.0,13.0,2.0,0.0,0.867
+peterw ximian com,678,51.0,47.0,38.0,0.0,0.346
+cfergeau redhat com,131,18.0,1.0,3.0,0.0,0.045
+michael c urbanski gmail com,575,2.0,0.0,0.0,1.0,0.0
+hib hiberis nl,333,1.0,1.0,0.0,0.0,0.5
+hpj copyleft no,344,41.0,0.0,19.0,0.0,0.0
+james jamesh id au,367,87.0,5.0,3.0,0.0,0.053
+calum benson sun com,120,0.0,16.0,4.0,0.0,0.8
+notzed novell com,635,257.0,25.0,135.0,0.0,0.06
+mike emmel gmail com,585,1.0,1.0,0.0,0.0,0.5
+ds baum ro,219,23.0,35.0,3.0,0.0,0.574
+muks mukund org,614,0.0,1.0,0.0,0.0,1.0
+martin pycage de,551,1.0,0.0,0.0,1.0,0.0
+rd baum ro,714,118.0,115.0,24.0,0.0,0.447
+leon asplinux ru,501,0.0,11.0,2.0,0.0,0.846
+mail 3v1n0 net,535,5.0,6.0,2.0,0.0,0.462
+charles rebelbase com,134,18.0,4.0,2.0,0.0,0.167
+vincent noel gmail com,854,16.0,0.0,0.0,1.0,0.0
+rstrode redhat com,745,1.0,4.0,1.0,0.0,0.667
+peter ximian com,677,0.0,4.0,5.0,0.0,0.444
+kabalak gtranslator org,455,,,,,
+alan mcgovern gmail com,31,2.0,3.0,0.0,0.0,0.6
+jon trowbridge org,419,50.0,9.0,8.0,0.0,0.134
+chaz yorba org,136,30.0,4.0,0.0,0.0,0.118
+kevin breit gmail com,471,2.0,0.0,3.0,0.0,0.0
+aes gnome org,22,40.0,2.0,7.0,0.0,0.041
+mcdavey mrao cam ac uk,563,11.0,5.0,2.0,0.0,0.278
+jsh unfactored org,440,2.0,5.0,2.0,0.0,0.556
+patdavid gmail com,664,2.0,2.0,0.0,0.0,0.5
+skadz stigmata org,781,8.0,2.0,2.0,0.0,0.167
+carlosgc gnome org,126,5.0,4.0,1.0,0.0,0.4
+joe joeshaw org,411,36.0,0.0,9.0,0.0,0.0
+gpoo ubiobio cl,311,0.0,11.0,0.0,0.0,1.0
+chema ximian com,139,,,,,
+ploum ploum net,689,3.0,2.0,0.0,0.0,0.4
+nlevitt columbia edu,632,2.0,1.0,0.0,0.0,0.333
+psimerda redhat com,700,18.0,11.0,4.0,0.0,0.333
+koke amedias org,487,1.0,0.0,0.0,1.0,0.0
+william walker sun com,868,0.0,273.0,28.0,0.0,0.907
+jmalonzo gmail com,403,5.0,2.0,0.0,0.0,0.286
+braden endoframe com,104,1.0,4.0,0.0,0.0,0.8
+mitch gimp org,590,9.0,1.0,1.0,0.0,0.091
+muntyan tamu edu,615,5.0,2.0,5.0,0.0,0.167
+nshmyrev yandex ru,637,6.0,1.0,2.0,0.0,0.111
+ma30002000 yahoo de,531,9.0,10.0,0.0,0.0,0.526
+monsanto sun com,602,25.0,34.0,11.0,0.0,0.486
+gedakc gmail com,288,5.0,2.0,2.0,0.0,0.222
+federico ximian com,263,0.0,153.0,25.0,0.0,0.86
+jdub bethesignal org,381,13.0,0.0,0.0,1.0,0.0
+enselic gmail com,240,4.0,0.0,1.0,0.0,0.0
+hellan acm org,326,4.0,2.0,0.0,0.0,0.333
+fcrozat mandrakesoft com,260,0.0,2.0,1.0,0.0,0.667
+mbarnes redhat com,560,121.0,14.0,43.0,0.0,0.079
+steve istique net,801,0.0,2.0,1.0,0.0,0.667
+martin pitt ubuntu com,550,0.0,1.0,0.0,0.0,1.0
+cactus cactus rulez org,114,5.0,0.0,3.0,0.0,0.0
+agx sigxcpu org,26,2.0,2.0,0.0,0.0,0.5
+baiju freeshell org,83,1.0,0.0,0.0,1.0,0.0
+pchenthill novell com,670,0.0,60.0,8.0,0.0,0.882
+hendrik gnome-de org,329,0.0,1.0,0.0,0.0,1.0
+marcandre lureau gmail com,540,2.0,0.0,1.0,0.0,0.0
+metalpain2002 yahoo es,573,0.0,0.0,2.0,0.0,0.0
+lars raeder dk,495,4.0,2.0,1.0,0.0,0.286
+sdevashish novell com,761,2.0,21.0,9.0,0.0,0.656
+mjmac ximian com,593,,,,,
+pcutler gnome org,672,6.0,0.0,2.0,0.0,0.0
+kris loopnest org,489,55.0,0.0,10.0,0.0,0.0
+omega temple-baptist com,646,4.0,2.0,0.0,0.0,0.333
+calamandrei gmail com,116,5.0,5.0,0.0,0.0,0.5
+gforcada gnome org,291,6.0,9.0,1.0,0.0,0.563
+mathias hasselmann gmx de,554,7.0,7.0,0.0,0.0,0.5
+ude88 web de,849,5.0,4.0,5.0,0.0,0.286
+david alderia com,185,2.0,0.0,0.0,1.0,0.0
+kfv101 psu edu,475,40.0,4.0,5.0,0.0,0.082
+chpe gnome org,142,257.0,5.0,13.0,0.0,0.018
+fejj helixcode com,265,0.0,55.0,9.0,0.0,0.859
+lukaslipka gmail com,527,16.0,0.0,17.0,0.0,0.0
+jrb redhat com,437,15.0,43.0,7.0,0.0,0.662
+kpraveen novell com,488,11.0,17.0,24.0,0.0,0.327
+damon ximian com,165,0.0,71.0,20.0,0.0,0.78
+k_wayne linuxpower org,454,3.0,6.0,3.0,0.0,0.5
+dick acm org,199,10.0,0.0,0.0,1.0,0.0
+menesis delfi lt,571,1.0,0.0,1.0,0.0,0.0
+plongstaff rogers com,688,0.0,8.0,0.0,0.0,1.0
+bsreerenj gmail com,112,3.0,2.0,0.0,0.0,0.4
+T Thiessens chello nl,7,0.0,3.0,0.0,0.0,1.0
+david bolter gmail com,186,36.0,0.0,4.0,0.0,0.0
+sandmann cs au dk,755,28.0,0.0,13.0,0.0,0.0
+olivier lethanh be,645,1.0,0.0,0.0,1.0,0.0
+karl qdh org uk,462,2.0,1.0,0.0,0.0,0.333
+reinouts gnome org,719,11.0,4.0,2.0,0.0,0.235
+jeff cai oracle com,384,1.0,0.0,0.0,1.0,0.0
+chema celorio com,138,30.0,27.0,1.0,0.0,0.466
+jacob ximian com,364,0.0,49.0,9.0,0.0,0.845
+daniel phasevelocity org,171,1.0,0.0,0.0,1.0,0.0
+wim fluendo com,869,0.0,34.0,0.0,0.0,1.0
+hashem riseup net,324,2.0,1.0,0.0,0.0,0.333
+jpr novell com,433,0.0,49.0,27.0,0.0,0.645
+vgeddes gnome org,852,3.0,0.0,0.0,1.0,0.0
+reinout cs vu nl,718,0.0,1.0,0.0,0.0,1.0
+yvibha suse com,886,1.0,0.0,0.0,1.0,0.0
+kbuchcik 4commerce de,466,18.0,18.0,0.0,0.0,0.5
+murrayc murrayc com,616,10.0,1.0,1.0,0.0,0.083
+joanied gnome org,407,0.0,51.0,35.0,0.0,0.593
+kharish novell com,478,0.0,100.0,38.0,0.0,0.725
+danw novell com,179,0.0,11.0,0.0,0.0,1.0
+Remi Cohen-Scali com,6,1.0,6.0,0.0,0.0,0.857
+chicane reninet com,141,0.0,1.0,0.0,0.0,1.0
+baudais okstate edu,86,0.0,0.0,2.0,0.0,0.0
+hiikezoe gnome org,335,1.0,1.0,0.0,0.0,0.5
+mike fleetwood googlemail com,586,11.0,11.0,0.0,0.0,0.5
+alex weej com,39,3.0,1.0,4.0,0.0,0.125
+harish krishnaswamy gmail com,322,0.0,1.0,0.0,0.0,1.0
+jasonleach usa net,374,26.0,26.0,17.0,0.0,0.377
+stevek gnome org,803,1.0,0.0,0.0,1.0,0.0
+robert ancell gmail com,731,77.0,76.0,8.0,0.0,0.472
+tristan upstairslabs com,840,3.0,0.0,0.0,1.0,0.0
+mkasik redhat com,597,9.0,3.0,0.0,0.0,0.25
+christine ximian com,149,8.0,1.0,7.0,0.0,0.063
+emmanuel rodriguez gmail com,238,2.0,3.0,0.0,0.0,0.6
+eitan ascender com,234,0.0,59.0,6.0,0.0,0.908
+aloriel gmail com,51,1.0,1.0,0.0,0.0,0.5
+pjc51 cam ac uk,685,0.0,40.0,2.0,0.0,0.952
+itoral igalia com,355,2.0,0.0,0.0,1.0,0.0
+nick lurcher org,626,0.0,1.0,0.0,0.0,1.0
+psankar gnome org,697,47.0,0.0,15.0,0.0,0.0
+xclaesse gmail com,876,3.0,0.0,1.0,0.0,0.0
+christian twotoasts de,148,13.0,0.0,0.0,1.0,0.0
+grakic devbase net,312,1.0,0.0,0.0,1.0,0.0
+dsandras seconix com,221,5.0,3.0,0.0,0.0,0.375
+gzr eazel com,317,,,,,
+thierry moisan gmail com,822,1.0,0.0,0.0,1.0,0.0
+sven gimp org,807,133.0,1.0,12.0,0.0,0.007
+thomas urgent rug ac be,824,0.0,10.0,2.0,0.0,0.833
+martinpitt gnome org,553,11.0,0.0,1.0,0.0,0.0
+steve stevebaker org,802,0.0,3.0,1.0,0.0,0.75
+ivanwong gnome org,358,1.0,1.0,0.0,0.0,0.5
+balamurali viswanathan wipro com,84,5.0,2.0,0.0,0.0,0.286
+lowfi chello at,520,6.0,10.0,0.0,0.0,0.625
+xjuan_gq_nu yahoo com ar,877,,,,,
+ruiandrebatista gmail com,748,,,,,
+gpoo gnome org,310,15.0,0.0,0.0,1.0,0.0
+kvandine gnome org,491,1.0,2.0,0.0,0.0,0.667
+jamie mccrack gmail com,368,,,,,
+fanc999 yahoo com tw,258,3.0,3.0,0.0,0.0,0.5
+dmitry taurussoft org,204,0.0,8.0,0.0,0.0,1.0
+fargiolas gnome org,259,2.0,0.0,0.0,1.0,0.0
+luis debethencourt com,524,8.0,7.0,1.0,0.0,0.438
+dumol gnome ro,222,,,,,
+alexk gnome org,45,25.0,0.0,4.0,0.0,0.0
+pankajkumar students iiit ac in,656,0.0,1.0,1.0,0.0,0.5
+eitan monotonous org,235,42.0,0.0,2.0,0.0,0.0
+jdub perkypants org,382,0.0,11.0,3.0,0.0,0.786
+acuster gnome org,17,0.0,3.0,0.0,0.0,1.0
+alvaro 0x50 org,52,,,,,
+dan eazel com,166,,,,,
+erikg codepoet no,246,2.0,0.0,0.0,1.0,0.0
+kittykat3756 gmail com,482,3.0,1.0,0.0,0.0,0.25
+aaron ximian com,12,31.0,24.0,13.0,0.0,0.353
+mcrha redhat com,566,415.0,444.0,63.0,0.0,0.482
+jaka gnu org,365,1.0,9.0,0.0,0.0,0.9
+kl linuxfaqs de,484,0.0,0.0,2.0,0.0,0.0
+olivier bluefish openoffice nl,643,7.0,5.0,0.0,0.0,0.417
+rslinckx gmail com,744,3.0,0.0,0.0,1.0,0.0
+pchenthill gmail com,669,27.0,1.0,13.0,0.0,0.024
+shaunm gnome org,773,7.0,37.0,110.0,0.0,0.24
+stephen browne sun com,800,2.0,5.0,0.0,0.0,0.714
+pnayak novell com,690,3.0,0.0,0.0,1.0,0.0
+yuedong du sun com,884,10.0,3.0,4.0,0.0,0.176
+wdziedzic aviary pl,864,6.0,2.0,1.0,0.0,0.222
+goetz waschk gmail com,305,1.0,0.0,1.0,0.0,0.0
+alex launi gmail com,38,1.0,2.0,0.0,0.0,0.667
+kidd wang sun com,479,2.0,1.0,2.0,0.0,0.2
+maxcvs email it,559,5.0,7.0,3.0,0.0,0.467
+zach math berkeley edu,887,1.0,0.0,0.0,1.0,0.0
+michiel sikkes gmail com,579,2.0,1.0,0.0,0.0,0.333
+zana webwynk net,889,0.0,8.0,0.0,0.0,1.0
+blizzard redhat com,97,1.0,1.0,0.0,0.0,0.5
+vincent legoll gmail com,853,17.0,18.0,0.0,0.0,0.514
+code istique net,157,4.0,0.0,2.0,0.0,0.0
+julo42 gmail com,446,1.0,0.0,0.0,1.0,0.0
+micke codefactory se,580,0.0,6.0,0.0,0.0,1.0
+plaes plaes org,687,2.0,0.0,0.0,1.0,0.0
+gdesmott gnome org,287,23.0,3.0,1.0,0.0,0.111
+matt ookypooky com,557,1.0,5.0,0.0,0.0,0.833
+sparthasarathi novell com,789,0.0,49.0,7.0,0.0,0.875
+wade ezri org,859,2.0,1.0,0.0,0.0,0.333
+degger fhm edu,193,1.0,0.0,0.0,1.0,0.0
+jonathon quotidian org,421,12.0,9.0,0.0,0.0,0.429
+andy eazel com,66,,,,,
+sjoerd luon net,780,1.0,3.0,0.0,0.0,0.75
+newren gmail com,625,978.0,1.0,106.0,0.0,0.001
+marco barisione org,543,2.0,3.0,0.0,0.0,0.6
+daniel leidert spam gmx net,169,2.0,2.0,0.0,0.0,0.5
+jimmyk novell com,399,2.0,2.0,0.0,0.0,0.5
+eikke eikke com,233,1.0,1.0,0.0,0.0,0.5
+clahey ximian com,153,0.0,216.0,56.0,0.0,0.794
+wim taymans chello be,870,0.0,18.0,3.0,0.0,0.857
+andreas fatal se,61,3.0,4.0,0.0,0.0,0.571
+jonnylamb jonnylamb com,422,,,,,
+rodrigo ximian com,740,0.0,88.0,17.0,0.0,0.838
+dwatson cs ucr edu,225,,,,,
+kailueke riseup net,460,3.0,4.0,1.0,0.0,0.5
+brad getcoded net,103,2.0,2.0,0.0,0.0,0.5
+madewokherd gmail com,532,1.0,0.0,1.0,0.0,0.0
+trev saunders gmail com,839,1.0,2.0,0.0,0.0,0.667
+weskaggs primate ucdavis edu,865,0.0,0.0,1.0,0.0,0.0
+scott bashautomation com,760,86.0,106.0,6.0,0.0,0.535
+jimhayward linuxexperience net,396,3.0,2.0,0.0,0.0,0.4
+clahey helixcode com,152,0.0,13.0,9.0,0.0,0.591
+almer gnome org,50,0.0,24.0,5.0,0.0,0.828
+sragavan gnome org,790,45.0,2.0,10.0,0.0,0.035
+seth gnome org,772,43.0,0.0,4.0,0.0,0.0
+nat nat org,623,23.0,1.0,4.0,0.0,0.036
+ariel gnu org,72,1.0,6.0,1.0,0.0,0.75
+julien puydt laposte net,445,156.0,149.0,5.0,0.0,0.481
+alexandre prokoudine gmail com,43,3.0,4.0,1.0,0.0,0.5
+swilmet gnome org,810,7.0,1.0,0.0,0.0,0.125
+leftmostcat gmail com,499,3.0,3.0,0.0,0.0,0.5
+egger suse de,231,1.0,0.0,0.0,1.0,0.0
+kelemeng ubuntu com,469,3.0,0.0,0.0,1.0,0.0
+danigm wadobo com,174,3.0,3.0,0.0,0.0,0.5
+mp baum de,604,0.0,3.0,8.0,0.0,0.273
+pd cipherfunk org,673,0.0,9.0,0.0,0.0,1.0
+seth eazel com,771,0.0,0.0,1.0,0.0,0.0
+emmanuele emmanuelebassi net,239,0.0,4.0,1.0,0.0,0.8
+kenneth gnu org,470,0.0,2.0,0.0,0.0,1.0
+nicolas dufresne collabora co uk,627,0.0,11.0,1.0,0.0,0.917
+zeuthen gmail com,892,11.0,2.0,8.0,0.0,0.095
+jessevdk gmail com,391,9.0,0.0,0.0,1.0,0.0
+aldug astrolinux com,32,83.0,0.0,2.0,0.0,0.0
+trow ximian com,842,54.0,119.0,78.0,0.0,0.474
+brandon smarterits com,105,3.0,3.0,0.0,0.0,0.5
+rebecka eazel com,716,0.0,3.0,0.0,0.0,1.0
+philip chimento gmail com,680,8.0,6.0,2.0,0.0,0.375
+doclivingston gmail com,211,3.0,0.0,0.0,1.0,0.0
+diegoe gnome org,201,10.0,1.0,0.0,0.0,0.091
+exodusrobot yahoo com,255,,,,,
+jmillikin gmail com,405,1.0,0.0,0.0,1.0,0.0
+jimmac gmail com,397,22.0,4.0,2.0,0.0,0.143
+andrew andrewski net,62,2.0,0.0,3.0,0.0,0.0
+holger thon gnome-db org,338,,,,,
+thesaltydog gmail com,821,1.0,6.0,0.0,0.0,0.857
+hilberg kernelconcepts de,336,1.0,1.0,0.0,0.0,0.5
+jralls ceridwen fremont ca us,436,8.0,4.0,0.0,0.0,0.333
+aafshar gmail com,11,4.0,4.0,0.0,0.0,0.5
+carlos gnome-db org,123,5.0,0.0,9.0,0.0,0.0
+hggdh2 ubuntu com,332,4.0,0.0,0.0,1.0,0.0
+lool dooz org,517,2.0,0.0,0.0,1.0,0.0
+shivaram upadhyayula wipro com,774,0.0,0.0,1.0,0.0,0.0
+srinidhi bs gmail com,793,1.0,0.0,0.0,1.0,0.0
+andersca codefactory se,55,0.0,1.0,1.0,0.0,0.5
+jirka 5z com,400,3.0,11.0,3.0,0.0,0.647
+wzssyqa gmail com,874,0.0,1.0,1.0,0.0,0.5
+happyguy_pt hotmail com,321,1.0,2.0,1.0,0.0,0.5
+andrea cimitan gmail com,59,4.0,3.0,0.0,0.0,0.429
+gowen72 yahoo com,307,1.0,0.0,0.0,1.0,0.0
+markdrago mail com,547,1.0,0.0,0.0,1.0,0.0
+d-mueth uchicago edu,164,,,,,
+dgsiegel gnome org,197,1.0,0.0,0.0,1.0,0.0
+curtis hovey name,162,14.0,0.0,1.0,0.0,0.0
+brett clippingdale gmail com,107,0.0,1.0,0.0,0.0,1.0
+parente cs unc edu,663,142.0,103.0,15.0,0.0,0.396
+stefw gnome org,797,17.0,0.0,2.0,0.0,0.0
+garnacho tuxerver net,285,0.0,1.0,0.0,0.0,1.0
+sdteffen yahoo com,764,,,,,
+stimming tuhh de,804,18.0,3.0,0.0,0.0,0.143
+jussi kukkonen intel com,448,1.0,1.0,0.0,0.0,0.5
+maggi athena polito it,533,0.0,0.0,15.0,0.0,0.0
+deejay1 srem org,192,0.0,1.0,8.0,0.0,0.111
+gjc inescporto pt,296,36.0,30.0,4.0,0.0,0.429
+teuf users sourceforge net,817,0.0,5.0,0.0,0.0,1.0
+allanpday gmail com,49,2.0,0.0,0.0,1.0,0.0
+claude 2xlibre net,155,15.0,10.0,1.0,0.0,0.385
+vincent vuntz net,855,0.0,2.0,1.0,0.0,0.667
+bharat tewari wipro com,94,0.0,0.0,2.0,0.0,0.0
+zaheermerali gmail com,888,2.0,3.0,1.0,0.0,0.5
+nekohayo gmail com,624,30.0,12.0,34.0,0.0,0.158
+gtk roboros com,313,3.0,0.0,0.0,1.0,0.0
+malerba gnome-db org,538,7.0,14.0,0.0,0.0,0.667
+slomo coaxion net,784,153.0,1.0,41.0,0.0,0.005
+behdad gnome org,87,75.0,31.0,18.0,0.0,0.25
+edd usefulinc com,228,,,,,
+miguel ximian com,583,1.0,0.0,2.0,0.0,0.0
+jpr ximian com,434,0.0,199.0,37.0,0.0,0.843
+benjamin sipsolutions net,91,3.0,2.0,9.0,0.0,0.143
+andrew sobala net,65,0.0,5.0,3.0,0.0,0.625
+k nielsen81 gmail com,453,1.0,2.0,0.0,0.0,0.667
+jobi via ecp fr,409,1.0,1.0,0.0,0.0,0.5
+nagappan gmail com,619,48.0,25.0,2.0,0.0,0.333
+liyuan gnome org,512,25.0,0.0,8.0,0.0,0.0
+notverysmart gmail com,633,6.0,0.0,0.0,1.0,0.0
+danielle madeley id au,173,9.0,0.0,0.0,1.0,0.0
+domlachowicz gmail com,215,10.0,0.0,0.0,1.0,0.0
+asarfraaz novell com,79,0.0,26.0,18.0,0.0,0.591
+gleblanc linuxweasel com,298,41.0,1.0,4.0,0.0,0.022
+arik eazel com,73,,,,,
+eugene oconnor sun com,252,3.0,2.0,0.0,0.0,0.4
+javiube gmail com,377,,,,,
+info kobaltwit be,352,20.0,6.0,0.0,0.0,0.231
+gabriel burt gmail com,283,65.0,10.0,15.0,0.0,0.111
+sragavan novell com,791,0.0,106.0,15.0,0.0,0.876
+jsled asynchronous org,441,2.0,0.0,0.0,1.0,0.0
+lakhil novell com,493,15.0,1.0,2.0,0.0,0.056
+jdiggs igalia com,380,272.0,34.0,67.0,0.0,0.091
+charlet adacore com,135,1.0,0.0,0.0,1.0,0.0
+tvv sparc spb su,848,24.0,6.0,1.0,0.0,0.194
+lferrett gnome org,505,4.0,0.0,0.0,1.0,0.0
+me jasonclinton com,570,8.0,9.0,0.0,0.0,0.529
+jmhorvat home com,404,2.0,0.0,0.0,1.0,0.0
+thomas apestaart org,823,54.0,27.0,5.0,0.0,0.314
+emmanuel pacaud univ-poitiers fr,237,0.0,3.0,0.0,0.0,1.0
+chabotc xs4all nl,132,1.0,0.0,0.0,1.0,0.0
+calum benson ireland sun com,118,0.0,0.0,1.0,0.0,0.0
+jaalburquerque gmail com,361,1.0,0.0,0.0,1.0,0.0
+mkestner speakeasy net,599,0.0,1.0,0.0,0.0,1.0
+fredrik hedberg hedbergs com,278,7.0,12.0,2.0,0.0,0.571
+os baum ro,647,2.0,21.0,0.0,0.0,0.913
+felipeborges gnome org,268,2.0,6.0,0.0,0.0,0.75
+bordoley msu edu,101,0.0,10.0,2.0,0.0,0.833
+olau hardworking dk,640,0.0,2.0,0.0,0.0,1.0
+alex barnes sympatico ca,36,2.0,2.0,2.0,0.0,0.333
+m berns thismagpie com,529,5.0,5.0,0.0,0.0,0.5
+duncan ximian com,223,1.0,1.0,0.0,0.0,0.5
+guenther rudersport de,314,28.0,3.0,3.0,0.0,0.088
+mathrick gmail com,555,1.0,0.0,0.0,1.0,0.0
+tetromino gentoo org,815,1.0,0.0,0.0,1.0,0.0
+r burton 180sw com,707,0.0,1.0,0.0,0.0,1.0
+cosimo cecchi gmail com,160,9.0,0.0,0.0,1.0,0.0
+pebolle tiscali nl,674,1.0,0.0,0.0,1.0,0.0
+stephane raimbault gmail com,799,2.0,1.0,1.0,0.0,0.25
+chris gnome-de org,144,0.0,65.0,1.0,0.0,0.985
+jorn nl linux org,424,0.0,40.0,5.0,0.0,0.889
+jpe wingware com,431,1.0,1.0,0.0,0.0,0.5
+fabiobonelli libero it,257,0.0,1.0,1.0,0.0,0.5
+jojeda emergya es,417,0.0,5.0,1.0,0.0,0.833
+i7tiol t-online de,348,1.0,0.0,0.0,1.0,0.0
+eoin hennessy gmail com,242,0.0,0.0,1.0,0.0,0.0
+pochu27 gmail com,691,3.0,2.0,0.0,0.0,0.4
+abockover novell com,15,0.0,8.0,2.0,0.0,0.8
+sdteffen gmail com,762,8.0,6.0,1.0,0.0,0.4
+alexl users sourceforge net,47,3.0,0.0,1.0,0.0,0.0
+py luyten fr,704,,,,,
+susana pereira gmail com,806,1.0,0.0,0.0,1.0,0.0
+ettore helixcode com,250,0.0,15.0,6.0,0.0,0.714
+alexiadeath gmail com,44,3.0,3.0,0.0,0.0,0.5
+antonio xu sun com,69,4.0,3.0,3.0,0.0,0.3
+kevin ve3syb ca,474,1.0,1.0,1.0,0.0,0.333
+sshreyas gmail com,795,15.0,0.0,3.0,0.0,0.0
+bowie owens csiro au,102,2.0,2.0,0.0,0.0,0.5
+arvind samptur wipro com,77,10.0,0.0,2.0,0.0,0.0
+paolo maggi polito it,661,0.0,0.0,10.0,0.0,0.0
+jasuarez igalia com,375,1.0,0.0,2.0,0.0,0.0
+eric zhao sun com,244,1.0,4.0,1.0,0.0,0.667
+f kaser gmx net,256,6.0,6.0,1.0,0.0,0.462
+thunder ximian com,825,0.0,7.0,3.0,0.0,0.7
+rodd clarkson id au,735,1.0,0.0,0.0,1.0,0.0
+zeeshanak gnome org,891,5.0,0.0,0.0,1.0,0.0
+jean brefort normalesup org,383,34.0,34.0,1.0,0.0,0.493
+btimothy gmail com,113,343.0,1.0,35.0,0.0,0.003
+notzed ximian com,636,0.0,340.0,28.0,0.0,0.924
+gonzalo gnome-db org,306,6.0,6.0,0.0,0.0,0.5
+chepelov calixo net,140,5.0,4.0,0.0,0.0,0.444
+kevin planetsaphire com,473,0.0,4.0,1.0,0.0,0.8
+mike catanzaro gmail com,584,0.0,1.0,0.0,0.0,1.0
+bochecha daitauha fr,99,,,,,
+vjaquez igalia com,856,1.0,1.0,0.0,0.0,0.5
+menthos menthos com,572,33.0,13.0,10.0,0.0,0.232
+airxdres linuxers cl,28,0.0,0.0,1.0,0.0,0.0
+desrt desrt ca,196,40.0,27.0,8.0,0.0,0.36
+nalin redhat com,621,1.0,1.0,88.0,0.0,0.011
+yakk yakk net,880,4.0,3.0,0.0,0.0,0.429
+lucasr at mundo gmail com,523,9.0,8.0,2.0,0.0,0.421
+srittau jroger in-berlin de,794,2.0,0.0,0.0,1.0,0.0
+mjc avtechpulse com,592,5.0,0.0,0.0,1.0,0.0
+slomo circular-chaos org,783,0.0,52.0,34.0,0.0,0.605
+marco gnome org,544,0.0,5.0,0.0,0.0,1.0
+esodan gmail com,249,1.0,1.0,0.0,0.0,0.5
+ross burtonini com,742,14.0,0.0,1.0,0.0,0.0
+jose aliste gmail com,427,,,,,
+flaper87 gmail com,272,1.0,2.0,0.0,0.0,0.667
+javi raisingthefloor org,376,1.0,0.0,0.0,1.0,0.0
+sandmann daimi au dk,756,0.0,31.0,9.0,0.0,0.775
+bengt thuree com,90,1.0,2.0,1.0,0.0,0.5
+hadess hadess net,318,0.0,24.0,4.0,0.0,0.857
+simon bates utoronto ca,778,3.0,8.0,5.0,0.0,0.5
+nab mail by,617,0.0,1.0,0.0,0.0,1.0
+walters verbum org,860,8.0,27.0,1.0,0.0,0.75
+callum spooky-possum org,117,0.0,1.0,1.0,0.0,0.5
+james daa com au,366,0.0,8.0,2.0,0.0,0.8
+jwise springthrough com,452,,,,,
+miles megapathdsl net,589,2.0,0.0,0.0,1.0,0.0
+dobey ximian com,210,0.0,105.0,12.0,0.0,0.897
+friemann svn gnome org,281,0.0,6.0,0.0,0.0,1.0
+bill zhu sun com,96,1.0,2.0,1.0,0.0,0.5
+Aaron LarsonsOnline net,0,7.0,7.0,0.0,0.0,0.5
+glynnfoster me com,300,22.0,0.0,5.0,0.0,0.0
+pawsa theochem kth se,667,6.0,1.0,1.0,0.0,0.125
+carlos cmartin tk,121,1.0,14.0,0.0,0.0,0.933
+mkanat bugzilla org,596,1.0,2.0,4.0,0.0,0.286
+oleevye wanadoo fr,642,0.0,1.0,1.0,0.0,0.5
+sshreyas novell com,796,0.0,15.0,6.0,0.0,0.714
+psanxiao gmail com,699,6.0,6.0,0.0,0.0,0.5
+ric users sourceforge net,723,9.0,60.0,6.0,0.0,0.8
+vvaradhan novell com,858,24.0,63.0,13.0,0.0,0.63
+Don Scorgie org,2,3.0,0.0,0.0,1.0,0.0
+fjsola aui es,271,0.0,0.0,1.0,0.0,0.0
+bryan reigndropsfall net,111,2.0,2.0,0.0,0.0,0.5
+ad baum ro,18,47.0,10.0,11.0,0.0,0.147
+cemual gmail com,129,1.0,1.0,0.0,0.0,0.5
+lincoln phipps openmutual net,509,13.0,12.0,2.0,0.0,0.444
+georges stavracas gmail com,289,1.0,3.0,2.0,0.0,0.5
+friemann gnome org,280,16.0,1.0,1.0,0.0,0.056
+dobey pwns gmail com,209,120.0,1.0,31.0,0.0,0.007
+dhelder gizmolabs org,198,,,,,
+jensgr gmx net,388,48.0,4.0,10.0,0.0,0.065
+pradhika novell com,693,0.0,10.0,5.0,0.0,0.667
+ylatuya gmail com,882,1.0,1.0,0.0,0.0,0.5
+fundawang gmail com,282,3.0,6.0,2.0,0.0,0.545
+drichard largo com,218,1.0,0.0,0.0,1.0,0.0
+rsushma novell com,746,0.0,50.0,20.0,0.0,0.714
+pvanhoof gnome org,702,7.0,6.0,0.0,0.0,0.462
+anna helixcode com,67,0.0,0.0,1.0,0.0,0.0
+heath pointedstick net,325,1.0,0.0,1.0,0.0,0.0
+snickell stanford edu,786,0.0,12.0,4.0,0.0,0.75
+ermilov maxim gmail com,247,2.0,0.0,0.0,1.0,0.0
+slaf66 gmail com,782,1.0,1.0,0.0,0.0,0.5
+mtgordon ximian com,610,16.0,0.0,0.0,1.0,0.0
+jeffschroeder computer org,385,4.0,10.0,15.0,0.0,0.345
+johan gnome org,412,29.0,27.0,6.0,0.0,0.435
+muet alumni uchicago edu,611,1.0,0.0,0.0,1.0,0.0
+jonas codefactory se,420,0.0,1.0,0.0,0.0,1.0
+danmills sandmill org,176,0.0,0.0,3.0,0.0,0.0
+tsaunier gnome org,844,5.0,4.0,3.0,0.0,0.333
+behnam zwnj org,88,0.0,8.0,0.0,0.0,1.0
+katzj redhat com,464,1.0,0.0,0.0,1.0,0.0
+gns gnome org,304,14.0,14.0,0.0,0.0,0.5
+gpastore gnome org,308,50.0,0.0,5.0,0.0,0.0
+alex beatniksoftware com,37,,,,,
+bertrand lorentz gmail com,92,1.0,0.0,0.0,1.0,0.0
+ruben savanne be,747,14.0,5.0,1.0,0.0,0.25
+otte gnome org,649,3.0,0.0,1.0,0.0,0.0
+fejj ximian com,267,0.0,405.0,49.0,0.0,0.892
+vantr touchtunes com,850,1.0,0.0,2.0,0.0,0.0
+ross golder org,743,3.0,9.0,1.0,0.0,0.692
+marcin kolny gmail com,542,2.0,2.0,0.0,0.0,0.5
+miguel helixcode com,582,0.0,0.0,3.0,0.0,0.0
+ajaysusarla gmail com,29,71.0,2.0,22.0,0.0,0.021
+horkana tcd ie,340,0.0,1.0,0.0,0.0,1.0
+fred crozat net,277,11.0,0.0,1.0,0.0,0.0
+trow gnu org,841,0.0,15.0,1.0,0.0,0.938
+yosh gimp org,883,4.0,5.0,2.0,0.0,0.455
+rodo novell com,736,49.0,2.0,34.0,0.0,0.024
+richard imendio com,724,20.0,22.0,9.0,0.0,0.431
+hobbit aloss ukuu org uk,337,18.0,0.0,0.0,1.0,0.0
+j bitron ch,359,418.0,418.0,5.0,0.0,0.497
+cyrille chepelov org,163,1.0,1.0,0.0,0.0,0.5
+veillard redhat com,851,1.0,2.0,0.0,0.0,0.667
+Thomas_Hinkle alumni brown edu,8,4.0,5.0,1.0,0.0,0.5
+airmind gmail com,27,1.0,1.0,0.0,0.0,0.5
+warlord MIT EDU,861,2.0,6.0,0.0,0.0,0.75
+martin wehner gmail com,552,19.0,0.0,0.0,1.0,0.0
+dan reactivated net,167,5.0,0.0,0.0,1.0,0.0
+Benedikt Roth gmx net,1,0.0,8.0,3.0,0.0,0.727
+andrew operationaldynamics com,64,27.0,9.0,16.0,0.0,0.173
+jsacco gnome org,438,1.0,1.0,1.0,0.0,0.333
+danilo gnome org,175,5.0,0.0,1.0,0.0,0.0
+seb128 ubuntu com,766,74.0,0.0,6.0,0.0,0.0
+rms39 columbia edu,729,1.0,0.0,1.0,0.0,0.0
+duraid octopus com au,224,1.0,0.0,0.0,1.0,0.0
+luis lu is,525,1162.0,0.0,59.0,0.0,0.0
+mail jensge org,536,8.0,9.0,0.0,0.0,0.529
+shooby gnome hu,775,,,,,
+jorn openedhand com,425,,,,,
+kai willadsen gmail com,459,15.0,13.0,0.0,0.0,0.464
+mkestner novell com,598,3.0,0.0,6.0,0.0,0.0
+clahey clahey net,151,111.0,0.0,49.0,0.0,0.0
+pcutler foresightlinux org,671,0.0,0.0,1.0,0.0,0.0
+fejj gnome org,264,841.0,0.0,327.0,0.0,0.0
+link subpop net,510,0.0,2.0,0.0,0.0,1.0
+cjcollier colliertech org,150,5.0,3.0,1.0,0.0,0.333
+khanreaper nerp net,476,1.0,0.0,0.0,1.0,0.0
+marc mulcahy sun com,539,0.0,6.0,0.0,0.0,1.0
+rhult codefactory se,722,,,,,
+lunchtimemama gmail com,528,1.0,2.0,0.0,0.0,0.667
+jim yorba org,395,12.0,7.0,0.0,0.0,0.368
+aleksander aleksander es,34,1.0,0.0,0.0,1.0,0.0
+kekun plazas laposte net,468,1.0,0.0,0.0,1.0,0.0
+jwillcox gnome org,451,2.0,9.0,1.0,0.0,0.75
+federico helixcode com,262,0.0,4.0,1.0,0.0,0.8
+svillar igalia com,808,1.0,1.0,0.0,0.0,0.5
+todd dropline net,833,0.0,1.0,0.0,0.0,1.0
+bmaurer andrew cmu edu,98,1.0,0.0,0.0,1.0,0.0
+timar gnome hu,829,3.0,0.0,0.0,1.0,0.0
+joschi eds org,426,1.0,0.0,1.0,0.0,0.0
+hidetoshi tajima sun com,334,6.0,5.0,1.0,0.0,0.417
+ramiro fateware com,711,30.0,0.0,0.0,1.0,0.0
+cneumair gnome org,156,85.0,18.0,16.0,0.0,0.151
+evan coeus-group com,253,1.0,0.0,0.0,1.0,0.0
+michael meeks novell com,576,0.0,1.0,1.0,0.0,0.5
+johnyhwang gmail com,416,5.0,9.0,1.0,0.0,0.6
+lpeek mrijk consunet nl,521,1.0,1.0,0.0,0.0,0.5
+rkrishnan novell com,727,13.0,0.0,14.0,0.0,0.0
+qdlacz gmail com,705,2.0,2.0,0.0,0.0,0.5
+kaffeetisch gmx de,457,1.0,0.0,0.0,1.0,0.0
+jared jaredjennings org,373,3.0,0.0,1.0,0.0,0.0
+muks banu com,613,3.0,0.0,0.0,1.0,0.0
+mccann jhu edu,562,0.0,0.0,1.0,0.0,0.0
+peter peterjohanson com,676,3.0,0.0,0.0,1.0,0.0
+tomeu tomeuvizoso net,834,1.0,1.0,0.0,0.0,0.5
+kevin kubasik net,472,19.0,1.0,0.0,0.0,0.05
+muhammetk gmail com,612,1.0,0.0,0.0,1.0,0.0
+acs barrapunto com,16,1.0,1.0,0.0,0.0,0.5
+kjetilho ifi uio no,483,1.0,0.0,0.0,1.0,0.0
+danw gnome org,177,338.0,42.0,96.0,0.0,0.088
+kakumar novell com,461,0.0,2.0,0.0,0.0,1.0
+lewing helixcode com,503,0.0,12.0,0.0,0.0,1.0
+matt helixcode com,556,6.0,0.0,0.0,1.0,0.0
+ben bagu org,89,3.0,7.0,0.0,0.0,0.7
+paolo borelli gmail com,659,14.0,0.0,0.0,1.0,0.0
+carlos gnome org,122,7.0,0.0,3.0,0.0,0.0
+aronxu gnome org,74,0.0,1.0,3.0,0.0,0.25
+robert staudinger gmail com,732,2.0,2.0,0.0,0.0,0.5
+liblit acm org,507,1.0,0.0,0.0,1.0,0.0
+andersca gnu org,57,0.0,41.0,15.0,0.0,0.732
+joanmarie diggs gmail com,408,0.0,261.0,26.0,0.0,0.909
+sanfordarmstrong gmail com,757,12.0,4.0,6.0,0.0,0.182
+juanpablougarte gmail com,443,3.0,1.0,2.0,0.0,0.167
+jjohnny novell com,402,0.0,42.0,9.0,0.0,0.824
+israel ximian com,354,79.0,0.0,0.0,1.0,0.0
+kristian planet nl,490,0.0,11.0,3.0,0.0,0.786
+andersca gnome org,56,0.0,2.0,3.0,0.0,0.4
+jamiemcc blueyonder co uk,369,0.0,19.0,1.0,0.0,0.95
+jody gnome org,410,53.0,88.0,4.0,0.0,0.607
+j orcauser gmail com,360,0.0,12.0,9.0,0.0,0.571
+irene ryan sun com,353,1.0,0.0,0.0,1.0,0.0
+tommi komulainen iki fi,835,22.0,14.0,2.0,0.0,0.368
+lorenzo colitti com,518,1.0,1.0,0.0,0.0,0.5
+garrettregier gmail com,286,2.0,2.0,0.0,0.0,0.5
+calum benson oracle com,119,9.0,0.0,2.0,0.0,0.0
+paolo bacchilega libero it,658,0.0,3.0,0.0,0.0,1.0
+frank scirocco-5v-turbo de,275,3.0,2.0,0.0,0.0,0.4
+nirav magnet-i com,631,0.0,1.0,0.0,0.0,1.0
+sdteffen web de,763,0.0,1.0,0.0,0.0,1.0
+alexander kojevnikov com,41,0.0,22.0,7.0,0.0,0.759
+toms baugis gmail com,836,2.0,1.0,0.0,0.0,0.333
+eduffy gmail com,229,1.0,1.0,0.0,0.0,0.5
+fpeters 0d be,274,5.0,0.0,0.0,1.0,0.0
+martin gnome org,549,499.0,0.0,1.0,0.0,0.0
+avaldes gnome org,81,1.0,0.0,0.0,1.0,0.0
+dwmw2 infradead org,226,2.0,1.0,1.0,0.0,0.25
+aleiva emergya es,33,0.0,8.0,6.0,0.0,0.571
+dobey novell com,208,0.0,17.0,3.0,0.0,0.85
+sahil sareen hotmail com,751,19.0,18.0,2.0,0.0,0.462
+roberto majadas openshine com,733,,,,,
+jacob gnome org,363,27.0,3.0,7.0,0.0,0.081
+schumaml gmx de,759,23.0,0.0,0.0,1.0,0.0
+kaushalkumar1 gmail com,465,5.0,1.0,6.0,0.0,0.083
+prashmohan gmail com,694,10.0,13.0,1.0,0.0,0.542
+leo fontenelle gmail com,500,0.0,12.0,0.0,0.0,1.0
+aperez igalia com,70,2.0,2.0,0.0,0.0,0.5
+gale gtk org,284,5.0,8.0,0.0,0.0,0.615
+m_kretzschmar gmx net,530,7.0,4.0,1.0,0.0,0.333
+at baum ro,80,4.0,1.0,5.0,0.0,0.1
+iain openedhand com,349,1.0,0.0,0.0,1.0,0.0
+jpwhiting kde org,435,4.0,4.0,0.0,0.0,0.5
+psankar novell com,698,0.0,55.0,14.0,0.0,0.797
+gpoo calcifer org,309,,,,,
+dbera web gmail com,190,21.0,20.0,3.0,0.0,0.455
+sarfraaz gmail com,758,51.0,0.0,25.0,0.0,0.0
+gerardo novell com,290,1926.0,0.0,131.0,0.0,0.0
+jnoreiko yahoo com,406,16.0,9.0,2.0,0.0,0.333
+thaytan mad scientist com,819,0.0,26.0,1.0,0.0,0.963
+jimmac ximian com,398,0.0,29.0,3.0,0.0,0.906
+fejj novell com,266,0.0,19.0,6.0,0.0,0.76
+gkraft gnome org,297,1.0,0.0,0.0,1.0,0.0
+jstpierre mecheye net,442,1.0,1.0,0.0,0.0,0.5
+padraig obriain oracle com,652,171.0,0.0,71.0,0.0,0.0
+ralucaelena1985 gmail com,710,1.0,1.0,0.0,0.0,0.5
+jpr helixcode com,432,0.0,6.0,0.0,0.0,1.0
+notzed helixcode com,634,0.0,28.0,0.0,0.0,1.0
+yaneti declera com,881,132.0,7.0,11.0,0.0,0.047
+otaylor redhat com,648,310.0,44.0,57.0,0.0,0.107
+llommer svn gnome org,514,8.0,8.0,2.0,0.0,0.444
+rbultje ronald bitfreak net,713,55.0,26.0,7.0,0.0,0.295
+wbolster gnome org,862,20.0,5.0,5.0,0.0,0.167
+david bolter utoronto ca,187,0.0,9.0,8.0,0.0,0.529
+tim ximian com,828,23.0,0.0,1.0,0.0,0.0
+magnus therning org,534,2.0,2.0,0.0,0.0,0.5
+dobey free fr,207,0.0,10.0,1.0,0.0,0.909
+mrproper ximian com,608,0.0,4.0,3.0,0.0,0.571
+aguelzow pyrshep ca,24,96.0,39.0,14.0,0.0,0.262
+qgil desdeamericaconamor org,706,26.0,1.0,3.0,0.0,0.033
+gnome nextreality net,302,9.0,9.0,1.0,0.0,0.474
+jan schampera web de,370,21.0,20.0,0.0,0.0,0.488
+laurent belmonte gmail com,497,1.0,1.0,0.0,0.0,0.5
+palango gmx de,653,1.0,1.0,0.0,0.0,0.5
+lukas pmad net,526,0.0,4.0,1.0,0.0,0.8
+dodji seketeli org,213,0.0,23.0,0.0,0.0,1.0
+jsh pixelslut com,439,0.0,20.0,1.0,0.0,0.952
+jpe wingide com,430,0.0,6.0,1.0,0.0,0.857
+dodji seketeli net,212,27.0,0.0,0.0,1.0,0.0
+malcolm commsecure com au,537,0.0,6.0,1.0,0.0,0.857
+davef tetsubo com,184,2.0,1.0,0.0,0.0,0.333
+karunakar freedomink org,463,0.0,1.0,0.0,0.0,1.0
+compnerd compnerd org,159,1.0,1.0,0.0,0.0,0.5
+alexl redhat com,46,42.0,31.0,7.0,0.0,0.388
+mattgerg users sourceforge net,558,1.0,1.0,0.0,0.0,0.5
+carlos imendio com,124,0.0,12.0,1.0,0.0,0.923
+hpj novell com,345,0.0,10.0,7.0,0.0,0.588
+juri iki fi,447,1.0,1.0,0.0,0.0,0.5
+brian cameron oracle com,108,33.0,27.0,1.0,0.0,0.443
+eh mad scientist com,232,0.0,1.0,2.0,0.0,0.333
+pchen gnome org,668,0.0,6.0,1.0,0.0,0.857
+llanero jazzfree com,513,1.0,0.0,0.0,1.0,0.0
+rkaa netcom no,726,1.0,0.0,0.0,1.0,0.0
+sreeves suse com,792,0.0,0.0,1.0,0.0,0.0
+emmanuel pacaud lapp in2p3 fr,236,5.0,8.0,2.0,0.0,0.533
+carlosg gnome org,125,17.0,5.0,0.0,0.0,0.227
+jjardon gnome org,401,1.0,0.0,0.0,1.0,0.0
+tvgm ximian com,847,0.0,17.0,1.0,0.0,0.944
+jgoldberg home com,394,0.0,2.0,2.0,0.0,0.5
+afranke gnome org,23,4.0,0.0,3.0,0.0,0.0
+cogumbreiro users sf net,158,5.0,5.0,0.0,0.0,0.5
+herzi gnome-de org,330,72.0,67.0,5.0,0.0,0.465
+sullivan eazel com,805,,,,,
+sam mxracer gmail com,752,3.0,3.0,0.0,0.0,0.5
+s feltman gmail com,749,2.0,2.0,0.0,0.0,0.5
+kirillov math sunysb edu,481,0.0,1.0,0.0,0.0,1.0
+jensen jsomers be,387,1.0,0.0,0.0,1.0,0.0
+mnicel novell com,601,15.0,7.0,8.0,0.0,0.233
+kharish gnome org,477,78.0,0.0,26.0,0.0,0.0
+gnome flowerday cx,301,39.0,40.0,8.0,0.0,0.46
+jeroen zwartepoorte gmail com,389,2.0,1.0,0.0,0.0,0.333
+owen discobabe net,650,1.0,1.0,0.0,0.0,0.5
+leonardof gnome org,502,15.0,2.0,0.0,0.0,0.118
+dolphindddd aol com,214,6.0,0.0,1.0,0.0,0.0
+hp pobox com,342,174.0,0.0,9.0,0.0,0.0
+jdahlin async com br,378,0.0,0.0,1.0,0.0,0.0
+tim miao oracle com,827,1.0,0.0,0.0,1.0,0.0
+olivier crete ocrete ca,644,3.0,1.0,1.0,0.0,0.2
+amigadave amigadave com,54,2.0,2.0,0.0,0.0,0.5
+chris wilddev net,145,1.0,3.0,0.0,0.0,0.75
+gicmo gnome org,293,14.0,14.0,1.0,0.0,0.483
+yvibha novell com,885,0.0,4.0,4.0,0.0,0.5
+florian muellner gmail com,273,9.0,28.0,4.0,0.0,0.683
+josiah ritchie gmail com,428,3.0,0.0,0.0,1.0,0.0
+readams readams net,715,6.0,0.0,1.0,0.0,0.0
+chris chris-wilson co uk,143,8.0,10.0,1.0,0.0,0.526
+mgorse suse com,574,1.0,1.0,0.0,0.0,0.5
+tal00r ecs soton ac uk,813,,,,,
+mcepl redhat com,564,2.0,2.0,0.0,0.0,0.5
+halfline hawaii rr com,319,,,,,
+mr gnome org,607,9.0,0.0,0.0,1.0,0.0
+finlay moeraki com,270,6.0,4.0,1.0,0.0,0.364
+rml ximian com,728,2.0,6.0,1.0,0.0,0.667
+jfleck inkstain net,392,0.0,28.0,10.0,0.0,0.737
+caillon redhat com,115,7.0,4.0,2.0,0.0,0.308
+danw ximian com,180,0.0,66.0,30.0,0.0,0.688
+timothy howard gmail com,831,1.0,1.0,0.0,0.0,0.5
+hovinen ximian com,341,40.0,20.0,4.0,0.0,0.313
+sindhus live in,779,5.0,5.0,0.0,0.0,0.5
+aleksander lanedo com,35,0.0,1.0,3.0,0.0,0.25
+keizie gmail com,467,2.0,0.0,0.0,1.0,0.0
+ensonic sonicpulse de,241,100.0,96.0,4.0,0.0,0.48
+bgmerrell gmail com,93,3.0,1.0,0.0,0.0,0.25
+dimitri stack nl,202,0.0,3.0,0.0,0.0,1.0
+ted gould cx,814,6.0,0.0,0.0,1.0,0.0
+adborden live com,20,1.0,2.0,1.0,0.0,0.5
+dave ximian com,183,0.0,31.0,8.0,0.0,0.795
+mortenw gnome org,603,87.0,56.0,20.0,0.0,0.344
+mcatanzaro gnome org,561,53.0,36.0,3.0,0.0,0.391
