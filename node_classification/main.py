@@ -5,6 +5,9 @@ from sklearn.metrics import roc_auc_score
 import math
 import subprocess
 import Node2Vec_LayerSelect
+import Convince_Graph
+import Convince_Multi_Graph
+
 from gensim.models import Word2Vec
 import argparse
 from MNE import *
@@ -69,6 +72,12 @@ def train_deepwalk_embedding(walks, iteration=None):
     return model
 
 
+def classify_model(all_data_vec, all_data):
+    X_train, X_test, y_train, y_test = cross_validation.train_test_split(all_data_vec, all_data['label'], test_size=0.4, random_state=0)
+    clf = svm.SVC(kernel='linear', class_weight='balanced', C=1).fit(X_train, y_train)
+    return clf.score(X_test, y_test)
+
+
 def get_auc(model, node_label):
     def label_node_vec(row):
         try:
@@ -82,10 +91,7 @@ def get_auc(model, node_label):
     all_data_vec = all_data.drop(['index', 'label', 'vec'], axis=1)
     all_data_vec = all_data_vec.applymap(float)
 
-    X_train, X_test, y_train, y_test = cross_validation.train_test_split(all_data_vec, all_data['label'], test_size=0.4, random_state=0)
-    clf = svm.SVC(kernel='linear', C=1).fit(X_train, y_train)
-    print(clf.score(X_test, y_test))
-    return clf.score(X_test, y_test)
+    return classify_model(all_data_vec, all_data)
 
 
 def get_dict_auc(model, node_label):
@@ -95,10 +101,7 @@ def get_dict_auc(model, node_label):
     node_label_vec = node_vec.merge(node_label, on='index', how='inner')
     all_data_vec = node_label_vec.drop(['index', 'label'], axis=1)
 
-    X_train, X_test, y_train, y_test = cross_validation.train_test_split(all_data_vec, node_label['label'], test_size=0.4, random_state=0)
-    clf = svm.SVC(kernel='linear', C=1).fit(X_train, y_train)
-    print(clf.score(X_test, y_test))
-    return clf.score(X_test, y_test)
+    return classify_model(all_data_vec, node_label)
 
 
 def read_LINE_vectors(file_name):
@@ -145,10 +148,7 @@ def get_PMNE_two_auc(model_one, model_two, node_label):
     all_data_vec = all_data.drop(['index', 'label', 'vec'], axis=1)
     all_data_vec = all_data_vec.applymap(float)
 
-    X_train, X_test, y_train, y_test = cross_validation.train_test_split(all_data_vec, all_data['label'], test_size=0.4, random_state=0)
-    clf = svm.SVC(kernel='linear', C=1).fit(X_train, y_train)
-    print(clf.score(X_test, y_test))
-    return clf.score(X_test, y_test)
+    return classify_model(all_data_vec, all_data)
 
 
 def merge_PMNE_models(input_all_models, all_nodes):
@@ -168,64 +168,34 @@ def merge_PMNE_models(input_all_models, all_nodes):
     return final_model
 
 
-def Evaluate_PMNE_methods(merged_networks, network_one, network_two, node_label):
+def Evaluate_PMNE_methods(merged_networks, network_one, network_two, PMNE_3_network, node_label):
     # we need to write codes to implement the co-analysis method of PMNE
     print('Start to analyze the PMNE method')
-    # training_network = input_network['training']
-    # test_network = input_network['test_true']
-    # false_network = input_network['test_false']
-    # all_network = list()
-    # all_test_network = list()
-    # all_false_network = list()
-    # all_nodes = list()
-    # for edge_type in training_network:
-    #     for edge in training_network[edge_type]:
-    #         all_network.append(edge)
-    #         if edge[0] not in all_nodes:
-    #             all_nodes.append(edge[0])
-    #         if edge[1] not in all_nodes:
-    #             all_nodes.append(edge[1])
-    #     for edge in test_network[edge_type]:
-    #         all_test_network.append(edge)
-    #     for edge in false_network[edge_type]:
-    #         all_false_network.append(edge)
-    # print('We are working on method one')
     all_network = merged_networks
 
-    # G = Random_walk.RWGraph(get_G_from_edges(all_network), args.directed, args.p, args.q)
-    # G.preprocess_transition_probs()
-    # walks = G.simulate_walks(args.num_walks, args.walk_length)
-    # model_one = train_deepwalk_embedding(walks)
-    # method_one_performance = get_auc(model_one, node_label)
-    # print('Performance of PMNE method one:', method_one_performance)
-    # # print('We are working on method two')
-    # all_models = list()
-    # # for edge_type in training_network:
-    # #     tmp_edges = training_network[edge_type]
-    # #     tmp_G = Random_walk.RWGraph(get_G_from_edges(tmp_edges), args.directed, args.p, args.q)
-    # #     tmp_G.preprocess_transition_probs()
-    # #     walks = tmp_G.simulate_walks(args.num_walks, args.walk_length)
-    # #     tmp_model = train_deepwalk_embedding(walks)
-    # #     all_models.append(tmp_model)
-    # # model_two = merge_PMNE_models(all_models, all_nodes)
-    # G = Random_walk.RWGraph(get_G_from_edges(network_one), args.directed, args.p, args.q)
-    # G.preprocess_transition_probs()
-    # walks = G.simulate_walks(args.num_walks, args.walk_length)
-    # model_two_up = train_deepwalk_embedding(walks)
+    G = Random_walk.RWGraph(get_G_from_edges(all_network), args.directed, args.p, args.q)
+    G.preprocess_transition_probs()
+    walks = G.simulate_walks(args.num_walks, args.walk_length)
+    model_one = train_deepwalk_embedding(walks)
+    method_one_performance = get_auc(model_one, node_label)
+    print('Performance of PMNE method one:', method_one_performance)
 
-    # G = Random_walk.RWGraph(get_G_from_edges(network_two), args.directed, args.p, args.q)
-    # G.preprocess_transition_probs()
-    # walks = G.simulate_walks(args.num_walks, args.walk_length)
-    # model_two_down = train_deepwalk_embedding(walks)
-    # method_two_performance = get_PMNE_two_auc(model_two_up, model_two_down, node_label)
-    # print('Performance of PMNE method two:', method_two_performance)
-    # # print('We are working on method three')
-    # # tmp_graphs = list()
-    # # for edge_type in training_network:
-    # #     tmp_G = get_G_from_edges(training_network[edge_type])
-    # #     tmp_graphs.append(tmp_G)
-    tmp_graphs = get_G_from_edges(all_network)
-    # print(all_network)
+    G = Random_walk.RWGraph(get_G_from_edges(network_one), args.directed, args.p, args.q)
+    G.preprocess_transition_probs()
+    walks = G.simulate_walks(args.num_walks, args.walk_length)
+    model_two_up = train_deepwalk_embedding(walks)
+
+    G = Random_walk.RWGraph(get_G_from_edges(network_two), args.directed, args.p, args.q)
+    G.preprocess_transition_probs()
+    walks = G.simulate_walks(args.num_walks, args.walk_length)
+    model_two_down = train_deepwalk_embedding(walks)
+    method_two_performance = get_PMNE_two_auc(model_two_up, model_two_down, node_label)
+    print('Performance of PMNE method two:', method_two_performance)
+
+    tmp_graphs = list()
+    for et in ['1', '2']:
+        tmp_G = get_G_from_edges(PMNE_3_network[et])
+        tmp_graphs.append(tmp_G)
     MK_G = Node2Vec_LayerSelect.Graph(tmp_graphs, args.p, args.q, 0.5)
     MK_G.preprocess_transition_probs()
     MK_walks = MK_G.simulate_walks(args.num_walks, args.walk_length)
@@ -250,37 +220,66 @@ for threshold in [0.5, 0.8, 0.99]:
         node_label = pd.read_csv('./threshold_data/gnome_{}.csv'.format(threshold))
         LINE_path = './data/LINE/ge_'
 
-    # node2vec_auc = 0
-    # Deepwalk_auc = 0
-    # LINE_auc = 0
-    # for et in edge_type:
-    #     node2vec_G = Random_walk.RWGraph(get_G_from_edges(edge_data_by_type[et]), args.directed, 2, 0.5)
-    #     node2vec_G.preprocess_transition_probs()
-    #     node2vec_walks = node2vec_G.simulate_walks(10, 10)
-    #     node2vec_model = train_deepwalk_embedding(node2vec_walks)
-    #     tmp_node2vec_auc = get_auc(node2vec_model, node_label)
+# baseline node2vec deepwalk line PMNE================================================================================
+    node2vec_auc = 0
+    Deepwalk_auc = 0
+    LINE_auc = 0
+    for et in edge_type:
+        node2vec_G = Random_walk.RWGraph(get_G_from_edges(edge_data_by_type[et]), args.directed, 2, 0.5)
+        node2vec_G.preprocess_transition_probs()
+        node2vec_walks = node2vec_G.simulate_walks(10, 10)
+        node2vec_model = train_deepwalk_embedding(node2vec_walks)
+        tmp_node2vec_auc = get_auc(node2vec_model, node_label)
 
-    #     Deepwalk_G = Random_walk.RWGraph(get_G_from_edges(edge_data_by_type[et]), args.directed, 1, 1)
-    #     Deepwalk_G.preprocess_transition_probs()
-    #     Deepwalk_walks = Deepwalk_G.simulate_walks(args.num_walks, 10)
-    #     Deepwalk_model = train_deepwalk_embedding(Deepwalk_walks)
-    #     tmp_Deepwalk_auc = get_auc(Deepwalk_model, node_label)
+        Deepwalk_G = Random_walk.RWGraph(get_G_from_edges(edge_data_by_type[et]), args.directed, 1, 1)
+        Deepwalk_G.preprocess_transition_probs()
+        Deepwalk_walks = Deepwalk_G.simulate_walks(args.num_walks, 10)
+        Deepwalk_model = train_deepwalk_embedding(Deepwalk_walks)
+        tmp_Deepwalk_auc = get_auc(Deepwalk_model, node_label)
 
-    #     LINE_file = LINE_path + str(et) + '.edges'
-    #     LINE_model = train_LINE_model(LINE_file)
-    #     tmp_LINE_auc = get_dict_auc(LINE_model, node_label)
+        LINE_file = LINE_path + str(et) + '.edges'
+        LINE_model = train_LINE_model(LINE_file)
+        tmp_LINE_auc = get_dict_auc(LINE_model, node_label)
 
-    #     node2vec_auc += tmp_node2vec_auc
-    #     Deepwalk_auc += tmp_Deepwalk_auc
-    #     LINE_auc += tmp_LINE_auc
+        node2vec_auc += tmp_node2vec_auc
+        Deepwalk_auc += tmp_Deepwalk_auc
+        LINE_auc += tmp_LINE_auc
 
-    # print('threshold:{}, node2vec_auc:{}'.format(threshold, round(node2vec_auc/2.0, 2)))
-    # print('threshold:{}, Deepwalk_auc:{}'.format(threshold, round(Deepwalk_auc/2.0, 2)))
-    # print('threshold:{}, LINE_auc:{}'.format(threshold, round(LINE_auc/2.0, 2)))
-
+    print('threshold:{}, node2vec_auc:{}'.format(threshold, round(node2vec_auc/2.0, 2)))
+    print('threshold:{}, Deepwalk_auc:{}'.format(threshold, round(Deepwalk_auc/2.0, 2)))
+    print('threshold:{}, LINE_auc:{}'.format(threshold, round(LINE_auc/2.0, 2)))
 
     edge_data_by_type_list = edge_data_by_type['1'] + edge_data_by_type['2']
     edge_data_by_type_df = pd.DataFrame(edge_data_by_type_list, columns=['from', 'to', 'weight'])
     edge_data_by_type_df['weight'] = edge_data_by_type_df['weight'].apply(int)
     merged_networks = edge_data_by_type_df.groupby(['from', 'to']).sum().reset_index()
-    PMNE_1_auc, PMNE_2_auc, PMNE_3_auc = Evaluate_PMNE_methods(merged_networks, edge_data_by_type['1'], edge_data_by_type['2'], node_label)
+    PMNE_3_network = edge_data_by_type
+    # PMNE_network data 1:merged networks, 2:edge_data_by_type['1'],edge_data_by_type['2'], 3:PMNE_3_network
+    PMNE_1_auc, PMNE_2_auc, PMNE_3_auc = Evaluate_PMNE_methods(merged_networks, edge_data_by_type['1'], edge_data_by_type['2'], PMNE_3_network, node_label) 
+
+# convi graph structure=====================================================================================
+    convi_data = edge_data_by_type['2']
+    weight_structure = [0.5, 0, 0, 0.5] # need to try
+    cp = 0.5 # need to try
+    convi_proper_G = Convince_Graph.ConvGraph(get_G_from_edges(edge_data_by_type['1']),\
+                                            get_G_from_edges(convi_data),\
+                                            args.directed, cp, weight_structure)
+    convi_proper_G.preprocess_transition_probs(weight_structure)
+    convi_MNE_walks = convi_proper_G.simulate_walks(10, 10)
+    convi_MNE_model = train_deepwalk_embedding(convi_MNE_walks)
+    tmp_convi_MNE_score = get_auc(convi_MNE_model, node_label)
+    print('threshold:{}, convi_graph_structure:{}'.format(threshold, tmp_convi_MNE_score))
+
+    weight_property = [0, 0, 0.3, 0.4, 0.3]
+    cp = 0.9
+    convi_data = pd.DataFrame(convi_data, columns=['From', 'To', 'Weight'])
+    convi_data['Weight'].apply(int)
+    convi_proper_G = Convince_Multi_Graph.ConvMultiGraph(get_G_from_edges(edge_data_by_type['1']),\
+                                                        get_G_from_edges(convi_data),\
+                                                        edge_data_by_type['1'],\
+                                                        convi_data, args.directed, cp, weight_property)
+    convi_proper_G.preprocess_transition_probs(weight_property)
+    convi_MNE_proper_walks = convi_proper_G.simulate_walks(10, 10)
+    convi_MNE_proper_model = train_deepwalk_embedding(convi_MNE_proper_walks)
+    tmp_convi_MNE_proper_score = get_auc(convi_MNE_proper_model, node_label)
+    print('threshold:{}, convi_graph_proper:{}'.format(threshold, tmp_convi_MNE_proper_score))
