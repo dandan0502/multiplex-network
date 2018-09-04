@@ -50,7 +50,7 @@ def get_G_from_edges(edges):
     edges_df['Weight'] = edges_df['Weight'].apply(int)
     edges = edges_df.values.tolist()
     tmp_G = nx.DiGraph()
-    tmp_G.add_weighted_edges_from(edges)
+    tmp_G.add_weighted_edges_from(edges) 
     return tmp_G
 
 
