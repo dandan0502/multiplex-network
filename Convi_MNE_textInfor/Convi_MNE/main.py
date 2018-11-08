@@ -62,13 +62,6 @@ def parse_args():
     return parser.parse_args()
 
 
-# randomly divide data into few parts for the purpose of cross-validation
-# def divide_data(input_list, group_number):
-#     local_division = len(input_list) / float(group_number)
-#     random.shuffle(input_list)
-#     return [input_list[int(round(local_division * i)): int(round(local_division * (i + 1)))] for i in range(group_number)]
-
-
 def train_deepwalk_embedding(walks, iteration=None):
     if iteration is None:
         iteration = 100
@@ -100,86 +93,29 @@ def get_dict_neighbourhood_score(local_model, node1, node2):
     except:
         return 2+random.random()
 
-# 计算AUC
-# def get_dict_AUC(model, true_edges, false_edges):
-#     true_list = list()
-#     prediction_list = list()
-#     for edge in true_edges:
-#         tmp_score = get_dict_neighbourhood_score(model, str(edge[0]), str(edge[1]))
-#         true_list.append(1)
-#         # prediction_list.append(tmp_score)
-#         # for the unseen pair, we randomly give a prediction
-#         if tmp_score > 2:
-#             if tmp_score > 2.5:
-#                 prediction_list.append(1)
-#             else:
-#                 prediction_list.append(-1)
-#         else:
-#             prediction_list.append(tmp_score)
-#     for edge in false_edges:
-#         tmp_score = get_dict_neighbourhood_score(model, str(edge[0]), str(edge[1]))
-#         true_list.append(0)
-#         # prediction_list.append(tmp_score)
-#         # for the unseen pair, we randomly give a prediction
-#         if tmp_score > 2:
-#             if tmp_score > 2.5:
-#                 prediction_list.append(1)
-#             else:
-#                 prediction_list.append(-1)
-#         else:
-#             prediction_list.append(tmp_score)
-#     y_true = np.array(true_list)
-#     y_scores = np.array(prediction_list)
-#     return roc_auc_score(y_true, y_scores)
+
+def get_tosser_fixer_prob(model, node1, node2):
+    try:
+        vector1 = model.wv.syn0[model.wv.index2word.index(node1)]
+        vector2 = model.wv.syn0[model.wv.index2word.index(node2)]
+        return np.dot(vector1, vector2) / (np.linalg.norm(vector1) * np.linalg.norm(vector2))
+    except:
+        return 2+random.random()
 
 
-# def get_neighbourhood_score(local_model, node1, node2):
-#     try:
-#         vector1 = local_model.wv.syn0[local_model.wv.index2word.index(node1)]
-#         vector2 = local_model.wv.syn0[local_model.wv.index2word.index(node2)]
-#         return np.dot(vector1, vector2) / (np.linalg.norm(vector1) * np.linalg.norm(vector2))
-#     except:
-#         return 2+random.random()
-
-
-# def get_AUC(model, true_edges, false_edges):
-#     true_list = list()
-#     prediction_list = list()
-#     for edge in true_edges:
-#         tmp_score = get_neighbourhood_score(model, str(edge[0]), str(edge[1]))
-#         true_list.append(1)
-#         # prediction_list.append(tmp_score)
-#         # for the unseen pair, we randomly give a prediction
-#         if tmp_score > 2:
-#             if tmp_score > 2.5:
-#                 prediction_list.append(1)
-#             else:
-#                 prediction_list.append(-1)
-#         else:
-#             prediction_list.append(tmp_score)
-
-#     for edge in false_edges:
-#         tmp_score = get_neighbourhood_score(model, str(edge[0]), str(edge[1]))
-#         true_list.append(0)
-#         # prediction_list.append(tmp_score)
-#         # for the unseen pair, we randomly give a prediction
-#         if tmp_score > 2:
-#             if tmp_score > 2.5:
-#                 prediction_list.append(1)
-#             else:
-#                 prediction_list.append(-1)
-#         else:
-#             prediction_list.append(tmp_score)
-#     y_true = np.array(true_list)
-#     y_scores = np.array(prediction_list)
-#     return roc_auc_score(y_true, y_scores)
+def count_assists(l):
+    tmp_ass = 0
+    all_tossers_num = len(l['other_t']) + 1
+    for p in l['other_t']:
+        if float(l['fixers']) <= p:
+            tmp_ass += 1
+    l['count'] = tmp_ass/all_tossers_num
+    return l
 
 
 args = parse_args()
-# logging.basicConfig(format='%(asctime)s : %(levelname)s : %(message)s', level=logging.INFO)
 file_name = args.input
 output_name = file_name.split('.edges')[0].split('data/')[1]
-# test_file_name = 'data/Vickers-Chan-7thGraders_multiplex.edges'
 edge_data_by_type, all_edges, all_nodes = load_network_data(file_name)
 edge_data_by_type['1'] = pd.DataFrame(edge_data_by_type['1'], columns=['From', 'To', 'Weight'])
 edge_data_by_type_df = edge_data_by_type['1']
@@ -198,41 +134,43 @@ all_data = edge_data['1']
 
 # 找到tossing path 里的助攻与fixer的边概率
 path = "../assists_dev_MNE/"
-bugid_tosser_fixer = pd.read_csv(path + file_name.split('.')[0] + "_bugid_tossers_fixers.csv")
+if file_name.split('.')[0].split('/')[1] == 'ee':
+    file_name_pre = 'eclipse'
+else:
+    file_name_pre = 'gnome'
+bugid_tosser_fixer = pd.read_csv(path + file_name_pre + "_bugid_tossers_fixers.csv")
+bugid_tosser_fixer['bugid'] = bugid_tosser_fixer['bugid'].astype("str")
+bugid_tosser_fixer['fixers'] = bugid_tosser_fixer['fixers'].astype("str")
 bugid_fixer_tosser_dict = dict(zip(bugid_tosser_fixer['bugid'] + '--' + bugid_tosser_fixer['fixers'], bugid_tosser_fixer['tossers']))
-fixer_tosser_dict = dict(zip(bugid_tosser_fixer['fixers'], bugid_tosser_fixer['tossers']))
-for fixer in fixer_tosser_dict:
-    tossers = fixer_tosser_dict[fixer].split('++')
-
-    for cp in [0.9, 0.8, 0.7, 0.6]:
+# fixer_tosser_dict = dict(zip(bugid_tosser_fixer['fixers'], bugid_tosser_fixer['tossers']))
+for i in range(number_of_groups):
+    for cp in [0.9, 0.8]:
         weight = np.array([0.1, 0.2, 0.3, 0.4])
-        # overall_convi_MNE_performance = list()
-        for i in range(number_of_groups):
-            convi_struct_G = Convince_Graph.ConvGraph(get_G_from_edges(edge_data_by_type['1']),\
-                                                    get_G_from_edges(convi_data),\
-                                                    args.directed, cp, weight)
-            # print("cross validation :{}",format(i))
-            convi_struct_G.preprocess_transition_probs(weight)
-            convi_MNE_walks = convi_struct_G.simulate_walks(10, 10)
-            convi_MNE_model = train_deepwalk_embedding(convi_MNE_walks)
+        fixer_lastTosser_tosser_df = pd.DataFrame()
+        fixer_lastTosser_tosser_df['fixers'] = list(map(lambda x:x.split('--')[1], bugid_fixer_tosser_dict))
+        last_tosser = []
+        other_tossers = []
+        convi_struct_G = Convince_Graph.ConvGraph(get_G_from_edges(edge_data_by_type['1']),\
+                                                get_G_from_edges(convi_data),\
+                                                args.directed, cp, weight)
+        convi_struct_G.preprocess_transition_probs(weight)
+        convi_MNE_walks = convi_struct_G.simulate_walks(10, 10)
+        convi_MNE_model = train_deepwalk_embedding(convi_MNE_walks)
 
-            # tmp_convi_MNE_score = get_AUC(convi_MNE_model, selected_true_edges, selected_false_edges)
-            # print('weight:{}'.format(weight))
-
-            # tmp_convi_MNE_performance += tmp_convi_MNE_score * 1
-            # number_of_edges += 1
-            
-            # print('convi_MNE performance:', tmp_convi_MNE_performance / number_of_edges)
-            # overall_convi_MNE_performance.append(tmp_convi_MNE_performance / number_of_edges)
-
-        # print('cp:{}'.format(cp), 'weight:{}'.format(weight))
-        # overall_convi_MNE_performance = np.asarray(overall_convi_MNE_performance)
-        # print('Overall convi_MNE AUC:', overall_convi_MNE_performance)
-        # print('Overall convi_MNE_AUC:', np.mean(overall_convi_MNE_performance))
-        # print('Overall convi_MNE_AUC std:', np.std(overall_convi_MNE_performance))
-        # with open('../result/baseline_node_link/link_prediction/{}_structure.csv'.format(output_name), 'a') as csvfile:
-        #     writer = csv.writer(csvfile)
-        #     writer.writerow([cp, weight, overall_convi_MNE_performance, np.mean(overall_convi_MNE_performance), np.std(overall_convi_MNE_performance)])
+        # 固定fixer找到路径上的所有tosser与fixer的边概率
+        for bugid_fixer in bugid_fixer_tosser_dict:
+            tossers = bugid_fixer_tosser_dict[bugid_fixer].split('++')
+            prob_last = get_tosser_fixer_prob(convi_MNE_model, tossers[-1], bugid_fixer.split('--')[1])
+            last_tosser.append(prob_last)
+            tmp_tosser = []
+            for tosser in tossers[-1]:
+                prob_tosser_fixer = get_tosser_fixer_prob(convi_MNE_model, tosser, bugid_fixer.split('--')[1])
+                tmp_tosser.append(prob_tosser_fixer)
+            other_tossers.append(tmp_tosser)
+        fixer_lastTosser_tosser_df['last_t'] = pd.Series(last_tosser)
+        fixer_lastTosser_tosser_df['other_t'] = pd.Series(other_tossers)
+        fixer_lastTosser_tosser_df = fixer_lastTosser_tosser_df.apply(count_assists, axis=1)
+        print(len(fixer_lastTosser_tosser_df), len(fixer_lastTosser_tosser_df[fixer_lastTosser_tosser_df['count']>0]))
     print('end')
                         
 # ======================================property============================================================
