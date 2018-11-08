@@ -57,6 +57,7 @@ def find_tp(path, file_name):
 
 
 def main():
+	# 得到数据框bugid，tossers，fixers
 	bugid_tossers_fixers = find_tp(path, file_name)
 	bugid_tossers_fixers.to_csv(path + file_name + "_bugid_tossers_fixers.csv", index=False)
 
