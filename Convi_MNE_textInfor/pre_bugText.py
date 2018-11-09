@@ -5,9 +5,9 @@ filename = 'eclipse' # gnome
 def preprocess(data):
 	pass
 
-def cal_work_theme(l, fixer_bugNum):
-	total_bug = fixer_bugNum.loc[fixer_bugNum['fixers'] == l['fixers']]
-	l['prob'] = l['component'] / total_bug
+def cal_work_theme(l):
+	total_bug = int(fixer_bugNum.loc[fixer_bugNum['fixers'] == l['fixers']]['num'])
+	l['prob'] = l['num'] / total_bug
 	return l
 
 
@@ -17,11 +17,14 @@ def work_component(bug_tosser_fixer, bug_component):
 	work_com = pd.DataFrame()
 	fixer_df = bug_fixer.loc[bug_fixer['fixers'].isin(fixer)] # all fixers and bugs
 	fixer_bugid_component = pd.merge(fixer_df, bug_component)
+	global fixer_bugNum 
 	fixer_bugNum = fixer_bugid_component['bugid'].groupby(fixer_bugid_component['fixers']).count().reset_index()
 	fixer_bugNum.columns = ['fixers', 'num']
 	fixer_com_bugNum = fixer_bugid_component['bugid'].groupby([fixer_bugid_component['fixers'], fixer_bugid_component['component']]).count().reset_index()
 	fixer_com_bugNum.columns = ['fixers', 'component', 'num']
-	fixer_com_bugNum.apply(cal_work_theme, axis=1, args=(fixer_bugNum))
+	fixer_com_bugNum = fixer_com_bugNum.apply(cal_work_theme, axis=1)
+	
+	print(fixer_coms_prob)
 
 
 def main():
