@@ -23,16 +23,17 @@ head = {"Mozilla/5.0 (X11; Linux x86_64)"}
 
 bugid_path = './assists_dev_MNE/'
 bugid_path = pd.read_csv(bugid_path + filename + '_bugid_path.csv')
-bugid = list(bugid_path['bugid'])
-bug_text['bugid'] = pd.Series(bugid)
+bugid_list = list(bugid_path['bugid'])
+bugid = []
 product = []
 component = []
 abstract = []
 des_com = []
 error_bugid = []
 
-for index, bug in enumerate(bugid):
+for index, bug in enumerate(bugid_list):
 	time.sleep(1)
+	bugid.append(bug)
 	bug_url = url + str(bug)
 	try:
 		bug_source = s.post(bug_url, data=datas).text
@@ -50,12 +51,20 @@ for index, bug in enumerate(bugid):
 		print('error:', bug)
 	if (index % 100) == 0:
 		print(index)
+		bug_text = pd.DataFrame()
+		bug_text['bugid'] = bugid
+		bug_text['product'] = product
+		bug_text['component'] = component
+		bug_text['abstract'] = abstract
+		bug_text['des_com'] = des_com
+		bugid = []
+		product = []
+		component = []
+		abstract = []
+		des_com = []
 
-	
-bug_text['product'] = product
-bug_text['component'] = component
-bug_text['abstract'] = abstract
-bug_text['des_com'] = des_com
+		error_df = pd.Series(error_bugid)
+		error_bugid = []
 
-pd.DataFrame(error_bugid).to_csv("./find_bugReport/" + filename + "_error_bugid.csv", index=False, header=None)
-bug_text.to_csv("./find_bugReport/" + filename + "_bugid_text.csv", index=False)
+		bug_text.to_csv("./find_bugReport/" + filename + "_bugid_text.csv", index=False, header=None, mode='a')
+		error_df.to_csv("./find_bugReport/" + filename + "_error_bugid.csv", index=False, header=None, mode='a')
