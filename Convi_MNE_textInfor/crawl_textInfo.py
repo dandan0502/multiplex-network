@@ -15,15 +15,17 @@ url = "https://bugs.eclipse.org/bugs/show_bug.cgi?id="
 # url = "https://bugzilla.gnome.org/show_bug.cgi?id="
 
 
+
 bug_text = pd.DataFrame()
 s = requests.Session()
 datas = {'username':"674198105@qq.com", 'password':"@120132013lh@"}
 head = {"Mozilla/5.0 (X11; Linux x86_64)"}
 
+# bugid_path = './assists_dev_MNE/'
+# bugid_path = pd.read_csv(bugid_path + filename + '_bugid_path.csv')
+# bugid_list = list(bugid_path['bugid'])
+error_bugid_list = list(pd.read_csv("./find_bugReport/" + filename + "_error_bugid.csv", header=None)[0])
 
-bugid_path = './assists_dev_MNE/'
-bugid_path = pd.read_csv(bugid_path + filename + '_bugid_path.csv')
-bugid_list = list(bugid_path['bugid'])
 bugid = []
 product = []
 component = []
@@ -31,7 +33,8 @@ abstract = []
 des_com = []
 error_bugid = []
 
-for index, bug in enumerate(bugid_list):
+
+for index, bug in enumerate(error_bugid_list):
 	time.sleep(1)
 	bugid.append(bug)
 	bug_url = url + str(bug)
@@ -49,7 +52,7 @@ for index, bug in enumerate(bugid_list):
 		des_com.append('')
 		error_bugid.append(bug)
 		print('error:', bug)
-	if (index % 100) == 0:
+	if (index % 10) == 0:
 		print(index)
 		bug_text = pd.DataFrame()
 		bug_text['bugid'] = bugid
@@ -67,4 +70,5 @@ for index, bug in enumerate(bugid_list):
 		error_bugid = []
 
 		bug_text.to_csv("./find_bugReport/" + filename + "_bugid_text.csv", index=False, header=None, mode='a')
-		error_df.to_csv("./find_bugReport/" + filename + "_error_bugid.csv", index=False, header=None, mode='a')
+		error_df.to_csv("./find_bugReport/" + filename + "_error_bugid1.csv", index=False, header=None)
+

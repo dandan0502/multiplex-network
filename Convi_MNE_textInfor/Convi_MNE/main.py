@@ -25,7 +25,7 @@ def parse_args():
     parser.add_argument('--output', nargs='?', default='emb/karate.emb',
                         help='Embeddings path')
 
-    parser.add_argument('--dimensions', type=int, default=200,
+    parser.add_argument('--dimensions', type=int, default=100,
                         help='Number of dimensions. Default is 200.')
 
     parser.add_argument('--walk-length', type=int, default=10,
@@ -128,7 +128,7 @@ convi_data = pd.DataFrame(convi_data, columns=['From', 'To', 'Weight'])
 convi_data['Weight'].apply(int)
 
 # In our experiment, we use 5-fold cross-validation, but you can change that
-number_of_groups = 2
+number_of_groups = 1
 edge_data_by_type_by_group = dict()
 all_data = edge_data['1']
 
@@ -136,74 +136,86 @@ all_data = edge_data['1']
 path = "../assists_dev_MNE/"
 if file_name.split('.')[0].split('/')[1] == 'ee':
     file_name_pre = 'eclipse'
+    weight_property = np.array([0,0,0.3,0.4,0.3])
 else:
     file_name_pre = 'gnome'
+    weight_property = np.array([0,0,0.9,0,0.1])
 bugid_tosser_fixer = pd.read_csv(path + file_name_pre + "_bugid_tossers_fixers.csv")
 bugid_tosser_fixer['bugid'] = bugid_tosser_fixer['bugid'].astype("str")
 bugid_tosser_fixer['fixers'] = bugid_tosser_fixer['fixers'].astype("str")
 bugid_fixer_tosser_dict = dict(zip(bugid_tosser_fixer['bugid'] + '--' + bugid_tosser_fixer['fixers'], bugid_tosser_fixer['tossers']))
+cp = 0.9
 # fixer_tosser_dict = dict(zip(bugid_tosser_fixer['fixers'], bugid_tosser_fixer['tossers']))
-for i in range(number_of_groups):
-    for cp in [0.9, 0.8]:
-        weight = np.array([0.1, 0.2, 0.3, 0.4])
-        fixer_lastTosser_tosser_df = pd.DataFrame()
-        fixer_lastTosser_tosser_df['fixers'] = list(map(lambda x:x.split('--')[1], bugid_fixer_tosser_dict))
-        last_tosser = []
-        other_tossers = []
-        convi_struct_G = Convince_Graph.ConvGraph(get_G_from_edges(edge_data_by_type['1']),\
-                                                get_G_from_edges(convi_data),\
-                                                args.directed, cp, weight)
-        convi_struct_G.preprocess_transition_probs(weight)
-        convi_MNE_walks = convi_struct_G.simulate_walks(10, 10)
-        convi_MNE_model = train_deepwalk_embedding(convi_MNE_walks)
+# for i in range(number_of_groups):
+#     fixer_lastTosser_tosser_df = pd.DataFrame()
+#     fixer_lastTosser_tosser_df['fixers'] = list(map(lambda x:x.split('--')[1], bugid_fixer_tosser_dict))
+#     last_tosser = []
+#     other_tossers = []
+#     convi_struct_G = Convince_Graph.ConvGraph(get_G_from_edges(edge_data_by_type['1']),\
+#                                             get_G_from_edges(convi_data),\
+#                                             args.directed, cp, weight)
+#     convi_struct_G.preprocess_transition_probs(weight)
+#     convi_MNE_walks = convi_struct_G.simulate_walks(10, 10)
+#     convi_MNE_model = train_deepwalk_embedding(convi_MNE_walks)
+#     for r in convi_MNE_model:
+#         print(r)
+#     for f in list(bugid_tosser_fixer['fixers']):
+#         print(convi_MNE_model[f])
+#         print(convi_MNE_model.wv.syn0[convi_MNE_model.wv.index2word.index(f)])
 
-        # 固定fixer找到路径上的所有tosser与fixer的边概率
-        for bugid_fixer in bugid_fixer_tosser_dict:
-            tossers = bugid_fixer_tosser_dict[bugid_fixer].split('++')
-            prob_last = get_tosser_fixer_prob(convi_MNE_model, tossers[-1], bugid_fixer.split('--')[1])
-            last_tosser.append(prob_last)
-            tmp_tosser = []
-            for tosser in tossers[-1]:
-                prob_tosser_fixer = get_tosser_fixer_prob(convi_MNE_model, tosser, bugid_fixer.split('--')[1])
-                tmp_tosser.append(prob_tosser_fixer)
-            other_tossers.append(tmp_tosser)
-        fixer_lastTosser_tosser_df['last_t'] = pd.Series(last_tosser)
-        fixer_lastTosser_tosser_df['other_t'] = pd.Series(other_tossers)
-        fixer_lastTosser_tosser_df = fixer_lastTosser_tosser_df.apply(count_assists, axis=1)
-        print(len(fixer_lastTosser_tosser_df), len(fixer_lastTosser_tosser_df[fixer_lastTosser_tosser_df['count']>0]))
-    print('end')
+#         # 固定fixer找到路径上的所有tosser与fixer的边概率
+#     #     for bugid_fixer in bugid_fixer_tosser_dict:
+#     #         tossers = bugid_fixer_tosser_dict[bugid_fixer].split('++')
+#     #         prob_last = get_tosser_fixer_prob(convi_MNE_model, tossers[-1], bugid_fixer.split('--')[1])
+#     #         last_tosser.append(prob_last)
+#     #         tmp_tosser = []
+#     #         for tosser in tossers[-1]:
+#     #             prob_tosser_fixer = get_tosser_fixer_prob(convi_MNE_model, tosser, bugid_fixer.split('--')[1])
+#     #             tmp_tosser.append(prob_tosser_fixer)
+#     #         other_tossers.append(tmp_tosser)
+#     #     fixer_lastTosser_tosser_df['last_t'] = pd.Series(last_tosser)
+#     #     fixer_lastTosser_tosser_df['other_t'] = pd.Series(other_tossers)
+#     #     fixer_lastTosser_tosser_df = fixer_lastTosser_tosser_df.apply(count_assists, axis=1)
+#     #     print(len(fixer_lastTosser_tosser_df), len(fixer_lastTosser_tosser_df[fixer_lastTosser_tosser_df['count']>0]))
+#     # print('end')
                         
 # ======================================property============================================================
-# for fixer in fixer_tosser_dict:
-#     tossers = fixer_tosser_dict[fixer].split('++')
-#     for cp in [0.9, 0.8, 0.7]:
-#         weight_property = np.array([0.1, 0.1, 0.3, 0.2, 0.3])
-#         overall_convi_MNE_performance = list()
-#         for i in range(number_of_groups):
-            
-#             convi_proper_G = Convince_Multi_Graph.ConvMultiGraph(get_G_from_edges(edge_data_by_type['1']),\
-#                                                         get_G_from_edges(convi_data),\
-#                                                         edge_data_by_type_df,\
-#                                                         convi_data, args.directed, cp, weight_property)
-#             # print("cross validation :{}",format(i))
-#             convi_proper_G.preprocess_transition_probs(weight_property)
-#             convi_MNE_walks = convi_proper_G.simulate_walks(10, 10)
-#             convi_MNE_model = train_deepwalk_embedding(convi_MNE_walks)
-#         #     tmp_convi_MNE_score = get_AUC(convi_MNE_model, selected_true_edges, selected_false_edges)
+# for fixer in bugid_fixer_tosser_dict:
+    # tossers = bugid_fixer_tosser_dict[fixer].split('++')
+    # overall_convi_MNE_performance = list()
+for i in range(number_of_groups):
+    fixer_lastTosser_tosser_df = pd.DataFrame()
+    fixer_lastTosser_tosser_df['fixers'] = list(map(lambda x:x.split('--')[1], bugid_fixer_tosser_dict))
+    last_tosser = []
+    other_tossers = []
+    convi_proper_G = Convince_Multi_Graph.ConvMultiGraph(get_G_from_edges(edge_data_by_type['1']),\
+                                                get_G_from_edges(convi_data),\
+                                                edge_data_by_type_df,\
+                                                convi_data, args.directed, cp, weight_property)
+    # print("cross validation :{}",format(i))
+    convi_proper_G.preprocess_transition_probs(weight_property)
+    convi_MNE_walks = convi_proper_G.simulate_walks(10, 10)
+    convi_MNE_model = train_deepwalk_embedding(convi_MNE_walks)
+    emb_result = []
+    for f in set(list(bugid_tosser_fixer['fixers'])):
+        emb_result.append([f] + list(convi_MNE_model[f]))
+    pd.DataFrame(emb_result).to_csv("./emb_result/" + file_name_pre + "_emb_result_100.csv", index=None, header=False)
 
-#         #     tmp_convi_MNE_performance += tmp_convi_MNE_score * 1
-#         #     number_of_edges += 1
+        #     tmp_convi_MNE_score = get_AUC(convi_MNE_model, selected_true_edges, selected_false_edges)
 
-#         #     overall_convi_MNE_performance.append(tmp_convi_MNE_performance / number_of_edges)
+        #     tmp_convi_MNE_performance += tmp_convi_MNE_score * 1
+        #     number_of_edges += 1
+
+        #     overall_convi_MNE_performance.append(tmp_convi_MNE_performance / number_of_edges)
         
-#         # print('cp:{}'.format(cp), 'weight:{}'.format(weight_property))
-#         # # print('convi_MNE performance:', tmp_convi_MNE_performance / number_of_edges)
-#         # overall_convi_MNE_performance = np.asarray(overall_convi_MNE_performance)
-#         # # print('Overall convi_MNE AUC:', overall_convi_MNE_performance)
-#         # print('Overall convi_MNE_AUC:', np.mean(overall_convi_MNE_performance))
-#         # # print('Overall convi_MNE_AUC std:', np.std(overall_convi_MNE_performance))
+        # print('cp:{}'.format(cp), 'weight:{}'.format(weight_property))
+        # # print('convi_MNE performance:', tmp_convi_MNE_performance / number_of_edges)
+        # overall_convi_MNE_performance = np.asarray(overall_convi_MNE_performance)
+        # # print('Overall convi_MNE AUC:', overall_convi_MNE_performance)
+        # print('Overall convi_MNE_AUC:', np.mean(overall_convi_MNE_performance))
+        # # print('Overall convi_MNE_AUC std:', np.std(overall_convi_MNE_performance))
 
-#         # with open('../result/baseline_node_link/link_prediction/{}_property.csv'.format(output_name), 'a') as csvfile:
-#         #     writer = csv.writer(csvfile)
-#         #     writer.writerow([cp, weight_property, overall_convi_MNE_performance, np.mean(overall_convi_MNE_performance), np.std(overall_convi_MNE_performance)])
-#         print('end')
+        # with open('../result/baseline_node_link/link_prediction/{}_property.csv'.format(output_name), 'a') as csvfile:
+        #     writer = csv.writer(csvfile)
+        #     writer.writerow([cp, weight_property, overall_convi_MNE_performance, np.mean(overall_convi_MNE_performance), np.std(overall_convi_MNE_performance)])
+    print('end')
