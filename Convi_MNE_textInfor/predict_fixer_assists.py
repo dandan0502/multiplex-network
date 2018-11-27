@@ -1,7 +1,7 @@
 import pandas as pd
 import numpy as np
 
-filename = 'gnome' # gnome
+filename = 'eclipse' # gnome
 
 text_path = "./textInfo/"
 fix_path = "./assists_dev_MNE/"
@@ -64,10 +64,10 @@ def topn_cos_similarity(left_df, right_df, n):
 	print('finish groupby')
 	topn_df = pd.DataFrame()
 	group_list = []
-	count = 0
+	# count = 0
 	for name, group in group_cos:
 		group_list.append(group.sort_values('cos')[-n:])
-		count += 1
+		# count += 1
 		# if count % 100 == 0:
 		# 	print(count)
 	topn_df = pd.concat(group_list, axis=0)
@@ -78,7 +78,7 @@ def topn_cos_similarity(left_df, right_df, n):
 def structure():
 	# 1.concat all vectors of fixers, bugs and all nodes
 	bug_des_com = pd.read_csv(text_path + filename + "_bugid_des_com_200.csv")
-	fixer_structure = pd.read_csv(structure_path + filename + "_emb_result_200.csv", header=None)
+	fixer_structure = pd.read_csv(structure_path + filename + "_emb_result_50.csv", header=None)
 	fixer_structure.columns = ['fixers'] + list(range(fixer_structure.shape[1] - 1))
 
 	dev_com = pd.read_csv(text_path + filename + "_fixer_component51.csv")
@@ -89,7 +89,7 @@ def structure():
 	dev_pro = dev_pro.fillna(0)
 	dev_pro = dev_pro.drop('fixers', axis=1)
 	dev_vec = pd.concat([dev_abs, dev_com, dev_pro], axis=1)
-	dev_vec.to_csv(text_path + filename + "_fixer_textInfo.csv", index=False)
+	# dev_vec.to_csv(text_path + filename + "_fixer_textInfo.csv", index=False)
 
 	bugid_fixer = bug_tosser_fixer.drop(['last_t', 'other_t'], axis=1)
 	dev_structure_vec = pd.merge(dev_vec, fixer_structure, how='inner', on='fixers')
@@ -109,24 +109,50 @@ def structure():
 	# print('finish acc')
 
 
+def struc_sem():
+	# left
+	fixer_structure = pd.read_csv(structure_path + filename + "_emb_result_200.csv", header=None)
+	fixer_structure.columns = ['fixers'] + list(range(fixer_structure.shape[1] - 1))
+	bug_all_text = pd.read_csv(text_path + filename + "_bugs_all_text_topics_200.csv")
+	bugid_fixer = bug_tosser_fixer.drop(['last_t', 'other_t'], axis=1)
+	bugid_fixer_structure = pd.merge(bugid_fixer, fixer_structure, how='inner', on='fixers')
+	bugid_fixer_structure_bug_all_text = pd.merge(bugid_fixer_structure, bug_des_com, how='inner', on='bugid')
+
+	# right
+	dev_vec = pd.read_csv(text_path + filename + "_tossers_bug_all_text_topics_200.csv")
+	dev_vec.columns = ['fixers'] + list(range(dev_vec.shape[1] - 1)) # convert tossers to fixers, as to be the same with above function
+	dev_structure_vec = pd.merge(dev_vec, fixer_structure, how='inner', on='fixers')
+
+
+
 def text_info():
 	# 1.concat all vectors of dev
-	fixer_vec = pd.read_csv(text_path + filename + "_fixer_textInfo.csv")
-	fixer_vec.columns = ['idx'] + list(range(fixer_vec.shape[1] - 1))
-	bug_des_com = pd.read_csv(text_path + filename + "_bugid_des_com_100.csv")
-
-	dev_com = pd.read_csv(text_path + filename + "_fixer_component16.csv")
-	dev_pro = pd.read_csv(text_path + filename + "_fixer_product16.csv")
-	dev_abs = pd.read_csv(text_path + filename + "_fixer_abstract_68.csv")
+	# right
+	dev_com = pd.read_csv(text_path + filename + "_fixer_component151.csv")
+	dev_pro = pd.read_csv(text_path + filename + "_fixer_product151.csv")
+	dev_abs = pd.read_csv(text_path + filename + "_fixer_abstract_198.csv")
 	dev_com = dev_com.fillna(0)
 	dev_com = dev_com.drop('fixers', axis=1)
 	dev_pro = dev_pro.fillna(0)
 	dev_pro = dev_pro.drop('fixers', axis=1)
+	fixer_vec = pd.concat([dev_abs, dev_com, dev_pro], axis=1)
+	fixer_vec.columns = ['idx'] + list(range(fixer_vec.shape[1] - 1))
+	fixer_vec['idx'] = fixer_vec['idx'].astype('str')
+	# fixer_vec = pd.read_csv(text_path + filename + "_fixer_textInfo.csv")
+	# fixer_vec.columns = ['idx'] + list(range(fixer_vec.shape[1] - 1))
+
+	# left
+	bug_des_com = pd.read_csv(text_path + filename + "_bugid_des_com_100.csv")
+	# dev_com = pd.read_csv(text_path + filename + "_fixer_component151.csv")
+	# dev_pro = pd.read_csv(text_path + filename + "_fixer_product151.csv")
+	dev_abs = pd.read_csv(text_path + filename + "_fixer_abstract_98.csv")
 	dev_vec = pd.concat([dev_abs, dev_com, dev_pro], axis=1)
 	dev_vec.columns = ['fixers'] + list(range(dev_vec.shape[1] - 1))
-	dev_vec.to_csv(text_path + filename + "_fixer_textInfo_100.csv", index=False)
+	dev_vec['fixers'] = dev_vec['fixers'].astype('str')
+	dev_vec.to_csv(text_path + filename + "_fixer_textInfo_400_119.csv", index=False)
 
 	bugid_fixer = bug_tosser_fixer.drop(['last_t', 'other_t'], axis=1)
+	bugid_fixer['fixers'] = bugid_fixer['fixers'].astype('str')
 	bugid_fixer_text = pd.merge(bugid_fixer, dev_vec, how='inner', on='fixers')
 	bugid_fixer_text_des_com = pd.merge(bugid_fixer_text, bug_des_com, how='inner', on='bugid')
 	bugid_fixer_text_des_com['fixers'] = bugid_fixer_text_des_com['fixers'].astype('str')
@@ -140,22 +166,27 @@ def text_info():
 
 def all_info():
 	# 1.concat text vectors and structure vectors
-	fixer_vec = pd.read_csv(text_path + filename + "_fixer_textInfo_100.csv")
+	# left
+	fixer_vec = pd.read_csv(text_path + filename + "_fixer_textInfo_400_119.csv")
 	fixer_vec.columns = ['fixers'] + list(range(fixer_vec.shape[1] - 1))
-	fixer_structure = pd.read_csv(structure_path + filename + "_emb_result_200.csv", header=None)
+	fixer_structure = pd.read_csv(structure_path + filename + "_emb_result_50.csv", header=None)
 	fixer_structure.columns = ['fixers'] + list(range(fixer_structure.shape[1] - 1))
 	fixer_vec = pd.merge(fixer_vec, fixer_structure, on='fixers', how='inner')
+	fixer_vec['fixers'] = fixer_vec['fixers'].astype('str')
 	bug_des_com = pd.read_csv(text_path + filename + "_bugid_des_com_100.csv")
 
 	bugid_fixer = bug_tosser_fixer.drop(['last_t', 'other_t'], axis=1)
+	bugid_fixer['fixers'] = bugid_fixer['fixers'].astype('str')
+	# print(bugid_fixer['fixers'], fixer_vec['fixers'])
 	bugid_fixer_text = pd.merge(bugid_fixer, fixer_vec, how='inner', on='fixers')
 	bugid_fixer_text_des_com = pd.merge(bugid_fixer_text, bug_des_com, how='inner', on='bugid')
 	bugid_fixer_text_des_com['fixers'] = bugid_fixer_text_des_com['fixers'].astype('str')
 	bugid_fixer_text_des_com['bugid'] = bugid_fixer_text_des_com['bugid'].astype('str')
 
-	dev_com = pd.read_csv(text_path + filename + "_fixer_component101.csv")
-	dev_pro = pd.read_csv(text_path + filename + "_fixer_product101.csv")
-	dev_abs = pd.read_csv(text_path + filename + "_fixer_abstract_198.csv")
+	# right
+	dev_com = pd.read_csv(text_path + filename + "_fixer_component151.csv")
+	dev_pro = pd.read_csv(text_path + filename + "_fixer_product151.csv")
+	dev_abs = pd.read_csv(text_path + filename + "_fixer_abstract_248.csv")
 	dev_com = dev_com.fillna(0)
 	dev_com = dev_com.drop('fixers', axis=1)
 	dev_pro = dev_pro.fillna(0)
@@ -165,7 +196,7 @@ def all_info():
 
 	bugid_fixer_text_des_com['fixers'] = bugid_fixer_text_des_com['fixers'] + '++' + bugid_fixer_text_des_com['bugid']
 	fixer_bug_df = bugid_fixer_text_des_com.drop(['bugid', 'tossers'], axis=1)
-	# print()
+	# print(fixer_bug_df, dev_vec)
 	top10_tosser_df = topn_cos_similarity(fixer_bug_df, dev_vec, 10)
 	acc = count_tosser_acc(top10_tosser_df)
 
@@ -203,12 +234,16 @@ def main():
 	bug_tosser_fixer = pd.read_csv(fix_path + filename + "_bugid_tossers_fixers.csv")
 	bug_tosser_fixer = bug_tosser_fixer.apply(get_other_tosser, axis=1)
 	bug_tosser_fixer_dict = bug_tosser_fixer.set_index('bugid').to_dict('index')
-	# 2.structure - 100
-	structure()
-	# 3.text - 132
-	text_info()
-	# all
-	all_info()
+	# 2.structure 
+	# structure()
+	# 3.text 
+	# text_info()
+	# 4.all
+	# all_info()
+	# 5.same semantic space
+	struc_sem()
+	text_sem()
+	all_sem()
 
 
 if __name__ == '__main__':

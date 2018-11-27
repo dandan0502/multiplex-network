@@ -89,7 +89,7 @@ def trans_component(l):
 	return l
 
 # work component + work product
-def work_component(bug_tosser_fixer, bug_component):
+def work_component(bug_tosser_fixer, bug_component, n):
 	bug_component.columns = ['bugid', 'component']
 	bug_fixer = bug_tosser_fixer.drop(['tossers'], axis=1)
 	fixer = set(bug_fixer['fixers'])
@@ -105,11 +105,53 @@ def work_component(bug_tosser_fixer, bug_component):
 	# trans component to vectors
 	all_component = list(fixer_com_prob['component'])
 	global top_component
-	top_component = [x[0] for x in sorted(Counter(all_component).items(), key=lambda x: x[1], reverse=True)][:50]
+	top_component = [x[0] for x in sorted(Counter(all_component).items(), key=lambda x: x[1], reverse=True)][:n]
 	other_component = list(set(all_component) - set(top_component))
 	fixer_trans_com_prob = fixer_com_prob.apply(trans_component, axis=1)
 	fixer_trans_com_prob.drop_duplicates(['fixers', 'component'], keep='first', inplace=True)
 	return fixer_trans_com_prob.pivot('fixers', 'component', 'prob').reset_index()
+
+
+def pre_raw_data(data):
+	# process abstract and des_com
+	delEStr = string.punctuation + string.digits # 去掉Ascii标点符号和数字
+	data['abstract'] = data['abstract'].map(clean_text)
+	data['des_com'] = data['des_com'].map(clean_text)
+	return data
+
+
+def sum_all_text(l):
+	bugs = l['bugids'].split('++')
+	print(bugs)
+	sel_text = all_text_raw_data[all_text_raw_data['bugid'] == bugs]
+	print(sel_text.shape)
+	sel_text_list = sel_text.drop(['bugid'], axis=1, inplace=True).values.tolist()
+	print(len(sel_text_list[0]))
+	sel_text_list = list(map(lambda x:x[0], sel_text_list))
+	sel_text_str = '++'.join(sel_text_list)
+	l['all_text'] = sel_text_str
+	return l
+
+
+def all_info(raw_data, tossers_bug_df):
+	filter_raw_data = pre_raw_data(raw_data)
+	filter_raw_data['des_com'] = filter_raw_data['des_com'] + filter_raw_data['abstract']
+	filter_raw_data['des_com'] = filter_raw_data['des_com'].map(lambda x: ' '.join(x))
+	filter_raw_data['all_text'] = filter_raw_data['product'] + '++' + filter_raw_data['component'] + '++' + filter_raw_data['des_com']
+	global all_text_raw_data
+	all_text_raw_data = filter_raw_data.drop(['product', 'component', 'abstract', 'des_com'], axis=1)
+	tossers_bug_all_text = tossers_bug_df.apply(sum_all_text, axis=1)
+	return tossers_bug_all_text
+
+
+def bugs_all_info(raw_data):
+	filter_raw_data = pre_raw_data(raw_data)
+	filter_raw_data['des_com'] = filter_raw_data['des_com'] + filter_raw_data['abstract']
+	filter_raw_data['des_com'] = filter_raw_data['des_com'].map(lambda x: ' '.join(x))
+	filter_raw_data['all_text'] = filter_raw_data['product'] + '++' + filter_raw_data['component'] + '++' + filter_raw_data['des_com']
+	global all_text_raw_data
+	all_text_raw_data = filter_raw_data.drop(['product', 'component', 'abstract', 'des_com'], axis=1)
+	return bugs_all_text
 
 
 def main():
@@ -122,9 +164,10 @@ def main():
 	bug_product = raw_data.drop(['component', 'abstract', 'des_com'], axis=1)
 
 	# 1.clean des_com, add all abstracts and clean them
-	bugid_des_com, fixer_abstract = preprocess(raw_data, bug_tosser_fixer)
+	# bugid_des_com, fixer_abstract = preprocess(raw_data, bug_tosser_fixer)
+	# print(bugid_des_com, fixer_abstract)
 
-	# 2.get bugid des_com 232/132/100
+	# 2.get bugid des_com 232/132/100/200
 	# bugid_des_com_df_232 = pd.concat([bugid_des_com['bugid'], topic_extraction(list(bugid_des_com['des_com']), 232)], axis=1)
 	# bugid_des_com_df_232.to_csv("./textInfo/" + filename + "_bugid_des_com_232.csv", index=None)
 	# print("finish bugid des_com 232")
@@ -138,18 +181,49 @@ def main():
 	# bugid_des_com_df_100.to_csv("./textInfo/" + filename + "_bugid_des_com_100.csv", index=None)
 	# print("finish bugid des_com 100")
 
+	# bugid_des_com_df_68 = pd.concat([bugid_des_com['bugid'], topic_extraction(list(bugid_des_com['des_com']), 68)], axis=1)
+	# bugid_des_com_df_68.to_csv("./textInfo/" + filename + "_bugid_des_com_68.csv", index=None)
+	# print("finish bugid des_com 68")
+
 	# 3.get fixer abstract
-	fixer_abstract_df = pd.concat([fixer_abstract['fixers'], topic_extraction(list(fixer_abstract['abstract']), 30)], axis=1)
-	fixer_abstract_df.to_csv("./textInfo/" + filename + "_fixer_abstract.csv", index=None)
-	print("finish fixer abstract")
+	# fixer_abstract_df = pd.concat([fixer_abstract['fixers'], topic_extraction(list(fixer_abstract['abstract']), 248)], axis=1)
+	# fixer_abstract_df.to_csv("./textInfo/" + filename + "_fixer_abstract_248.csv", index=None)
+	# print("finish fixer abstract")
 
 	# 4.get 51 dimensions vectcors with component and product
-	# fixer_component51 = work_component(bug_tosser_fixer, bug_component)
-	# fixer_component51.to_csv("./textInfo/" + filename + "_fixer_component51.csv", index=None)
+	# fixer_component51 = work_component(bug_tosser_fixer, bug_component, 150)
+	# fixer_component51.to_csv("./textInfo/" + filename + "_fixer_component151.csv", index=None)
 	# print("finish fixer component")
-	# fixer_product51 = work_component(bug_tosser_fixer, bug_product)
-	# fixer_product51.to_csv("./textInfo/" + filename + "_fixer_product51.csv", index=None)
+	# fixer_product51 = work_component(bug_tosser_fixer, bug_product, 150)
+	# fixer_product51.to_csv("./textInfo/" + filename + "_fixer_product151.csv", index=None)
 	# print("finish fixer product")
+
+	# 5.use the same semantic space to get vectors of devs
+	# ----------------get a dataframe of tossers and bugs, run it only once-----------------
+	# bug_tosser_fixer_list = bug_tosser_fixer.values.tolist()
+	# tossers_bug_dict = {}
+	# for bug in bug_tosser_fixer_list:
+	# 	tossers = bug[1].split('++')
+	# 	for t in tossers:
+	# 		if t not in tossers_bug_dict:
+	# 			tossers_bug_dict[t] = str(bug[0])
+	# 		else:
+	# 			tossers_bug_dict[t] = str(tossers_bug_dict[t]) + '++' + str(bug[0])
+	# tossers_bug_df = pd.DataFrame.from_dict(tossers_bug_dict, orient='index').reset_index()
+	# tossers_bug_df.columns = ['tossers', 'bugids']
+	# tossers_bug_df.to_csv(assist_dev_path + filename + '_tossers_bugids.csv', index=None)
+	# -----------------------------------------------------------------------------------
+	tossers_bug_df = pd.read_csv(assist_dev_path + filename + '_tossers_bugids.csv')
+	tossers_bug_all_text = all_info(raw_data, tossers_bug_df)
+	vector_num = 200
+	tossers_bug_all_text_topics = pd.concat([tossers_bug_all_text['tossers'], topic_extraction(list(tossers_bug_all_text['all_text']), vector_num)], axis=1)
+	tossers_bug_all_text_topics.to_csv("./textInfo/" + filename + "_tossers_bug_all_text_topics_{}.csv".format(vector_num), index=None)
+
+	# 6.use the same semantic space to get vectors of bugs
+	# bugs_all_text = bugs_all_info(raw_data)
+	# vector_num = 200
+	# bugs_all_text_topics = pd.concat([bugs_all_text['bugid'], topic_extraction(list(bugs_all_text['all_text']), vector_num)], axis=1)
+	# bugs_all_text_topics.to_csv("./textInfo/" + filename + "_bugs_all_text_topics_{}.csv".format(vector_num), index=None)
 
 
 if __name__ == '__main__':
