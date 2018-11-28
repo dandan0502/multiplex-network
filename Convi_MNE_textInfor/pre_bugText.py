@@ -53,13 +53,6 @@ def preprocess(data, bug_tosser_fixer):
 
 
 def topic_extraction(corpus, ntopics):
-	# lda package
-	# vectorizer = CountVectorizer()
-	# X = vectorizer.fit_transform(corpus)
-	# weight = X.toarray()
-	# model = lda.LDA(n_topics=ntopics, n_iter=1000, random_state=1)
-	# model.fit((100*np.asarray(weight)).astype(int))
-
 	# gensim lda
 	common_dictionary = Dictionary(corpus)
 	common_corpus = [common_dictionary.doc2bow(text) for text in corpus]
@@ -122,36 +115,38 @@ def pre_raw_data(data):
 
 def sum_all_text(l):
 	bugs = l['bugids'].split('++')
-	print(bugs)
-	sel_text = all_text_raw_data[all_text_raw_data['bugid'] == bugs]
-	print(sel_text.shape)
-	sel_text_list = sel_text.drop(['bugid'], axis=1, inplace=True).values.tolist()
-	print(len(sel_text_list[0]))
-	sel_text_list = list(map(lambda x:x[0], sel_text_list))
-	sel_text_str = '++'.join(sel_text_list)
-	l['all_text'] = sel_text_str
+	sel_text = all_text_raw_data.loc[all_text_raw_data['bugid'].isin(bugs)]
+	sel_text_list = sel_text.drop(['bugid'], axis=1)
+	sel_text_list = sel_text_list.values.tolist()
+	sel_text_list = list(map(lambda x:str(x[0]), sel_text_list))
+	l['all_text'] = sel_text_list
+	# print(sel_text_list)
 	return l
 
 
 def all_info(raw_data, tossers_bug_df):
 	filter_raw_data = pre_raw_data(raw_data)
 	filter_raw_data['des_com'] = filter_raw_data['des_com'] + filter_raw_data['abstract']
-	filter_raw_data['des_com'] = filter_raw_data['des_com'].map(lambda x: ' '.join(x))
-	filter_raw_data['all_text'] = filter_raw_data['product'] + '++' + filter_raw_data['component'] + '++' + filter_raw_data['des_com']
+	# print(filter_raw_data['des_com'])
 	global all_text_raw_data
-	all_text_raw_data = filter_raw_data.drop(['product', 'component', 'abstract', 'des_com'], axis=1)
+	all_text_raw_data = filter_raw_data.drop(['abstract'], axis=1)
 	tossers_bug_all_text = tossers_bug_df.apply(sum_all_text, axis=1)
 	return tossers_bug_all_text
+
+
+def sum_bug_text(l):
+	l['all_text'] = [l['product']] + [l['component']] + l['des_com']
+	return l
 
 
 def bugs_all_info(raw_data):
 	filter_raw_data = pre_raw_data(raw_data)
 	filter_raw_data['des_com'] = filter_raw_data['des_com'] + filter_raw_data['abstract']
-	filter_raw_data['des_com'] = filter_raw_data['des_com'].map(lambda x: ' '.join(x))
-	filter_raw_data['all_text'] = filter_raw_data['product'] + '++' + filter_raw_data['component'] + '++' + filter_raw_data['des_com']
+	filter_raw_data.drop(['abstract'], axis=1, inplace=True)
+
 	global all_text_raw_data
-	all_text_raw_data = filter_raw_data.drop(['product', 'component', 'abstract', 'des_com'], axis=1)
-	return bugs_all_text
+	all_text_raw_data = filter_raw_data.apply(sum_bug_text, axis=1)
+	return all_text_raw_data
 
 
 def main():
@@ -160,6 +155,7 @@ def main():
 	raw_data = pd.read_csv(raw_data_path + filename + "_bugid_text.csv", header=None, lineterminator="\n")
 	bug_tosser_fixer = pd.read_csv(assist_dev_path + filename + "_bugid_tossers_fixers.csv")
 	raw_data.columns = ['bugid', 'product', 'component', 'abstract', 'des_com']
+	raw_data['bugid'] = raw_data['bugid'].astype('str')
 	bug_component = raw_data.drop(['product', 'abstract', 'des_com'], axis=1)
 	bug_product = raw_data.drop(['component', 'abstract', 'des_com'], axis=1)
 
@@ -213,17 +209,21 @@ def main():
 	# tossers_bug_df.columns = ['tossers', 'bugids']
 	# tossers_bug_df.to_csv(assist_dev_path + filename + '_tossers_bugids.csv', index=None)
 	# -----------------------------------------------------------------------------------
-	tossers_bug_df = pd.read_csv(assist_dev_path + filename + '_tossers_bugids.csv')
-	tossers_bug_all_text = all_info(raw_data, tossers_bug_df)
-	vector_num = 200
-	tossers_bug_all_text_topics = pd.concat([tossers_bug_all_text['tossers'], topic_extraction(list(tossers_bug_all_text['all_text']), vector_num)], axis=1)
-	tossers_bug_all_text_topics.to_csv("./textInfo/" + filename + "_tossers_bug_all_text_topics_{}.csv".format(vector_num), index=None)
+	# tossers_bug_df = pd.read_csv(assist_dev_path + filename + '_tossers_bugids.csv')
+	# tossers_bug_all_text = all_info(raw_data, tossers_bug_df)
+	# vector_num = 600
+	# tossers_bug_all_text_topics = pd.concat([tossers_bug_all_text['tossers'], topic_extraction(list(tossers_bug_all_text['all_text']), vector_num)], axis=1)
+	# tossers_bug_all_text_topics.to_csv("./textInfo/" + filename + "_tossers_bug_all_text_topics_{}.csv".format(vector_num), index=None)
 
 	# 6.use the same semantic space to get vectors of bugs
-	# bugs_all_text = bugs_all_info(raw_data)
-	# vector_num = 200
-	# bugs_all_text_topics = pd.concat([bugs_all_text['bugid'], topic_extraction(list(bugs_all_text['all_text']), vector_num)], axis=1)
-	# bugs_all_text_topics.to_csv("./textInfo/" + filename + "_bugs_all_text_topics_{}.csv".format(vector_num), index=None)
+	bugs_all_text = bugs_all_info(raw_data)
+	#coding by laoge
+	bugs_corpus = list(bugs_all_text['all_text'])
+	new_bug_corpus = [[str(i) for i in j] for j in bugs_corpus]
+	#mei le
+	vector_num = 100
+	bugs_all_text_topics = pd.concat([bugs_all_text['bugid'], topic_extraction(new_bug_corpus, vector_num)], axis=1)
+	bugs_all_text_topics.to_csv("./textInfo/" + filename + "_bugs_all_text_topics_{}.csv".format(vector_num), index=None)
 
 
 if __name__ == '__main__':

@@ -1,7 +1,7 @@
 import pandas as pd
 import numpy as np
 
-filename = 'eclipse' # gnome
+filename = 'gnome' # gnome
 
 text_path = "./textInfo/"
 fix_path = "./assists_dev_MNE/"
@@ -113,16 +113,26 @@ def struc_sem():
 	# left
 	fixer_structure = pd.read_csv(structure_path + filename + "_emb_result_200.csv", header=None)
 	fixer_structure.columns = ['fixers'] + list(range(fixer_structure.shape[1] - 1))
-	bug_all_text = pd.read_csv(text_path + filename + "_bugs_all_text_topics_200.csv")
+	bug_all_text = pd.read_csv(text_path + filename + "_bugs_all_text_topics_100.csv")
 	bugid_fixer = bug_tosser_fixer.drop(['last_t', 'other_t'], axis=1)
 	bugid_fixer_structure = pd.merge(bugid_fixer, fixer_structure, how='inner', on='fixers')
-	bugid_fixer_structure_bug_all_text = pd.merge(bugid_fixer_structure, bug_des_com, how='inner', on='bugid')
+	bugid_fixer_structure_bug_all_text = pd.merge(bugid_fixer_structure, bug_all_text, how='inner', on='bugid')
 
 	# right
-	dev_vec = pd.read_csv(text_path + filename + "_tossers_bug_all_text_topics_200.csv")
+	dev_vec = pd.read_csv(text_path + filename + "_tossers_bug_all_text_topics_100.csv")
 	dev_vec.columns = ['fixers'] + list(range(dev_vec.shape[1] - 1)) # convert tossers to fixers, as to be the same with above function
-	dev_structure_vec = pd.merge(dev_vec, fixer_structure, how='inner', on='fixers')
+	dev_structure_vec = pd.merge(fixer_structure, dev_vec, how='inner', on='fixers')
+	dev_structure_vec.columns = ['idx'] + list(range(dev_structure_vec.shape[1] - 1))
 
+	# print(bugid_fixer_structure_bug_all_text.columns, dev_structure_vec.columns)
+
+	# evaluate
+	bugid_fixer_structure_bug_all_text['fixers'] = bugid_fixer_structure_bug_all_text['fixers'].astype('str')
+	bugid_fixer_structure_bug_all_text['bugid'] = bugid_fixer_structure_bug_all_text['bugid'].astype('str')
+	bugid_fixer_structure_bug_all_text['fixers'] = bugid_fixer_structure_bug_all_text['fixers'] + '++' + bugid_fixer_structure_bug_all_text['bugid']
+	fixer_bug_df = bugid_fixer_structure_bug_all_text.drop(['bugid', 'tossers'], axis=1)
+	top10_tosser_df = topn_cos_similarity(fixer_bug_df, dev_structure_vec, 10)
+	acc = count_tosser_acc(top10_tosser_df)
 
 
 def text_info():
@@ -164,6 +174,32 @@ def text_info():
 	acc = count_tosser_acc(top10_tosser_df)
 
 
+def text_sem():
+	# left
+	fixer_text = pd.read_csv(text_path + filename + "_tossers_bug_all_text_topics_100.csv")
+	fixer_text.columns = ['fixers'] + list(range(fixer_text.shape[1] - 1))
+	fixer_text['fixers'] = fixer_text['fixers'].astype('str')
+	bug_all_text = pd.read_csv(text_path + filename + "_bugs_all_text_topics_100.csv")
+	bugid_fixer = bug_tosser_fixer.drop(['last_t', 'other_t'], axis=1)
+	bugid_fixer['fixers'] = bugid_fixer['fixers'].astype('str')
+	bugid_fixer_text = pd.merge(bugid_fixer, fixer_text, how='inner', on='fixers')
+	bugid_fixer_text_bug_all_text = pd.merge(bugid_fixer_text, bug_all_text, how='inner', on='bugid')
+
+	# right
+	dev_vec = pd.read_csv(text_path + filename + "_tossers_bug_all_text_topics_100.csv")
+	other_dev_vec = dev_vec.drop(['tossers'], axis=1)
+	dev_vec = pd.concat([dev_vec, other_dev_vec], axis=1)
+	dev_vec.columns = ['idx'] + list(range(dev_vec.shape[1] - 1)) # convert tossers to idx, as to be the same with above function
+	
+	# print(bugid_fixer_text_bug_all_text.columns, dev_vec.columns)
+	bugid_fixer_text_bug_all_text['fixers'] = bugid_fixer_text_bug_all_text['fixers'].astype('str')
+	bugid_fixer_text_bug_all_text['bugid'] = bugid_fixer_text_bug_all_text['bugid'].astype('str')
+	bugid_fixer_text_bug_all_text['fixers'] = bugid_fixer_text_bug_all_text['fixers'] + '++' + bugid_fixer_text_bug_all_text['bugid']
+	fixer_bug_df = bugid_fixer_text_bug_all_text.drop(['bugid', 'tossers'], axis=1)
+	top10_tosser_df = topn_cos_similarity(fixer_bug_df, dev_vec, 10)
+	acc = count_tosser_acc(top10_tosser_df)
+
+
 def all_info():
 	# 1.concat text vectors and structure vectors
 	# left
@@ -201,9 +237,41 @@ def all_info():
 	acc = count_tosser_acc(top10_tosser_df)
 
 
+def all_sem():
+	# left
+	# fixer-structure
+	fixer_structure = pd.read_csv(structure_path + filename + "_emb_result_200.csv", header=None)
+	fixer_structure.columns = ['fixers'] + list(range(fixer_structure.shape[1] - 1))
+	# fixer-text
+	fixer_text = pd.read_csv(text_path + filename + "_tossers_bug_all_text_topics_200.csv")
+	fixer_text.columns = ['fixers'] + list(range(fixer_text.shape[1] - 1))
+	# bug
+	bug_all_text = pd.read_csv(text_path + filename + "_bugs_all_text_topics_200.csv")
+	# bug-tosser-fixer
+	bugid_fixer = bug_tosser_fixer.drop(['last_t', 'other_t'], axis=1)
+
+	bugid_fixer_text = pd.merge(bugid_fixer, fixer_text, how='inner', on='fixers')
+	structure_bugid_fixer_text = pd.merge(fixer_structure, bugid_fixer_text, how='inner', on='fixers')
+	structure_bugid_fixer_text_bug_all_text = pd.merge(structure_bugid_fixer_text, bug_all_text, how='inner', on='bugid')
+
+	# right
+	tosser_vec = pd.read_csv(text_path + filename + "_tossers_bug_all_text_topics_200.csv")
+	other_tosser_vec = tosser_vec.drop(['tossers'], axis=1)
+	tosser_vec = pd.concat([tosser_vec, other_tosser_vec], axis=1)
+	tosser_vec.columns = ['fixers'] + list(range(tosser_vec.shape[1] - 1)) # convert tossers to fixers, as to be the same with above function
+	dev_vec = pd.merge(fixer_structure, tosser_vec, on='fixers', how='inner')
+	dev_vec.columns = ['idx'] + list(range(dev_vec.shape[1] - 1))
+
+	# print(structure_bugid_fixer_text_bug_all_text.columns, dev_vec.columns)
+	structure_bugid_fixer_text_bug_all_text['fixers'] = structure_bugid_fixer_text_bug_all_text['fixers'].astype('str')
+	structure_bugid_fixer_text_bug_all_text['bugid'] = structure_bugid_fixer_text_bug_all_text['bugid'].astype('str')
+	structure_bugid_fixer_text_bug_all_text['fixers'] = structure_bugid_fixer_text_bug_all_text['fixers'] + '++' + structure_bugid_fixer_text_bug_all_text['bugid']
+	fixer_bug_df = structure_bugid_fixer_text_bug_all_text.drop(['bugid', 'tossers'], axis=1)
+	top10_tosser_df = topn_cos_similarity(fixer_bug_df, dev_vec, 10)
+	acc = count_tosser_acc(top10_tosser_df)
+
+
 def get_top1_tosser_acc(l):
-	# print(l['tosser'], l['tossers'].split('++'))
-	# print(type(l['tosser']), type(l['tossers'].split('++')[0]))
 	if str(l['tosser']) in l['tossers'].split('++'):
 		l['top1'] = 1
 	else:
@@ -241,9 +309,9 @@ def main():
 	# 4.all
 	# all_info()
 	# 5.same semantic space
-	struc_sem()
+	# struc_sem()
 	text_sem()
-	all_sem()
+	# all_sem()
 
 
 if __name__ == '__main__':
