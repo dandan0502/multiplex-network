@@ -3,7 +3,10 @@ import numpy as np
 
 filename = 'gnome' # gnome
 
-text_path = "./textInfo/"
+# ------------------------------------
+# text_path = "./textInfo/"
+text_path = "./textInfo_delCom/"
+# ------------------------------------
 fix_path = "./assists_dev_MNE/"
 structure_path = "./Convi_MNE/emb_result/"
 
@@ -28,9 +31,9 @@ def topn_cos_similarity(left_df, right_df, n):
 	# 1.get two np.array to calculate
 	left_idx = list(left_df['fixers'])
 	right_idx = list(right_df['idx'])
-	left_df.drop(['fixers'], axis=1, inplace=True)
+	left_df = left_df.drop(['fixers'], axis=1)
 	left_list = np.array(left_df)
-	right_df.drop(['idx'], axis=1, inplace=True)
+	right_df = right_df.drop(['idx'], axis=1)
 	right_list = np.array(right_df)
 	# 2.calculate cos similarity
 	left_list, right_list = normalize(left_list), normalize(right_list)
@@ -64,14 +67,9 @@ def topn_cos_similarity(left_df, right_df, n):
 	print('finish groupby')
 	topn_df = pd.DataFrame()
 	group_list = []
-	# count = 0
 	for name, group in group_cos:
 		group_list.append(group.sort_values('cos')[-n:])
-		# count += 1
-		# if count % 100 == 0:
-		# 	print(count)
 	topn_df = pd.concat(group_list, axis=0)
-	# print(topn_df, topn_df.columns)
 	return topn_df
 
 
@@ -102,8 +100,10 @@ def structure():
 	# 2.count cos similarity
 	bugid_fixer_structure_des_com['fixers'] = bugid_fixer_structure_des_com['fixers'] + '++' + bugid_fixer_structure_des_com['bugid']
 	fixer_bug_df = bugid_fixer_structure_des_com.drop(['bugid', 'tossers'], axis=1)
-	top10_tosser_df = topn_cos_similarity(fixer_bug_df, dev_structure_vec, 10)
-	# print('finish top10_tosser_df')
+	# top10_tosser_df = topn_cos_similarity(fixer_bug_df, dev_structure_vec, 3)
+	# acc = count_tosser_acc(top10_tosser_df)
+
+	top10_tosser_df = topn_cos_similarity(fixer_bug_df, dev_structure_vec, 5)
 	# 3.count structure acc
 	acc = count_tosser_acc(top10_tosser_df)
 	# print('finish acc')
@@ -113,14 +113,17 @@ def struc_sem():
 	# left
 	fixer_structure = pd.read_csv(structure_path + filename + "_emb_result_200.csv", header=None)
 	fixer_structure.columns = ['fixers'] + list(range(fixer_structure.shape[1] - 1))
-	bug_all_text = pd.read_csv(text_path + filename + "_bugs_all_text_topics_100.csv")
+	fixer_structure['fixers'] = fixer_structure['fixers'].astype('str')
+	bug_all_text = pd.read_csv(text_path + filename + "_bugs_all_text_topics_200.csv")
 	bugid_fixer = bug_tosser_fixer.drop(['last_t', 'other_t'], axis=1)
+	bugid_fixer['fixers'] = bugid_fixer['fixers'].astype('str')
 	bugid_fixer_structure = pd.merge(bugid_fixer, fixer_structure, how='inner', on='fixers')
 	bugid_fixer_structure_bug_all_text = pd.merge(bugid_fixer_structure, bug_all_text, how='inner', on='bugid')
 
 	# right
-	dev_vec = pd.read_csv(text_path + filename + "_tossers_bug_all_text_topics_100.csv")
+	dev_vec = pd.read_csv(text_path + filename + "_tossers_bug_all_text_topics_200.csv")
 	dev_vec.columns = ['fixers'] + list(range(dev_vec.shape[1] - 1)) # convert tossers to fixers, as to be the same with above function
+	dev_vec['fixers'] = dev_vec['fixers'].astype('str')
 	dev_structure_vec = pd.merge(fixer_structure, dev_vec, how='inner', on='fixers')
 	dev_structure_vec.columns = ['idx'] + list(range(dev_structure_vec.shape[1] - 1))
 
@@ -153,6 +156,7 @@ def text_info():
 
 	# left
 	bug_des_com = pd.read_csv(text_path + filename + "_bugid_des_com_100.csv")
+	bug_des_com['bugid'] = bug_des_com['bugid'].astype('str')
 	# dev_com = pd.read_csv(text_path + filename + "_fixer_component151.csv")
 	# dev_pro = pd.read_csv(text_path + filename + "_fixer_product151.csv")
 	dev_abs = pd.read_csv(text_path + filename + "_fixer_abstract_98.csv")
@@ -164,29 +168,32 @@ def text_info():
 	bugid_fixer = bug_tosser_fixer.drop(['last_t', 'other_t'], axis=1)
 	bugid_fixer['fixers'] = bugid_fixer['fixers'].astype('str')
 	bugid_fixer_text = pd.merge(bugid_fixer, dev_vec, how='inner', on='fixers')
+	bugid_fixer_text['bugid'] = bugid_fixer_text['bugid'].astype('str')
 	bugid_fixer_text_des_com = pd.merge(bugid_fixer_text, bug_des_com, how='inner', on='bugid')
 	bugid_fixer_text_des_com['fixers'] = bugid_fixer_text_des_com['fixers'].astype('str')
 	bugid_fixer_text_des_com['bugid'] = bugid_fixer_text_des_com['bugid'].astype('str')
 
 	bugid_fixer_text_des_com['fixers'] = bugid_fixer_text_des_com['fixers'] + '++' + bugid_fixer_text_des_com['bugid']
 	fixer_bug_df = bugid_fixer_text_des_com.drop(['bugid', 'tossers'], axis=1)
-	top10_tosser_df = topn_cos_similarity(fixer_bug_df, fixer_vec, 10)
+	# top10_tosser_df = topn_cos_similarity(fixer_bug_df, fixer_vec, 3)
+	# acc = count_tosser_acc(top10_tosser_df)
+	top10_tosser_df = topn_cos_similarity(fixer_bug_df, fixer_vec, 5)
 	acc = count_tosser_acc(top10_tosser_df)
 
 
 def text_sem():
 	# left
-	fixer_text = pd.read_csv(text_path + filename + "_tossers_bug_all_text_topics_100.csv")
+	fixer_text = pd.read_csv(text_path + filename + "_tossers_bug_all_text_topics_200.csv")
 	fixer_text.columns = ['fixers'] + list(range(fixer_text.shape[1] - 1))
 	fixer_text['fixers'] = fixer_text['fixers'].astype('str')
-	bug_all_text = pd.read_csv(text_path + filename + "_bugs_all_text_topics_100.csv")
+	bug_all_text = pd.read_csv(text_path + filename + "_bugs_all_text_topics_200.csv")
 	bugid_fixer = bug_tosser_fixer.drop(['last_t', 'other_t'], axis=1)
 	bugid_fixer['fixers'] = bugid_fixer['fixers'].astype('str')
 	bugid_fixer_text = pd.merge(bugid_fixer, fixer_text, how='inner', on='fixers')
 	bugid_fixer_text_bug_all_text = pd.merge(bugid_fixer_text, bug_all_text, how='inner', on='bugid')
 
 	# right
-	dev_vec = pd.read_csv(text_path + filename + "_tossers_bug_all_text_topics_100.csv")
+	dev_vec = pd.read_csv(text_path + filename + "_tossers_bug_all_text_topics_200.csv")
 	other_dev_vec = dev_vec.drop(['tossers'], axis=1)
 	dev_vec = pd.concat([dev_vec, other_dev_vec], axis=1)
 	dev_vec.columns = ['idx'] + list(range(dev_vec.shape[1] - 1)) # convert tossers to idx, as to be the same with above function
@@ -198,6 +205,21 @@ def text_sem():
 	fixer_bug_df = bugid_fixer_text_bug_all_text.drop(['bugid', 'tossers'], axis=1)
 	top10_tosser_df = topn_cos_similarity(fixer_bug_df, dev_vec, 10)
 	acc = count_tosser_acc(top10_tosser_df)
+	# top10_tosser_df = topn_cos_similarity(fixer_bug_df, dev_vec, 5)
+	# acc = count_tosser_acc(top10_tosser_df)
+
+
+def text_vecItem():
+	# left
+	fixer_text = pd.read_csv(text_path + filename + '_fixer_textInfo_100.csv')
+	bug_text = pd.read_csv(text_path + filename + 'bugs_all_text_topics_100.csv')
+	bugid_fixer = bug_tosser_fixer.drop(['last_t', 'other_t'], axis=1)
+	bugid_fixer['fixers'] = bugid_fixer['fixers'].astype('str')
+	bugid_fixer_text = pd.merge(bugid_fixer, fixer_text, how='inner', on='fixers')
+	bugid_fixer_text_bug_all_text = pd.merge(bugid_fixer_text, bug_text, how='inner', on='bugid')
+
+	# right
+
 
 
 def all_info():
@@ -210,11 +232,13 @@ def all_info():
 	fixer_vec = pd.merge(fixer_vec, fixer_structure, on='fixers', how='inner')
 	fixer_vec['fixers'] = fixer_vec['fixers'].astype('str')
 	bug_des_com = pd.read_csv(text_path + filename + "_bugid_des_com_100.csv")
+	bug_des_com['bugid'] = bug_des_com['bugid'].astype('str')
 
 	bugid_fixer = bug_tosser_fixer.drop(['last_t', 'other_t'], axis=1)
 	bugid_fixer['fixers'] = bugid_fixer['fixers'].astype('str')
 	# print(bugid_fixer['fixers'], fixer_vec['fixers'])
 	bugid_fixer_text = pd.merge(bugid_fixer, fixer_vec, how='inner', on='fixers')
+	bugid_fixer_text['bugid'] = bugid_fixer_text['bugid'].astype('str')
 	bugid_fixer_text_des_com = pd.merge(bugid_fixer_text, bug_des_com, how='inner', on='bugid')
 	bugid_fixer_text_des_com['fixers'] = bugid_fixer_text_des_com['fixers'].astype('str')
 	bugid_fixer_text_des_com['bugid'] = bugid_fixer_text_des_com['bugid'].astype('str')
@@ -233,7 +257,9 @@ def all_info():
 	bugid_fixer_text_des_com['fixers'] = bugid_fixer_text_des_com['fixers'] + '++' + bugid_fixer_text_des_com['bugid']
 	fixer_bug_df = bugid_fixer_text_des_com.drop(['bugid', 'tossers'], axis=1)
 	# print(fixer_bug_df, dev_vec)
-	top10_tosser_df = topn_cos_similarity(fixer_bug_df, dev_vec, 10)
+	# top10_tosser_df = topn_cos_similarity(fixer_bug_df, dev_vec, 3)
+	# acc = count_tosser_acc(top10_tosser_df)
+	top10_tosser_df = topn_cos_similarity(fixer_bug_df, dev_vec, 5)
 	acc = count_tosser_acc(top10_tosser_df)
 
 
@@ -242,23 +268,26 @@ def all_sem():
 	# fixer-structure
 	fixer_structure = pd.read_csv(structure_path + filename + "_emb_result_200.csv", header=None)
 	fixer_structure.columns = ['fixers'] + list(range(fixer_structure.shape[1] - 1))
+	fixer_structure['fixers'] = fixer_structure['fixers'].astype('str')
 	# fixer-text
-	fixer_text = pd.read_csv(text_path + filename + "_tossers_bug_all_text_topics_200.csv")
+	fixer_text = pd.read_csv(text_path + filename + "_tossers_bug_all_text_topics_100.csv")
 	fixer_text.columns = ['fixers'] + list(range(fixer_text.shape[1] - 1))
 	# bug
-	bug_all_text = pd.read_csv(text_path + filename + "_bugs_all_text_topics_200.csv")
+	bug_all_text = pd.read_csv(text_path + filename + "_bugs_all_text_topics_100.csv")
 	# bug-tosser-fixer
 	bugid_fixer = bug_tosser_fixer.drop(['last_t', 'other_t'], axis=1)
 
 	bugid_fixer_text = pd.merge(bugid_fixer, fixer_text, how='inner', on='fixers')
+	bugid_fixer_text['fixers'] = bugid_fixer_text['fixers'].astype('str')
 	structure_bugid_fixer_text = pd.merge(fixer_structure, bugid_fixer_text, how='inner', on='fixers')
 	structure_bugid_fixer_text_bug_all_text = pd.merge(structure_bugid_fixer_text, bug_all_text, how='inner', on='bugid')
 
 	# right
-	tosser_vec = pd.read_csv(text_path + filename + "_tossers_bug_all_text_topics_200.csv")
+	tosser_vec = pd.read_csv(text_path + filename + "_tossers_bug_all_text_topics_100.csv")
 	other_tosser_vec = tosser_vec.drop(['tossers'], axis=1)
 	tosser_vec = pd.concat([tosser_vec, other_tosser_vec], axis=1)
 	tosser_vec.columns = ['fixers'] + list(range(tosser_vec.shape[1] - 1)) # convert tossers to fixers, as to be the same with above function
+	tosser_vec['fixers'] = tosser_vec['fixers'].astype('str')
 	dev_vec = pd.merge(fixer_structure, tosser_vec, on='fixers', how='inner')
 	dev_vec.columns = ['idx'] + list(range(dev_vec.shape[1] - 1))
 
@@ -269,6 +298,8 @@ def all_sem():
 	fixer_bug_df = structure_bugid_fixer_text_bug_all_text.drop(['bugid', 'tossers'], axis=1)
 	top10_tosser_df = topn_cos_similarity(fixer_bug_df, dev_vec, 10)
 	acc = count_tosser_acc(top10_tosser_df)
+	# top10_tosser_df = topn_cos_similarity(fixer_bug_df, dev_vec, 5)
+	# acc = count_tosser_acc(top10_tosser_df)
 
 
 def get_top1_tosser_acc(l):
@@ -287,11 +318,13 @@ def count_tosser_acc(topn_df):
 	top1_df = topn_df.drop_duplicates(['bugid'], keep='last')
 	fixerbugid_tosser = pd.merge(top1_df, bug_tosser_fixer, how='inner', on='bugid')
 	fixerbugid_tosser_top1 = fixerbugid_tosser.apply(get_top1_tosser_acc, axis=1)
+	# print(fixerbugid_tosser_top1)
 	print(fixerbugid_tosser_top1['top1'].sum() , fixerbugid_tosser_top1.shape[0])
 	# 2. label top 10 
 	fixerbugid_tosser = pd.merge(topn_df, bug_tosser_fixer, how='inner', on='bugid')
 	fixerbugid_tosser_topn = fixerbugid_tosser.apply(get_top1_tosser_acc, axis=1)
 	# 3.print acc
+	# print(fixerbugid_tosser_topn['top1'])
 	print(fixerbugid_tosser_topn['top1'].sum() , fixerbugid_tosser_top1.shape[0])
 
 
@@ -310,8 +343,11 @@ def main():
 	# all_info()
 	# 5.same semantic space
 	# struc_sem()
-	text_sem()
-	# all_sem()
+	# text_sem()
+	all_sem()
+	# 6.different semantic space but same vectors item
+	# text_vecItem()
+	# all_vecItem()
 
 
 if __name__ == '__main__':

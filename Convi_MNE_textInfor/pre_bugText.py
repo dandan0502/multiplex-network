@@ -152,7 +152,11 @@ def bugs_all_info(raw_data):
 def main():
 	raw_data_path = "./find_bugReport/"
 	assist_dev_path = './assists_dev_MNE/'
-	raw_data = pd.read_csv(raw_data_path + filename + "_bugid_text.csv", header=None, lineterminator="\n")
+	# ----------------------------------------------------------------------------------
+	# the raw_data file name has been changed because try the data without comments
+	# raw_data = pd.read_csv(raw_data_path + filename + "_bugid_text.csv", header=None, lineterminator="\n")
+	raw_data = pd.read_csv(raw_data_path + filename + "_bugid_text_del_com.csv", header=None, lineterminator="\n")
+	# ----------------------------------------------------------------------------------
 	bug_tosser_fixer = pd.read_csv(assist_dev_path + filename + "_bugid_tossers_fixers.csv")
 	raw_data.columns = ['bugid', 'product', 'component', 'abstract', 'des_com']
 	raw_data['bugid'] = raw_data['bugid'].astype('str')
@@ -209,21 +213,23 @@ def main():
 	# tossers_bug_df.columns = ['tossers', 'bugids']
 	# tossers_bug_df.to_csv(assist_dev_path + filename + '_tossers_bugids.csv', index=None)
 	# -----------------------------------------------------------------------------------
-	# tossers_bug_df = pd.read_csv(assist_dev_path + filename + '_tossers_bugids.csv')
-	# tossers_bug_all_text = all_info(raw_data, tossers_bug_df)
-	# vector_num = 600
-	# tossers_bug_all_text_topics = pd.concat([tossers_bug_all_text['tossers'], topic_extraction(list(tossers_bug_all_text['all_text']), vector_num)], axis=1)
-	# tossers_bug_all_text_topics.to_csv("./textInfo/" + filename + "_tossers_bug_all_text_topics_{}.csv".format(vector_num), index=None)
-
+	tossers_bug_df = pd.read_csv(assist_dev_path + filename + '_tossers_bugids.csv')
+	tossers_bug_all_text = all_info(raw_data, tossers_bug_df)
+	vector_num = [100, 200, 400]
+	for v in vector_num:
+		tossers_bug_all_text_topics = pd.concat([tossers_bug_all_text['tossers'], topic_extraction(list(tossers_bug_all_text['all_text']), v)], axis=1)
+		tossers_bug_all_text_topics.to_csv("./textInfo_delCom/" + filename + "_tossers_bug_all_text_topics_{}.csv".format(v), index=None)
+	print('tosser finish')
 	# 6.use the same semantic space to get vectors of bugs
 	bugs_all_text = bugs_all_info(raw_data)
 	#coding by laoge
 	bugs_corpus = list(bugs_all_text['all_text'])
 	new_bug_corpus = [[str(i) for i in j] for j in bugs_corpus]
 	#mei le
-	vector_num = 100
-	bugs_all_text_topics = pd.concat([bugs_all_text['bugid'], topic_extraction(new_bug_corpus, vector_num)], axis=1)
-	bugs_all_text_topics.to_csv("./textInfo/" + filename + "_bugs_all_text_topics_{}.csv".format(vector_num), index=None)
+	vector_num = [100, 200]
+	for v in vector_num:
+		bugs_all_text_topics = pd.concat([bugs_all_text['bugid'], topic_extraction(new_bug_corpus, v)], axis=1)
+		bugs_all_text_topics.to_csv("./textInfo_delCom/" + filename + "_bugs_all_text_topics_{}.csv".format(v), index=None)
 
 
 if __name__ == '__main__':
